@@ -1,0 +1,11 @@
+{
+    "name": "satisfactory-like",
+    "version": "0.1.0",
+    "title": "Satisfactory Like",
+    "author": "Darkszero",
+    "description": "Satisfactory, but in Factorio's engine! Play with all the recipes and buildings of Satisfactory but in Factorio.",
+    "factorio_version": "1.1",
+    "dependencies": [
+      "base"
+    ]
+  }
