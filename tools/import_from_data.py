@@ -90,6 +90,10 @@ def wrap(data: typing.Any, indent: str = "") -> str:
     return str(data)
 
 
+def locale_wrap(data: str) -> str:
+    return data.replace("\r\n", "\\n")
+
+
 def decode_quote(s: str) -> str:
     assert s[0] == '"'
     return s[1:-1]
@@ -97,7 +101,7 @@ def decode_quote(s: str) -> str:
 
 def create_mipmap(input_path: Path, output_path: Path, *, mimaps: int = 3) -> None:
     img = Image.open(input_path)
-    if img.size == (256, 256):
+    if img.size != (64, 64):
         img = img.resize((64, 64))
     
     height = img.size[1]
@@ -173,14 +177,11 @@ def process_item(entry: dict[str, str]) -> tuple[str, dict]:
     # order = "d[stone]",
 
     if is_fluid:
-        definition["default_temperature"] = 15
-        
+        definition["default_temperature"] = 15        
         if entry["mForm"] == "RF_GAS":
             definition["gas_temperature"] = 0
-            color = entry["mGasColor"]
-        else:
-            color = entry["mFluidColor"]
-        
+
+        color = entry["mFluidColor"]
         b, g, r = COLOR_RE.match(color).group(1, 2, 3)
         definition["base_color"] = definition["flow_color"] = {"r": int(r)/255, "g": int(g)/255, "b": int(b)/255}
 
@@ -188,7 +189,7 @@ def process_item(entry: dict[str, str]) -> tuple[str, dict]:
     (all_fluids if is_fluid else all_items)[entry_name] = definition
     
     output_locale[f"{entry_type}-name"][entry_name] = entry["mDisplayName"]
-    output_locale[f"{entry_type}-description"][entry_name] = entry["mDescription"].replace("\r", "").replace("\n", "\\n")
+    output_locale[f"{entry_type}-description"][entry_name] = locale_wrap(entry["mDescription"])
 
     return entry_name, definition
 
@@ -233,7 +234,7 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
                 category = cat
 
             else:
-                print(f"IGNORING {entry_name}")
+                # print(f"IGNORING {entry_name}")
                 # Build Gun, Equipment
                 return None
             
@@ -294,7 +295,9 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
 
 def resource_processor(data: list[dict[str, str]]) -> None:
     for entry in data:
-        process_item(entry)
+        entry_name, definition = process_item(entry)
+        output_locale["entity-name"][entry_name] = entry["mDisplayName"]
+        output_locale["entity-description"][entry_name] = locale_wrap(entry["mDescription"])
 
 
 _KNOWN_PROCESSORS = {
@@ -357,7 +360,8 @@ def main():
     output_locale["fluid-name"] = {}
     output_locale["fluid-description"] = {}
     output_locale["recipe-name"] = {}
-
+    output_locale["entity-name"] = {}
+    output_locale["entity-description"] = {}
 
     for entries in satisfactory_data:
         processor = _KNOWN_PROCESSORS.get(entries["NativeClass"])
