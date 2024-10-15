@@ -33,6 +33,7 @@ sf_item_to_fac_name = {
     "Desc_SulfuricAcid_C": "sulfuric-acid",
     "Desc_HeavyOilResidue_C": "heavy-oil",
     "ResourceSink_Battery_C": "battery",
+    "Desc_Cement_C": "concrete",
 }
 STACK_SIZES = {
     "SS_ONE": 1,
@@ -177,6 +178,7 @@ def process_item(entry: dict[str, str]) -> tuple[str, dict]:
     # order = "d[stone]",
 
     if is_fluid:
+        definition["auto_barrel"] = False
         definition["default_temperature"] = 15        
         if entry["mForm"] == "RF_GAS":
             definition["gas_temperature"] = 0
@@ -270,7 +272,12 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
         product = decode_item_list(entry["mProduct"])
 
         main_product = product[0]["name"]
-        all_subgroups[f"sf-{main_product}"] = {"type": "item-subgroup", "name": f"sf-{main_product}", "group": "other"}
+        subgroup = f"sf-{main_product}"
+
+        if category == "packager":
+            subgroup = "fill-barrel" if entry["mDisplayName"].startswith("Packaged") else "empty-barrel"
+        else:
+            all_subgroups[subgroup] = {"type": "item-subgroup", "name": subgroup, "group": "other"}
 
         definition = {
             "type": "recipe",
@@ -278,7 +285,7 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
             "ingredients": ingredients,
             "results": product,
             "main_product": "",
-            "subgroup": f"sf-{main_product}",
+            "subgroup": subgroup,
             "order": "b" if "Alternate" in entry["mDisplayName"] else "a",
 
             "icon_size": 64,

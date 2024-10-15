@@ -2,3 +2,4 @@ fluids.lua
 items.lua
 recipes.lua
 subgroups.lua
+autoplace-controls.lua
