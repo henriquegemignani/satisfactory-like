@@ -32,6 +32,7 @@ sf_item_to_fac_name = {
     "Desc_LiquidOil_C": "crude-oil",
     "Desc_SulfuricAcid_C": "sulfuric-acid",
     "Desc_HeavyOilResidue_C": "heavy-oil",
+    "ResourceSink_Battery_C": "battery",
 }
 STACK_SIZES = {
     "SS_ONE": 1,
@@ -42,10 +43,15 @@ STACK_SIZES = {
     "SS_FLUID": None,
 }
 COLOR_RE = re.compile(r"\(B=(\d+),G=(\d+),R=(\d+),A=(\d+)\)")
+SF_THINGS_TO_IGNORE = {
+    "Recipe_Alternate_AutomatedMiner_C",
+    "Recipe_CartridgeChaos_C",
+}
 
 all_items = {}
 all_fluids = {}
 all_recipes = {}
+all_subgroups = {}
 assets_to_convert = {}
 
 def wrap_array_pretty(data: list) -> str:
@@ -78,7 +84,7 @@ def wrap(data: typing.Any, indent: str = "") -> str:
     if data is None:
         return "nil"
 
-    if isinstance(data, str):
+    if isinstance(data, str) and not data.startswith("data.raw."):
         return f'"{data}"'
 
     return str(data)
@@ -89,22 +95,48 @@ def decode_quote(s: str) -> str:
     return s[1:-1]
 
 
-def create_mipmap(input_path: Path, output_path: Path) -> None:
+def create_mipmap(input_path: Path, output_path: Path, *, mimaps: int = 3) -> None:
     img = Image.open(input_path)
     if img.size == (256, 256):
         img = img.resize((64, 64))
+    
     height = img.size[1]
     crop = img.crop((0, 0, height, height))
 
-    left = height
-    for mipmap in range(3):
-        d = 2 ** (mipmap + 1)
+    result = Image.new("RGBA", (
+        sum(height // (2 ** mip) for mip in range(mimaps + 1)),
+        height
+    ))
+
+    left = 0
+    for mipmap in range(mimaps + 1):
+        d = 2 ** mipmap
         smaller = crop.resize((height // d, height // d))
 
-        img.paste(smaller, (left, 0))
+        result.paste(smaller, (left, 0))
         left += smaller.size[0]
 
-    img.save(output_path)
+    result.save(output_path)
+
+
+
+def decode_item_list(entry: str) -> list[dict]:
+    def split_ingredient(item: str) -> dict:
+        raw_name, amount = item.split('",Amount=')
+        name = raw_name.replace("ItemClass=\"/Script/Engine.BlueprintGeneratedClass'", "")[:-1].split(".")[-1]
+        if name in sf_item_to_fac_name:
+            name = sf_item_to_fac_name[name]
+        else:
+            name = name.lower()
+        return {
+            "name": name,
+            "amount": int(amount),
+        }
+
+    if entry:
+        return [split_ingredient(raw) for raw in entry[2:-2].split("),(")]
+    else:
+        return []
 
 
 
@@ -127,44 +159,41 @@ def process_item(entry: dict[str, str]) -> tuple[str, dict]:
         entry_name = sf_item_to_fac_name[entry_name]
         definition["_update"] = True
     else:
+        entry_name = entry_name.lower()
         definition["name"] = entry_name
-        definition["icon"] = f"__satisfactory-like__/graphics/icons/{entry_name}.png"
-        definition["size"] = 64
-        definition["icon_mipmaps"] = 4
 
-        icon_name = entry["mSmallIcon"].replace("Texture2D /Game/", "")
-        icon_name = icon_name[:icon_name.rfind(".")]
-        assets_to_convert[icon_name] = f"graphics/icons/{entry_name}.png"
-        # subgroup = "raw-resource",
-        # order = "d[stone]",
+    definition["icon"] = f"__satisfactory-like__/graphics/icons/{entry_name}.png"
+    definition["icon_size"] = 64
+    definition["icon_mipmaps"] = 4
 
-        if is_fluid:
-            definition["default_temperature"] = 15
-            
-            if entry["mForm"] == "RF_GAS":
-                definition["gas_temperature"] = 0
-                color = entry["mGasColor"]
-            else:
-                color = entry["mFluidColor"]
-            
-            b, g, r = COLOR_RE.match(color).group(1, 2, 3)
-            definition["base_color"] = definition["flow_color"] = {"r": int(r)/255, "g": int(g)/255, "b": int(b)/255}
+    icon_name = entry["mSmallIcon"].replace("Texture2D /Game/", "")
+    icon_name = icon_name[:icon_name.rfind(".")]
+    assets_to_convert[icon_name] = f"graphics/icons/{entry_name}.png"
+    # subgroup = "raw-resource",
+    # order = "d[stone]",
+
+    if is_fluid:
+        definition["default_temperature"] = 15
+        
+        if entry["mForm"] == "RF_GAS":
+            definition["gas_temperature"] = 0
+            color = entry["mGasColor"]
+        else:
+            color = entry["mFluidColor"]
+        
+        b, g, r = COLOR_RE.match(color).group(1, 2, 3)
+        definition["base_color"] = definition["flow_color"] = {"r": int(r)/255, "g": int(g)/255, "b": int(b)/255}
 
     definition["stack_size"] = STACK_SIZES[entry["mStackSize"]]
     (all_fluids if is_fluid else all_items)[entry_name] = definition
     
     output_locale[f"{entry_type}-name"][entry_name] = entry["mDisplayName"]
-    output_locale[f"{entry_type}-description"][entry_name] = entry["mDescription"]
+    output_locale[f"{entry_type}-description"][entry_name] = entry["mDescription"].replace("\r", "").replace("\n", "\\n")
 
     return entry_name, definition
 
 
 def item_processor(data: list[dict[str, str]]) -> None:
-    output_locale["item-name"] = {}
-    output_locale["item-description"] = {}
-    output_locale["fluid-name"] = {}
-    output_locale["fluid-description"] = {}
-
     for entry in data:
         process_item(entry)
 
@@ -172,7 +201,7 @@ def item_processor(data: list[dict[str, str]]) -> None:
 def recipe_processor(data: list[dict[str, str]]) -> None:
     crafting_categories = {
         '/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C': "handcraft",
-        '/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkshopComponent.BP_WorkshopComponent_C': "handcraft",
+        # '/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkshopComponent.BP_WorkshopComponent_C': "handcraft",
         '/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C': "assembler",
         '/Game/FactoryGame/Buildable/Factory/AutomatedWorkBench/Build_AutomatedWorkBench.Build_AutomatedWorkBench_C': "handcraft",
         '/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C': "blender",
@@ -188,15 +217,11 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
         '/Script/FactoryGame.FGBuildableAutomatedWorkBench': "handcraft",
     }
 
-    for entry in data:
-        if not entry["mProducedIn"]:
-            continue
-
+    def get_category(produced_in: str) -> str | None:
         handcraft = False
         category = None
 
-        produced_in = set()
-        for possibility in entry["mProducedIn"][1:-1].split(","):
+        for possibility in produced_in[1:-1].split(","):
             cat = crafting_categories.get(decode_quote(possibility))
             if cat == "handcraft":
                 handcraft = True
@@ -206,19 +231,65 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
                     print("TWO MACHINES FOR RECIPE")
                 
                 category = cat
-                produced_in.add(cat)
+
+            else:
+                print(f"IGNORING {entry_name}")
+                # Build Gun, Equipment
+                return None
             
         if category is None:
             if handcraft:
                 category = "handcraft"
             else:
-                # Build Gun
-                continue
+                raise ValueError("Error")
 
         elif handcraft:
             category += "-handcraft"
+        
+        return category
 
-        # print(entry["mDisplayName"], category)
+    for entry in data:
+        if not entry["mProducedIn"]:
+            continue
+
+        if entry["mRelevantEvents"]:
+            continue
+        
+        entry_name = entry["ClassName"]
+        if entry_name in SF_THINGS_TO_IGNORE:
+            continue
+
+        entry_name = entry_name.lower()
+
+        category = get_category(entry["mProducedIn"])
+        if category is None:
+            continue
+
+        ingredients = decode_item_list(entry["mIngredients"])
+        product = decode_item_list(entry["mProduct"])
+
+        main_product = product[0]["name"]
+        all_subgroups[f"sf-{main_product}"] = {"type": "item-subgroup", "name": f"sf-{main_product}", "group": "other"}
+
+        definition = {
+            "type": "recipe",
+            "name": entry_name,
+            "ingredients": ingredients,
+            "results": product,
+            "main_product": "",
+            "subgroup": f"sf-{main_product}",
+            "order": "b" if "Alternate" in entry["mDisplayName"] else "a",
+
+            "icon_size": 64,
+            "icon_mipmaps": 4,
+
+            "category": category,
+            "energy_required": float(entry["mManufactoringDuration"]),
+        }
+
+        all_recipes[entry_name] = definition
+        output_locale["recipe-name"][entry_name] = entry["mDisplayName"]
+
 
 
 def resource_processor(data: list[dict[str, str]]) -> None:
@@ -228,6 +299,10 @@ def resource_processor(data: list[dict[str, str]]) -> None:
 
 _KNOWN_PROCESSORS = {
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptor'": item_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptorNuclearFuel'": item_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptorBiomass'": item_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGPowerShardDescriptor'": item_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptorPowerBoosterFuel'": item_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGRecipe'": recipe_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGResourceDescriptor'": resource_processor,
 }
@@ -255,14 +330,18 @@ def create_files(extracted_images: Path) -> None:
     export_root = Path(__file__).parents[1]
 
     for source_name, target_name in assets_to_convert.items():
-        print(f"Creating {target_name}")
-        create_mipmap(
-            extracted_images.joinpath(source_name + ".png"),
-            export_root.joinpath(target_name)
-        )
+        new_image = export_root.joinpath(target_name)
+        if not new_image.exists():
+            print(f"Creating {target_name}")
+            create_mipmap(extracted_images.joinpath(source_name + ".png"), new_image)
 
     create_update_file(all_items, export_root.joinpath("prototypes/items.lua"))
     create_update_file(all_fluids, export_root.joinpath("prototypes/fluids.lua"))
+    create_update_file(all_recipes, export_root.joinpath("prototypes/recipes.lua"))
+    create_update_file(all_subgroups, export_root.joinpath("prototypes/subgroups.lua"))
+    
+    with export_root.joinpath("locale/en/strings.cfg").open("w", encoding="utf-8") as f:
+        output_locale.write(f, space_around_delimiters=False)
 
 
 def main():
@@ -273,10 +352,33 @@ def main():
     json_text = json_path.read_bytes().decode("utf-16-le")[1:]
     satisfactory_data = json.loads(json_text)
 
+    output_locale["item-name"] = {}
+    output_locale["item-description"] = {}
+    output_locale["fluid-name"] = {}
+    output_locale["fluid-description"] = {}
+    output_locale["recipe-name"] = {}
+
+
     for entries in satisfactory_data:
         processor = _KNOWN_PROCESSORS.get(entries["NativeClass"])
         if processor is not None:
             processor(entries["Classes"])
+
+    def add_item_or_fluid(array: list[dict], n) -> None:
+        for entry in array:
+            if entry["name"] in all_items:
+                entry["type"] = "item"
+            elif entry["name"] in all_fluids:
+                entry["type"] = "fluid"
+            else:
+                raise ValueError(f"unknown item {entry['name']} ({n})")
+
+    for recipe_name, recipe_data in all_recipes.items():
+        add_item_or_fluid(recipe_data["ingredients"], recipe_name)
+        add_item_or_fluid(recipe_data["results"], recipe_name)
+
+        main_result = recipe_data["results"][0]
+        recipe_data["icon"] = f"data.raw.{main_result['type']}[\"{main_result['name']}\"].icon"
 
     create_files(args.extracted_images)
 
