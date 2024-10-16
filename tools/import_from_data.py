@@ -34,6 +34,11 @@ sf_item_to_fac_name = {
     "Desc_HeavyOilResidue_C": "heavy-oil",
     "ResourceSink_Battery_C": "battery",
     "Desc_Cement_C": "concrete",
+
+    "Desc_WaterPump_C": "offshore-pump",
+    "Desc_OilPump_C": "pumpjack",
+    "BP_ItemDescriptorPortableMiner_C": "burner-mining-drill",
+    "Desc_MinerMk1_C": "electric-mining-drill",
 }
 STACK_SIZES = {
     "SS_ONE": 1,
@@ -45,8 +50,27 @@ STACK_SIZES = {
 }
 COLOR_RE = re.compile(r"\(B=(\d+),G=(\d+),R=(\d+),A=(\d+)\)")
 SF_THINGS_TO_IGNORE = {
-    "Recipe_Alternate_AutomatedMiner_C",
     "Recipe_CartridgeChaos_C",
+}
+SF_ACCEPTABLE_PRODUCTS = {
+    "burner-mining-drill",
+    "electric-mining-drill",
+    
+    "offshore-pump",
+    "desc_quantumencoder_c",
+    "desc_converter_c",
+    "pumpjack",
+    "desc_oilrefinery_c",
+    "desc_foundrymk1_c",
+    "desc_packager_c",
+    "desc_manufacturermk1_c",
+    "desc_assemblermk1_c",
+    "desc_hadroncollider_c",
+    "desc_blender_c",
+    # "desc_frackingextractor_c",
+    "desc_frackingsmasher_c",
+    "desc_constructormk1_c",
+    "desc_smeltermk1_c",
 }
 
 all_items = {}
@@ -214,7 +238,7 @@ def building_processor(data: list[dict[str, str]]) -> None:
     interesting_categories = {
         # "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Power/SC_Generators.SC_Generators_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_Manufacturers.SC_Manufacturers_C'",
-        # "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_Miners.SC_Miners_C'",
+        "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_Miners.SC_Miners_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_OilProduction.SC_OilProduction_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_Smelters.SC_Smelters_C'",
     }
@@ -291,11 +315,14 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
         entry_name = entry_name.lower()
 
         category = get_category(entry["mProducedIn"])
-        if category is None:
-            continue
-
         ingredients = decode_item_list(entry["mIngredients"])
         product = decode_item_list(entry["mProduct"])
+
+        if len(product) == 1 and product[0]["name"] in SF_ACCEPTABLE_PRODUCTS:
+            category = "handcraft"
+
+        if category is None:
+            continue
 
         main_product = product[0]["name"]
         subgroup = f"sf-{main_product}"
@@ -334,16 +361,36 @@ def resource_processor(data: list[dict[str, str]]) -> None:
         output_locale["entity-description"][entry_name] = locale_wrap(entry["mDescription"])
 
 
+
+def equipment_processor(data: list[dict[str, str]]) -> None:
+    for entry in data:
+        entry_name = entry["ClassName"]
+        if entry_name == "BP_ItemDescriptorPortableMiner_C":
+            entry_name = sf_item_to_fac_name[entry_name]
+            entry_type = "item"
+            
+            definition = {
+                "type": entry_type,
+                "_update": True,
+                "stack_size": STACK_SIZES[entry["mStackSize"]],
+            }
+            all_items[entry_name] = definition
+            output_locale[f"{entry_type}-name"][entry_name] = entry["mDisplayName"]
+            output_locale[f"{entry_type}-description"][entry_name] = locale_wrap(entry["mDescription"])
+
+
 _KNOWN_PROCESSORS = {
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptor'": item_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptorNuclearFuel'": item_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptorBiomass'": item_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGPowerShardDescriptor'": item_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptorPowerBoosterFuel'": item_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGEquipmentDescriptor'": equipment_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGRecipe'": recipe_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGResourceDescriptor'": resource_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableManufacturer'": assembler_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableManufacturerVariablePower'": assembler_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableResourceExtractor'": assembler_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildingDescriptor'": building_processor,
 }
 
