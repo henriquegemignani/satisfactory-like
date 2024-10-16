@@ -2,11 +2,11 @@ local crafting_categories = {
     'blender', 'collider', 'converter', 'encoder',
     'handcraft', 'packager', 'refinery',
 
-    'assembler', 'assembler-handcraft',
+    'smelter', 'smelter-handcraft',
     'constructor', 'constructor-handcraft',
+    'assembler', 'assembler-handcraft',
     'foundry', 'foundry-handcraft',
     'manufacturer', 'manufacturer-handcraft',
-    'smelter', 'smelter-handcraft'
 }
 for _, cat in pairs(crafting_categories) do
     data:extend {
@@ -26,3 +26,4 @@ require("prototypes.fluids")
 require("prototypes.recipes")
 require("prototypes.autoplace-controls")
 require("prototypes.resources")
+require("prototypes.entities")

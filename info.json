@@ -6,6 +6,7 @@
     "description": "Satisfactory, but in Factorio's engine! Play with all the recipes and buildings of Satisfactory but in Factorio.",
     "factorio_version": "1.1",
     "dependencies": [
-      "base"
+      "base",
+      "Krastorio2Assets"
     ]
   }

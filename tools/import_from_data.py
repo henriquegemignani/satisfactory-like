@@ -154,7 +154,7 @@ def create_parser():
 
 def process_item(entry: dict[str, str]) -> tuple[str, dict]:
     entry_name = entry["ClassName"]
-    is_fluid = entry["mForm"] != "RF_SOLID"
+    is_fluid = entry["mForm"] in {"RF_GAS", "RF_LIQUID"}
     entry_type = "fluid" if is_fluid else "item"
     
     definition = {
@@ -199,6 +199,32 @@ def process_item(entry: dict[str, str]) -> tuple[str, dict]:
 def item_processor(data: list[dict[str, str]]) -> None:
     for entry in data:
         process_item(entry)
+
+
+def assembler_processor(data: list[dict[str, str]]) -> None:
+    for entry in data:
+        entry_name = entry["ClassName"].lower().replace("build_", "desc_")
+        for entry_type in ["entity", "item"]:
+            output_locale[f"{entry_type}-name"][entry_name] = entry["mDisplayName"]
+            output_locale[f"{entry_type}-description"][entry_name] = locale_wrap(entry["mDescription"])
+
+
+def building_processor(data: list[dict[str, str]]) -> None:
+
+    interesting_categories = {
+        # "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Power/SC_Generators.SC_Generators_C'",
+        "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_Manufacturers.SC_Manufacturers_C'",
+        # "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_Miners.SC_Miners_C'",
+        "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_OilProduction.SC_OilProduction_C'",
+        "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_Smelters.SC_Smelters_C'",
+    }
+
+    for entry in data:
+        categories = entry["mSubCategories"][2:-2]
+        if categories not in interesting_categories:
+            continue
+
+        print(process_item(entry)[0])
 
 
 def recipe_processor(data: list[dict[str, str]]) -> None:
@@ -292,6 +318,7 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
             "icon_mipmaps": 4,
 
             "category": category,
+            "always_show_made_in": True,
             "energy_required": float(entry["mManufactoringDuration"]),
         }
 
@@ -315,6 +342,9 @@ _KNOWN_PROCESSORS = {
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptorPowerBoosterFuel'": item_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGRecipe'": recipe_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGResourceDescriptor'": resource_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableManufacturer'": assembler_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableManufacturerVariablePower'": assembler_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildingDescriptor'": building_processor,
 }
 
 def create_update_file(data_dict: dict, output_file: Path) -> None:
