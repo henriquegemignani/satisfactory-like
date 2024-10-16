@@ -109,8 +109,8 @@ data:extend {
         autoplace = resource_autoplace.resource_autoplace_settings {
             name = "desc_nitrogengas_c",
             order = "c",
-            base_density = 4,
-            base_spots_per_km2 = 1.6,
+            base_density = 2,
+            base_spots_per_km2 = 0.8,
             random_probability = 1 / 24,
             random_spot_size_minimum = 1,
             random_spot_size_maximum = 1, -- don't randomize spot size
