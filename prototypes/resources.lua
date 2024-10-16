@@ -33,7 +33,7 @@ local function makeStages(name, asset_folder)
 end
 
 -- @return ResourceEntityPrototype
-local function makeResource(name, definition)
+local function make_resource(name, definition)
     definition.type = "resource"
     definition.name = name
     definition.icon_size = 64
@@ -49,14 +49,14 @@ local function makeResource(name, definition)
             }
         }
     }
-    definition.collision_box = definition.collision_box or {{-0.1, -0.1}, {0.1, 0.1}}
-    definition.selection_box = definition.selection_box or {{-0.5, -0.5}, {0.5, 0.5}}
+    definition.collision_box = definition.collision_box or { { -0.1, -0.1 }, { 0.1, 0.1 } }
+    definition.selection_box = definition.selection_box or { { -0.5, -0.5 }, { 0.5, 0.5 } }
 
     return definition
 end
 
 data:extend {
-    makeResource("desc_oregold_c", {
+    make_resource("desc_oregold_c", {
         stage_counts = { 15000, 9500, 5500, 2900, 1300, 400, 150, 80 },
         stages = makeStages("titanium-ore"),
         autoplace = resource_autoplace.resource_autoplace_settings {
@@ -69,13 +69,13 @@ data:extend {
             random_spot_size_maximum = 4,
             regular_rq_factor_multiplier = 1
         },
-        map_color = {0.65, 0.60, 0.41},
+        map_color = { 0.65, 0.60, 0.41 },
     }),
-    -- makeResource("desc_rawquartz_c", {
+    -- make_resource("desc_rawquartz_c", {
     --     stage_counts = { 15000, 9500, 5500, 2900, 1300, 400, 150, 80 },
     --     stages = makeStages(""),
     -- }),
-    makeResource("desc_orebauxite_c", {
+    make_resource("desc_orebauxite_c", {
         stage_counts = { 15000, 9500, 5500, 2900, 1300, 400, 150, 80 },
         stages = makeStages("zircon"),
         autoplace = resource_autoplace.resource_autoplace_settings {
@@ -88,27 +88,41 @@ data:extend {
             random_spot_size_maximum = 4,
             regular_rq_factor_multiplier = 1
         },
-        map_color = {0.89, 0.53, 0.26},
+        map_color = { 0.55, 0.47, 0.45 },
     }),
-    makeResource("desc_nitrogengas_c", {
+    make_resource("desc_nitrogengas_c", {
         stage_counts = { 0 },
         stages = data.raw["resource"]["crude-oil"].stages,
+        category = "sl-resource-well",
+
+        infinite = true,
+        highlight = true,
+        minimum = 60000,
+        normal = 300000,
+        infinite_depletion_amount = 10,
+        resource_patch_search_radius = 12,
+        tree_removal_probability = 0.7,
+        tree_removal_max_distance = 32 * 32,
+        collision_box = { { -1.4, -1.4 }, { 1.4, 1.4 } },
+        selection_box = { { -0.5, -0.5 }, { 0.5, 0.5 } },
+
         autoplace = resource_autoplace.resource_autoplace_settings {
-          name = "crude-oil",
-          order = "c",
-          base_density = 4,
-          base_spots_per_km2 = 1.8,
-          random_probability = 1/24,
-          random_spot_size_minimum = 1,
-          random_spot_size_maximum = 1, -- don't randomize spot size
-          additional_richness = 220000, -- this increases the total everywhere, so base_density needs to be decreased to compensate
-          has_starting_area_placement = false,
-          regular_rq_factor_multiplier = 1
+            name = "desc_nitrogengas_c",
+            order = "c",
+            base_density = 4,
+            base_spots_per_km2 = 1.6,
+            random_probability = 1 / 24,
+            random_spot_size_minimum = 1,
+            random_spot_size_maximum = 1, -- don't randomize spot size
+            additional_richness = 200000, -- this increases the total everywhere, so base_density needs to be decreased to compensate
+            has_starting_area_placement = false,
+            regular_rq_factor_multiplier = 1,
+            seed1 = 101,
         },
-        map_color = {0.23, 0.23, 0.23},
+        map_color = { 0.35, 0.35, 0.35 },
         map_grid = false,
     }),
-    makeResource("sulfur", {
+    make_resource("sulfur", {
         stage_counts = { 15000, 9500, 5500, 2900, 1300, 400, 150, 80 },
         stages = makeStages("gold-ore"),
         autoplace = resource_autoplace.resource_autoplace_settings {
@@ -121,9 +135,9 @@ data:extend {
             random_spot_size_maximum = 4,
             regular_rq_factor_multiplier = 1
         },
-        map_color = {0.89, 0.89, 0.26},
+        map_color = { 0.89, 0.89, 0.26 },
     }),
-    -- makeResource("desc_sam_c", {
+    -- make_resource("desc_sam_c", {
     --     stage_counts = { 15000, 9500, 5500, 2900, 1300, 400, 150, 80 },
     --     stages = makeStages(""),
     --     autoplace = resource_autoplace.resource_autoplace_settings {
@@ -136,7 +150,7 @@ data:extend {
     --         random_spot_size_maximum = 4,
     --         regular_rq_factor_multiplier = 1
     --     },
-        -- map_color = {},
+    -- map_color = {},
     -- }),
 }
 
@@ -168,7 +182,6 @@ for _, name in pairs {
     "uranium-ore",        -- 2100
 } do
     local resource = data.raw.resource[name]
-    print(name, resource, fluids[name] and "fluid" or "item")
     resource.icon = data.raw[fluids[name] and "fluid" or "item"][name].icon
     resource.minable.required_fluid = nil
     resource.minable.fluid_amount = nil

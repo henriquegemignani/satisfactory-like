@@ -15,10 +15,17 @@ for _, cat in pairs(crafting_categories) do
             name = cat,
         }
     }
-    if cat:find("-handcraft") then
+    if cat:find("handcraft") then
         table.insert(data.raw["character"]["character"].crafting_categories, cat)
     end
 end
+
+data:extend {
+  {
+    type = "resource-category",
+    name = "sl-resource-well"
+  }
+}
 
 require("prototypes.subgroups")
 require("prototypes.items")
