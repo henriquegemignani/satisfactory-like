@@ -33,10 +33,13 @@ sf_item_to_fac_name = {
     "Desc_OreCopper_C": "copper-ore",
     "Desc_OreUranium_C": "uranium-ore",
     "Desc_LiquidOil_C": "crude-oil",
-    "Desc_SulfuricAcid_C": "sulfuric-acid",
-    "Desc_HeavyOilResidue_C": "heavy-oil",
-    "ResourceSink_Battery_C": "battery",
     "Desc_Cement_C": "concrete",
+    "Desc_RailroadTrack_C": "rail",
+    "Desc_RailroadBlockSignal_C": "rail-signal",
+    "Desc_RailroadPathSignal_C": "rail-chain-signal",
+    "Desc_TrainStation_C": "train-stop",
+    "Desc_Locomotive_C": "locomotive",
+    "Desc_FreightWagon_C": "cargo-wagon",
     #
     "Desc_WaterPump_C": "offshore-pump",
     "Desc_OilPump_C": "pumpjack",
@@ -57,6 +60,7 @@ sf_item_to_fac_name = {
     # Additional mapping just for mod compatibility
     "Desc_IronIngot_C": "iron-plate",
     "Desc_CopperIngot_C": "copper-plate",
+    "Desc_SteelIngot_C": "steel-plate",
     "Desc_IronRod_C": "iron-stick",
     "Desc_IronScrew_C": "iron-gear-wheel",
     "Desc_CircuitBoard_C": "electronic-circuit",
@@ -68,6 +72,14 @@ sf_item_to_fac_name = {
     "Desc_NuclearWaste_C": "used-up-uranium-fuel-cell",
     "Desc_Motor_C": "engine-unit",
     "Desc_MotorLightweight_C": "electric-engine-unit",
+    "Desc_SulfuricAcid_C": "sulfuric-acid",
+    "Desc_HeavyOilResidue_C": "heavy-oil",
+    "ResourceSink_Battery_C": "battery",
+}
+CUSTOM_ITEM_TYPE = {
+    "rail": "rail-planner",
+    "locomotive": "item-with-entity-data",
+    "cargo-wagon": "item-with-entity-data",
 }
 KEEP_ORIGINAL_ICONS = {
     "sl-mk1-transport-belt",
@@ -85,6 +97,13 @@ KEEP_ORIGINAL_ICONS = {
     # Miners
     "burner-mining-drill",
     "electric-mining-drill",
+    # Trains
+    "rail",
+    "rail-signal",
+    "rail-chain-signal",
+    "train-stop",
+    "locomotive",
+    "cargo-wagon",
 }
 STACK_SIZES = {
     "SS_ONE": 1,
@@ -97,6 +116,16 @@ STACK_SIZES = {
 COLOR_RE = re.compile(r"\(B=(\d+),G=(\d+),R=(\d+),A=(\d+)\)")
 SF_THINGS_TO_IGNORE = {
     "Recipe_CartridgeChaos_C",
+    # Train Station
+    "Desc_TrainDockingStation_C",
+    "Desc_TrainDockingStationLiquid_C",
+    "Desc_TrainPlatformEmpty_C",
+    "Desc_TrainPlatformEmpty_02_C",
+    # Vehicle
+    "Desc_Truck_C",
+    "Desc_Tractor_C",
+    "Desc_Explorer_C",
+    "Desc_CyberWagon_C",
 }
 SF_ACCEPTABLE_PRODUCTS = {
     "burner-mining-drill",
@@ -116,6 +145,7 @@ SF_ACCEPTABLE_PRODUCTS = {
     "desc_frackingsmasher_c",
     "desc_constructormk1_c",
     "desc_smeltermk1_c",
+    "desc_generatorbiomass_automated_c",
     # Belts
     "sl-mk1-transport-belt",
     "transport-belt",
@@ -129,6 +159,13 @@ SF_ACCEPTABLE_PRODUCTS = {
     "express-underground-belt",
     "sl-mk5-underground-belt",
     "sl-mk6-underground-belt",
+    # Trains
+    "rail",
+    "rail-signal",
+    "rail-chain-signal",
+    "train-stop",
+    "locomotive",
+    "cargo-wagon",
 }
 
 all_items = {}
@@ -136,6 +173,13 @@ all_fluids = {}
 all_recipes = {}
 all_subgroups = {}
 assets_to_convert = {}
+
+
+def translate_item_name(name: str) -> str:
+    if name in sf_item_to_fac_name:
+        return sf_item_to_fac_name[name]
+    else:
+        return name.lower()
 
 
 def wrap_array_pretty(data: list) -> str:
@@ -169,7 +213,7 @@ def wrap(data: typing.Any, indent: str = "") -> str:
     if data is None:
         return "nil"
 
-    if isinstance(data, str) and not data.startswith("data.raw."):
+    if isinstance(data, str) and not data.startswith("data.raw"):
         return f'"{data}"'
 
     return str(data)
@@ -213,10 +257,7 @@ def decode_item_list(entry: str) -> list[dict]:
         name = raw_name.replace(
             "ItemClass=\"/Script/Engine.BlueprintGeneratedClass'", ""
         )[:-1].split(".")[-1]
-        if name in sf_item_to_fac_name:
-            name = sf_item_to_fac_name[name]
-        else:
-            name = name.lower()
+        name = translate_item_name(name)
         return {
             "name": name,
             "amount": int(amount),
@@ -243,10 +284,13 @@ def create_parser():
     return parser
 
 
-def process_item(entry: dict[str, str]) -> tuple[str, dict]:
+def process_item(entry: dict[str, str]) -> tuple[str, dict] | None:
     entry_name = entry["ClassName"]
     is_fluid = entry["mForm"] in {"RF_GAS", "RF_LIQUID"}
     entry_type = "fluid" if is_fluid else "item"
+
+    if entry_name in SF_THINGS_TO_IGNORE:
+        return None
 
     definition = {
         "type": entry_type,
@@ -285,7 +329,9 @@ def process_item(entry: dict[str, str]) -> tuple[str, dict]:
             "b": int(b) / 255,
         }
 
-    definition["stack_size"] = STACK_SIZES[entry["mStackSize"]]
+    if entry_name != "rail":
+        definition["stack_size"] = STACK_SIZES[entry["mStackSize"]]
+    
     (all_fluids if is_fluid else all_items)[entry_name] = definition
 
     output_locale[f"{entry_type}-name"][entry_name] = entry["mDisplayName"]
@@ -301,6 +347,28 @@ def item_processor(data: list[dict[str, str]]) -> None:
         process_item(entry)
 
 
+def nuclear_fuel_processor(data: list[dict[str, str]]) -> None:
+    for entry in data:
+
+        defintion = process_item(entry)[1]
+        defintion["fuel_value"] = entry["mEnergyValue"] + "MJ"
+        defintion["fuel_category"] = "nuclear"
+        
+        # mAmountOfWaste!!
+        # TODO: reduce the energy value by how much waste is generated and multiply recipes that generate by the same amount
+
+        spent_fuel = entry["mSpentFuelClass"][:-1].split(".")[-1]
+        if spent_fuel != "Non":
+            defintion["burnt_result"] = translate_item_name(spent_fuel)
+
+
+def biomass_processor(data: list[dict[str, str]]) -> None:
+    for entry in data:
+        defintion = process_item(entry)[1]
+        defintion["fuel_value"] = entry["mEnergyValue"] + "MJ"
+        defintion["fuel_category"] = "biomass"
+
+
 def locale_only_processor(data: list[dict[str, str]]) -> None:
     for entry in data:
         entry_name = entry["ClassName"].replace("Build_", "Desc_")
@@ -314,13 +382,14 @@ def locale_only_processor(data: list[dict[str, str]]) -> None:
 
 def building_processor(data: list[dict[str, str]]) -> None:
     interesting_categories = {
-        # "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Power/SC_Generators.SC_Generators_C'",
+        "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Power/SC_Generators.SC_Generators_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_Manufacturers.SC_Manufacturers_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_Miners.SC_Miners_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_OilProduction.SC_OilProduction_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_Smelters.SC_Smelters_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_ConveyorBelts.SC_ConveyorBelts_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_ConveyLift.SC_ConveyLift_C'",
+        "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_Trains.SC_Trains_C'",
     }
 
     for entry in data:
@@ -328,7 +397,7 @@ def building_processor(data: list[dict[str, str]]) -> None:
         if categories not in interesting_categories:
             continue
 
-        print(process_item(entry)[0])
+        process_item(entry)
 
 
 def recipe_processor(data: list[dict[str, str]]) -> None:
@@ -408,8 +477,9 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
         subgroup = f"sf-{main_product}"
 
         if category == "handcraft":
+            product_type = CUSTOM_ITEM_TYPE.get(main_product, "item")
             subgroup = (
-                f'data.raw.item["{main_product}"].subgroup or "production-machine"'
+                f'data.raw["{product_type}"]["{main_product}"].subgroup or "production-machine"'
             )
 
         elif category == "packager":
@@ -457,7 +527,7 @@ def equipment_processor(data: list[dict[str, str]]) -> None:
     for entry in data:
         entry_name = entry["ClassName"]
         if entry_name == "BP_ItemDescriptorPortableMiner_C":
-            entry_name = sf_item_to_fac_name[entry_name]
+            entry_name = translate_item_name(entry_name)
             entry_type = "item"
 
             definition = {
@@ -474,10 +544,11 @@ def equipment_processor(data: list[dict[str, str]]) -> None:
 
 _KNOWN_PROCESSORS = {
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptor'": item_processor,
-    "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptorNuclearFuel'": item_processor,
-    "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptorBiomass'": item_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptorNuclearFuel'": nuclear_fuel_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptorBiomass'": biomass_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGPowerShardDescriptor'": item_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptorPowerBoosterFuel'": item_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGVehicleDescriptor'": item_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGEquipmentDescriptor'": equipment_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGRecipe'": recipe_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGResourceDescriptor'": resource_processor,
@@ -486,6 +557,7 @@ _KNOWN_PROCESSORS = {
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableResourceExtractor'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableConveyorBelt'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableConveyorLift'": locale_only_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableGeneratorFuel'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildingDescriptor'": building_processor,
 }
 
@@ -497,7 +569,7 @@ def create_update_file(data_dict: dict, output_file: Path) -> None:
     for name, entry in data_dict.items():
         update = entry.pop("_update", False)
         if update:
-            type_name = entry.pop("type")
+            type_name = CUSTOM_ITEM_TYPE.get(name, entry.pop("type"))
             edit_code.extend(
                 [
                     f'data.raw["{type_name}"]["{name}"].{key} = {wrap(value)}'
@@ -566,8 +638,11 @@ def main():
         add_item_or_fluid(recipe_data["results"], recipe_name)
 
         main_result = recipe_data["results"][0]
+        result_type = main_result['type']
+        if result_type == "item":
+            result_type = CUSTOM_ITEM_TYPE.get(main_result['name'], result_type)
         recipe_data["icon"] = (
-            f"data.raw.{main_result['type']}[\"{main_result['name']}\"].icon"
+            f'data.raw["{result_type}"]["{main_result['name']}"].icon'
         )
 
     create_files(args.extracted_images)
