@@ -146,7 +146,7 @@ local biomass_generator = data.raw["burner-generator"]["desc_generatorbiomass_au
 biomass_generator.max_power_output = "30MW"
 biomass_generator.burner.effectivity = 1
 biomass_generator.burner.fuel_category = nil
-biomass_generator.burner.fuel_categories = {"biomass"}
+biomass_generator.burner.fuel_categories = {"sl-biomass"}
 
 -- make smelter look like electric furnace
 copy_art_from(

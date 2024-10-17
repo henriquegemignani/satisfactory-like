@@ -27,10 +27,19 @@ data:extend {
   },
   {
     type = "fuel-category",
-    name = "biomass"
+    name = "sl-biomass"
+  },
+  {
+    type = "fuel-category",
+    name = "sl-vehicle"
+  },
+  {
+    type = "fuel-category",
+    name = "sl-coal"
   }
 }
 require("prototypes.buildings.transport-belt")
+require("prototypes.item-groups")
 require("prototypes.subgroups")
 require("prototypes.items")
 require("prototypes.fluids")

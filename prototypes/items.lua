@@ -24,3 +24,13 @@ data:extend {
 }
 
 require("prototypes.generated-items")
+data.raw["item"]["battery"].fuel_category = "sl-vehicle"
+data.raw["item"]["solid-fuel"].fuel_category = "sl-vehicle"
+data.raw["item"]["rocket-fuel"].fuel_category = "sl-vehicle"
+data.raw["item"]["desc_packagedionizedfuel_c"].fuel_category = "sl-vehicle"
+data.raw["item"]["desc_turbofuel_c"].fuel_category = "sl-vehicle"
+data.raw["item"]["desc_packagedoilresidue_c"].fuel_category = "sl-vehicle"
+data.raw["item"]["desc_packagedoil_c"].fuel_category = "sl-vehicle"
+data.raw["item"]["coal"].fuel_category = "sl-coal"
+data.raw["item"]["desc_compactedcoal_c"].fuel_category = "sl-coal"
+data.raw["item"]["desc_petroleumcoke_c"].fuel_category = "sl-coal"

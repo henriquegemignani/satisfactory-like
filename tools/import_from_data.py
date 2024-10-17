@@ -64,17 +64,19 @@ sf_item_to_fac_name = {
     "Desc_IronRod_C": "iron-stick",
     "Desc_IronScrew_C": "iron-gear-wheel",
     "Desc_CircuitBoard_C": "electronic-circuit",
+    "Desc_Computer_C": "advanced-circuit",
+    "Desc_ComputerSuper_C": "processing-unit",
     "Desc_FluidCanister_C": "empty-barrel",
     "Desc_Fuel_C": "solid-fuel",
     "Desc_Plastic_C": "plastic-bar",
-    "Desc_PackagedRocketFuel_C": "solid-fuel",
+    "Desc_PackagedRocketFuel_C": "rocket-fuel",
     "Desc_NuclearFuelRod_C": "uranium-fuel-cell",
     "Desc_NuclearWaste_C": "used-up-uranium-fuel-cell",
     "Desc_Motor_C": "engine-unit",
     "Desc_MotorLightweight_C": "electric-engine-unit",
     "Desc_SulfuricAcid_C": "sulfuric-acid",
     "Desc_HeavyOilResidue_C": "heavy-oil",
-    "ResourceSink_Battery_C": "battery",
+    "Desc_Battery_C": "battery",
 }
 CUSTOM_ITEM_TYPE = {
     "rail": "rail-planner",
@@ -173,6 +175,132 @@ all_fluids = {}
 all_recipes = {}
 all_subgroups = {}
 assets_to_convert = {}
+
+PRODUCT_TO_SUBGROUP = {
+    # Iron
+    "iron-plate": "sl-iron-smelting",
+    "iron-stick":                   ("sl-iron-processing", "a"),
+    "iron-gear-wheel":              ("sl-iron-processing", "b"),
+    "desc_ironplate_c":             ("sl-iron-processing", "c"),
+    "desc_ironplatereinforced_c":   ("sl-iron-processing", "d"),
+
+    # Copper
+    "copper-plate": "sl-copper-smelting",
+    "copper-cable":         ("sl-copper-processing", "a"),
+    "desc_cable_c":         ("sl-copper-processing", "b"),
+    "desc_coppersheet_c":   ("sl-copper-processing", "c"),
+    "desc_copperdust_c":    ("sl-copper-processing", "d"),
+
+    # Concrete
+    "concrete": "sl-concrete-smelting",
+
+    # Steel
+    "steel-plate": "sl-steel-smelting",
+    "desc_steelpipe_c": "sl-steel-processing",
+    "desc_steelplate_c": "sl-steel-processing",
+    "desc_steelplatereinforced_c": "sl-steel-processing",
+
+    # Quartz
+    "desc_quartzcrystal_c": "sl-quartzcrystal-smelting",
+    "desc_silica_c": "sl-silica-smelting",
+    "desc_dissolvedsilica_c": "sl-silica-smelting",
+
+    # Aluminium
+    "desc_aluminasolution_c": "sl-aluminium-smelting",
+    "desc_aluminumscrap_c": "sl-aluminium-smelting",
+    "desc_aluminumingot_c": "sl-aluminium-smelting",
+    "desc_aluminumplate_c": "sl-aluminium-processing",
+    "desc_aluminumcasing_c": "sl-aluminium-processing",
+    "desc_aluminumplatereinforced_c": "sl-aluminium-processing",
+    "desc_gastank_c": "sl-aluminium-processing",
+
+    # Caterium
+    "desc_goldingot_c": "sl-caterium-smelting",
+    "desc_highspeedwire_c": "sl-caterium-processing",
+
+    # Frames
+    "desc_modularframe_c":           ("sl-frame-processing", "a"),
+    "desc_modularframeheavy_c":      ("sl-frame-processing", "b"),
+    "desc_modularframefused_c":      ("sl-frame-processing", "c"),
+    "desc_pressureconversioncube_c": ("sl-frame-processing", "d"),
+
+    # Motor
+    "desc_rotor_c":          ("sl-motor-processing", "a"),
+    "desc_stator_c":         ("sl-motor-processing", "b"),
+    "engine-unit":           ("sl-motor-processing", "c"),
+    "electric-engine-unit":  ("sl-motor-processing", "d"),
+
+    # Circuits
+    "electronic-circuit":          ("sl-circuit-processing", "a"),
+    "advanced-circuit":            ("sl-circuit-processing", "b"),
+    "desc_highspeedconnector_c":   ("sl-circuit-processing", "c"),
+    "desc_circuitboardhighspeed_c":("sl-circuit-processing", "d"),
+    "processing-unit":             ("sl-circuit-processing", "e"),
+    "desc_temporalprocessor_c":    ("sl-circuit-processing", "f"),
+
+    # Oil
+    "plastic-bar":         ("sl-oil-processing", "a"),
+    "desc_rubber_c":       ("sl-oil-processing", "b"),
+    "heavy-oil":           ("sl-oil-processing", "c"),
+    "desc_polymerresin_c": ("sl-oil-processing", "d"),
+    "desc_petroleumcoke_c": ("sl-oil-processing", "e"),
+
+    # Fuel
+    "desc_liquidfuel_c": ("sl-fuel", "a"),
+    "solid-fuel": ("sl-fuel", "b"),
+    "desc_liquidturbofuel_c": ("sl-fuel", "c"),
+    "desc_turbofuel_c": ("sl-fuel", "d"),
+    "desc_rocketfuel_c": ("sl-fuel", "e"),
+    "rocket-fuel": ("sl-fuel", "f"),
+    "desc_ionizedfuel_c": ("sl-fuel", "g"),
+    "desc_packagedionizedfuel_c": ("sl-fuel", "h"),
+
+    # Misc
+    "desc_coolingsystem_c":             ("sl-misc-processing", "a"),
+    "desc_electromagneticcontrolrod_c": ("sl-misc-processing", "b"),
+    "battery":                          ("sl-misc-processing", "c"),
+    "desc_crystaloscillator_c":         ("sl-misc-processing", "d"),
+    "desc_quantumoscillator_c":         ("sl-misc-processing", "e"),
+
+    # Nuclear
+    "desc_uraniumcell_c":        ("sl-uranium-processing", "a"),
+    "uranium-fuel-cell":         ("sl-uranium-processing", "b"),
+    "desc_nonfissibleuranium_c": ("sl-plutonium-processing", "a"),
+    "desc_plutoniumpellet_c":    ("sl-plutonium-processing", "b"),
+    "desc_plutoniumcell_c":      ("sl-plutonium-processing", "c"),
+    "desc_plutoniumfuelrod_c":   ("sl-plutonium-processing", "d"),
+    "desc_ficsonium_c":           "sl-ficsonium-processing",
+    "desc_ficsoniumfuelrod_c":    "sl-ficsonium-processing",
+
+    # Project Assembly
+    "desc_spaceelevatorpart_1_c": ("sl-project-assembly", "a"),
+    "desc_spaceelevatorpart_2_c": ("sl-project-assembly", "b"),
+    "desc_spaceelevatorpart_3_c": ("sl-project-assembly", "c"),
+    "desc_spaceelevatorpart_4_c": ("sl-project-assembly", "d"),
+    "desc_spaceelevatorpart_5_c": ("sl-project-assembly", "e"),
+    "desc_spaceelevatorpart_6_c": ("sl-project-assembly", "f"),
+    "desc_spaceelevatorpart_7_c": ("sl-project-assembly", "g"),
+    "desc_spaceelevatorpart_8_c": ("sl-project-assembly", "h"),
+    "desc_spaceelevatorpart_9_c": ("sl-project-assembly", "i"),
+    "desc_spaceelevatorpart_10_c": ("sl-project-assembly", "j"),
+    "desc_spaceelevatorpart_11_c": ("sl-project-assembly", "k"),
+    "desc_spaceelevatorpart_12_c": ("sl-project-assembly", "l"),
+
+    # Alien
+    "desc_genericbiomass_c": ("sl-biomass", "a"),
+    "desc_biofuel_c":        ("sl-biomass", "b"),
+    "desc_liquidbiofuel_c":  ("sl-biomass", "c"),
+    "desc_aliendnacapsule_c": "sl-alien",
+    "desc_alienprotein_c": "sl-alien",
+    "desc_crystalshard_c": "sl-shard",
+    "desc_alienpowerfuel_c": "sl-shard",
+}
+RECIPE_TO_SUBGROUP = {
+    "recipe_fabric_c": "sl-alien",
+    "recipe_alternate_coal_1_c": ("sl-biomass", "d"),
+    "recipe_alternate_coal_2_c": ("sl-biomass", "e"),
+    "recipe_alternate_polyesterfabric_c": ("sl-oil-processing", "f"),
+}
 
 
 def translate_item_name(name: str) -> str:
@@ -315,6 +443,9 @@ def process_item(entry: dict[str, str]) -> tuple[str, dict] | None:
     # subgroup = "raw-resource",
     # order = "d[stone]",
 
+    if float(entry["mEnergyValue"]) > 0:
+        definition["fuel_value"] = entry["mEnergyValue"] + "MJ"
+
     if is_fluid:
         definition["auto_barrel"] = False
         definition["default_temperature"] = 15
@@ -351,7 +482,6 @@ def nuclear_fuel_processor(data: list[dict[str, str]]) -> None:
     for entry in data:
 
         defintion = process_item(entry)[1]
-        defintion["fuel_value"] = entry["mEnergyValue"] + "MJ"
         defintion["fuel_category"] = "nuclear"
         
         # mAmountOfWaste!!
@@ -365,8 +495,7 @@ def nuclear_fuel_processor(data: list[dict[str, str]]) -> None:
 def biomass_processor(data: list[dict[str, str]]) -> None:
     for entry in data:
         defintion = process_item(entry)[1]
-        defintion["fuel_value"] = entry["mEnergyValue"] + "MJ"
-        defintion["fuel_category"] = "biomass"
+        defintion["fuel_category"] = "sl-biomass"
 
 
 def locale_only_processor(data: list[dict[str, str]]) -> None:
@@ -475,7 +604,9 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
 
         main_product = product[0]["name"]
         subgroup = f"sf-{main_product}"
-
+        order_prefix = "r"
+        order = main_product
+        
         if category == "handcraft":
             product_type = CUSTOM_ITEM_TYPE.get(main_product, "item")
             subgroup = (
@@ -483,16 +614,29 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
             )
 
         elif category == "packager":
-            subgroup = (
-                "fill-barrel"
-                if entry["mDisplayName"].startswith("Packaged")
-                else "empty-barrel"
-            )
+            if entry["mDisplayName"].startswith("Packaged"):
+                subgroup = "fill-barrel"
+                order = ingredients[0]["name"]
+            else:
+                subgroup = "empty-barrel"
+                order = main_product
+
+        elif main_product in PRODUCT_TO_SUBGROUP or entry_name in RECIPE_TO_SUBGROUP:
+            subgroup_details = RECIPE_TO_SUBGROUP[entry_name] if entry_name in RECIPE_TO_SUBGROUP else PRODUCT_TO_SUBGROUP[main_product]
+            if isinstance(subgroup_details, str):
+                subgroup = subgroup_details
+            else:
+                subgroup, order_prefix = subgroup_details
+
         else:
+            parent_group = "other"
+            if category == "converter":
+                parent_group = "sl-converter"
+
             all_subgroups[subgroup] = {
                 "type": "item-subgroup",
                 "name": subgroup,
-                "group": "other",
+                "group": parent_group,
             }
 
         definition = {
@@ -502,7 +646,7 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
             "results": product,
             "main_product": "",
             "subgroup": subgroup,
-            "order": "b" if "Alternate" in entry["mDisplayName"] else "a",
+            "order": f"{order_prefix}[{order}]" + ("b" if "Alternate" in entry["mDisplayName"] else "a"),
             "icon_size": 64,
             "icon_mipmaps": 4,
             "category": category,
@@ -599,7 +743,7 @@ def create_files(extracted_images: Path) -> None:
     create_update_file(all_recipes, export_root.joinpath("prototypes/recipes.lua"))
     create_update_file(all_subgroups, export_root.joinpath("prototypes/subgroups.lua"))
 
-    with export_root.joinpath("locale/en/strings.cfg").open("w", encoding="utf-8") as f:
+    with export_root.joinpath("locale/en/generated.cfg").open("w", encoding="utf-8") as f:
         output_locale.write(f, space_around_delimiters=False)
 
 
