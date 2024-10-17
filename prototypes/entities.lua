@@ -127,14 +127,6 @@ local machines = {
     }
 }
 
-for _, machine in pairs(machines) do
-    local item = data.raw["item"][machine.name]
-    item.place_result = machine.name
-    item.icon = machine.icon
-    item.icon_size = machine.icon_size
-    item.icon_mipmaps = machine.icon_mipmaps
-end
-
 data:extend(machines)
 
 local biomass_generator = data.raw["burner-generator"]["desc_generatorbiomass_automated_c"]
@@ -148,3 +140,13 @@ copy_art_from(
     data.raw["assembling-machine"]["desc_smeltermk1_c"],
     data.raw["furnace"]["electric-furnace"]
 )
+
+for i, machine in pairs(machines) do
+    local item = data.raw["item"][machine.name]
+    item.place_result = machine.name
+    item.icon = machine.icon
+    item.icon_size = machine.icon_size
+    item.icon_mipmaps = machine.icon_mipmaps
+    item.subgroup = "production-machine"
+    item.order = string.format("f[%s]", string.char(string.byte("a") + i))
+end

@@ -658,10 +658,7 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
         order = main_product
         
         if category == "handcraft":
-            product_type = CUSTOM_ITEM_TYPE.get(main_product, "item")
-            subgroup = (
-                f'data.raw["{product_type}"]["{main_product}"].subgroup or "production-machine"'
-            )
+            subgroup = "other"
 
         elif category == "packager":
             if entry["mDisplayName"].startswith("Packaged"):
@@ -703,6 +700,12 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
             "always_show_made_in": True,
             "energy_required": float(entry["mManufactoringDuration"]),
         }
+        if category == "handcraft":
+            definition["main_product"] = main_product
+            definition.pop("icon_size")
+            definition.pop("icon_mipmaps")
+            definition.pop("subgroup")
+            definition.pop("order")
 
         all_recipes[entry_name] = definition
         output_locale["recipe-name"][entry_name] = entry["mDisplayName"]
@@ -752,6 +755,7 @@ _KNOWN_PROCESSORS = {
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableConveyorBelt'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableConveyorLift'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableGeneratorFuel'": locale_only_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableFrackingActivator'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildingDescriptor'": building_processor,
 }
 
@@ -835,9 +839,11 @@ def main():
         result_type = main_result['type']
         if result_type == "item":
             result_type = CUSTOM_ITEM_TYPE.get(main_result['name'], result_type)
-        recipe_data["icon"] = (
-            f'data.raw["{result_type}"]["{main_result['name']}"].icon'
-        )
+        
+        if recipe_data["main_product"] == "":
+            recipe_data["icon"] = (
+                f'data.raw["{result_type}"]["{main_result['name']}"].icon'
+            )
 
     create_files(args.extracted_images)
 
