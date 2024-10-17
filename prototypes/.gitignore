@@ -1,5 +1,5 @@
 fluids.lua
-items.lua
+generated-items.lua
 recipes.lua
 subgroups.lua
 autoplace-controls.lua

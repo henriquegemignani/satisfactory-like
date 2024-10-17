@@ -26,7 +26,7 @@ data:extend {
     name = "sl-resource-well"
   }
 }
-
+require("prototypes.buildings.transport-belt")
 require("prototypes.subgroups")
 require("prototypes.items")
 require("prototypes.fluids")

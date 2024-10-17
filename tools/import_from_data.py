@@ -39,6 +39,22 @@ sf_item_to_fac_name = {
     "Desc_OilPump_C": "pumpjack",
     "BP_ItemDescriptorPortableMiner_C": "burner-mining-drill",
     "Desc_MinerMk1_C": "electric-mining-drill",
+
+    "Desc_ConveyorBeltMk1_C": "sl-mk1-transport-belt",
+    "Desc_ConveyorBeltMk2_C": "transport-belt",
+    "Desc_ConveyorBeltMk3_C": "fast-transport-belt",
+    "Desc_ConveyorBeltMk4_C": "express-transport-belt",
+    "Desc_ConveyorBeltMk5_C": "sl-mk5-transport-belt",
+    "Desc_ConveyorBeltMk6_C": "sl-mk6-transport-belt",
+}
+KEEP_ORIGINAL_ICONS = {
+    "sl-mk1-transport-belt",
+    "transport-belt",
+    "fast-transport-belt",
+    "express-transport-belt",
+    "sl-mk5-transport-belt",
+    "sl-mk6-transport-belt",
+    "electric-mining-drill",
 }
 STACK_SIZES = {
     "SS_ONE": 1,
@@ -191,13 +207,14 @@ def process_item(entry: dict[str, str]) -> tuple[str, dict]:
         entry_name = entry_name.lower()
         definition["name"] = entry_name
 
-    definition["icon"] = f"__satisfactory-like__/graphics/icons/{entry_name}.png"
-    definition["icon_size"] = 64
-    definition["icon_mipmaps"] = 4
+    if entry_name not in KEEP_ORIGINAL_ICONS:
+        definition["icon"] = f"__satisfactory-like__/graphics/icons/generated/{entry_name}.png"
+        definition["icon_size"] = 64
+        definition["icon_mipmaps"] = 4
 
-    icon_name = entry["mSmallIcon"].replace("Texture2D /Game/", "")
-    icon_name = icon_name[:icon_name.rfind(".")]
-    assets_to_convert[icon_name] = f"graphics/icons/{entry_name}.png"
+        icon_name = entry["mSmallIcon"].replace("Texture2D /Game/", "")
+        icon_name = icon_name[:icon_name.rfind(".")]
+        assets_to_convert[icon_name] = f"graphics/icons/generated/{entry_name}.png"
     # subgroup = "raw-resource",
     # order = "d[stone]",
 
@@ -225,22 +242,23 @@ def item_processor(data: list[dict[str, str]]) -> None:
         process_item(entry)
 
 
-def assembler_processor(data: list[dict[str, str]]) -> None:
+def locale_only_processor(data: list[dict[str, str]]) -> None:
     for entry in data:
-        entry_name = entry["ClassName"].lower().replace("build_", "desc_")
+        entry_name = entry["ClassName"].replace("Build_", "Desc_")
+        entry_name = sf_item_to_fac_name.get(entry_name, entry_name).lower()
         for entry_type in ["entity", "item"]:
             output_locale[f"{entry_type}-name"][entry_name] = entry["mDisplayName"]
             output_locale[f"{entry_type}-description"][entry_name] = locale_wrap(entry["mDescription"])
 
 
 def building_processor(data: list[dict[str, str]]) -> None:
-
     interesting_categories = {
         # "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Power/SC_Generators.SC_Generators_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_Manufacturers.SC_Manufacturers_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_Miners.SC_Miners_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_OilProduction.SC_OilProduction_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_Smelters.SC_Smelters_C'",
+        "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_ConveyorBelts.SC_ConveyorBelts_C'",
     }
 
     for entry in data:
@@ -388,9 +406,10 @@ _KNOWN_PROCESSORS = {
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGEquipmentDescriptor'": equipment_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGRecipe'": recipe_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGResourceDescriptor'": resource_processor,
-    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableManufacturer'": assembler_processor,
-    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableManufacturerVariablePower'": assembler_processor,
-    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableResourceExtractor'": assembler_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableManufacturer'": locale_only_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableManufacturerVariablePower'": locale_only_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableResourceExtractor'": locale_only_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableConveyorBelt'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildingDescriptor'": building_processor,
 }
 
@@ -422,7 +441,7 @@ def create_files(extracted_images: Path) -> None:
             print(f"Creating {target_name}")
             create_mipmap(extracted_images.joinpath(source_name + ".png"), new_image)
 
-    create_update_file(all_items, export_root.joinpath("prototypes/items.lua"))
+    create_update_file(all_items, export_root.joinpath("prototypes/generated-items.lua"))
     create_update_file(all_fluids, export_root.joinpath("prototypes/fluids.lua"))
     create_update_file(all_recipes, export_root.joinpath("prototypes/recipes.lua"))
     create_update_file(all_subgroups, export_root.joinpath("prototypes/subgroups.lua"))
