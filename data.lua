@@ -24,6 +24,10 @@ data:extend {
   {
     type = "resource-category",
     name = "sl-resource-well"
+  },
+  {
+    type = "fuel-category",
+    name = "biomass"
   }
 }
 require("prototypes.buildings.transport-belt")
