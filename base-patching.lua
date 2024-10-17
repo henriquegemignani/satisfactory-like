@@ -45,6 +45,9 @@ for _, name in pairs {
     "sulfuric-acid",
     "concrete",
     "rocket-fuel",
+    "solid-fuel-from-light-oil",
+    "solid-fuel-from-heavy-oil",
+    "solid-fuel-from-petroleum-gas",
 
     -- Things to just Hide
     "boiler",
@@ -71,6 +74,13 @@ for _, name in pairs {
     "stone-furnace",
     "steel-furnace",
     "electric-furnace",
+    "lubricant",
+    "basic-oil-processing",
+    "advanced-oil-processing",
+    "coal-liquefaction",
+    "heavy-oil-cracking",
+    "light-oil-cracking",
+    "nuclear-fuel",
 
     "beacon",
     "speed-module",

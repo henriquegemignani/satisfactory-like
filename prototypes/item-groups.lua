@@ -146,9 +146,9 @@ data:extend {
     },
     {
         type = "item-subgroup",
-        name = "sl-quantum-encoder",
+        name = "sl-high-tech",
         group = "intermediate-products",
-        order = "d-k[quantum]"
+        order = "d-p[high-tech]"
     },
 
     -- Project Assembly
@@ -157,6 +157,14 @@ data:extend {
         name = "sl-project-assembly",
         group = "intermediate-products",
         order = "f-a[project]"
+    },
+
+    -- Military
+    {
+        type = "item-subgroup",
+        name = "sl-military",
+        group = "combat",
+        order = "h"
     },
 
     -- Converter

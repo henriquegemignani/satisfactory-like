@@ -262,19 +262,21 @@ PRODUCT_TO_SUBGROUP = {
     "electric-engine-unit":  ("sl-motor-processing", "d"),
 
     # Circuits
-    "electronic-circuit":          ("sl-circuit-processing", "a"),
-    "advanced-circuit":            ("sl-circuit-processing", "b"),
-    "desc_highspeedconnector_c":   ("sl-circuit-processing", "c"),
-    "desc_circuitboardhighspeed_c":("sl-circuit-processing", "d"),
-    "processing-unit":             ("sl-circuit-processing", "e"),
-    "desc_temporalprocessor_c":    ("sl-circuit-processing", "f"),
+    "electronic-circuit":             ("sl-circuit-processing", "a"),
+    "advanced-circuit":               ("sl-circuit-processing", "b"),
+    "desc_highspeedconnector_c":      ("sl-circuit-processing", "c"),
+    "desc_circuitboardhighspeed_c":   ("sl-circuit-processing", "d"),
+    "desc_modularframelightweight_c": ("sl-circuit-processing", "e"),
+    "processing-unit":                ("sl-circuit-processing", "f"),
+    "desc_temporalprocessor_c":       ("sl-circuit-processing", "g"),
 
     # Oil
-    "plastic-bar":         ("sl-oil-processing", "a"),
-    "desc_rubber_c":       ("sl-oil-processing", "b"),
-    "heavy-oil":           ("sl-oil-processing", "c"),
-    "desc_polymerresin_c": ("sl-oil-processing", "d"),
+    "plastic-bar":          ("sl-oil-processing", "a"),
+    "desc_rubber_c":        ("sl-oil-processing", "b"),
+    "heavy-oil":            ("sl-oil-processing", "c"),
+    "desc_polymerresin_c":  ("sl-oil-processing", "d"),
     "desc_petroleumcoke_c": ("sl-oil-processing", "e"),
+    "empty-barrel":         ("sl-oil-processing", "f"),
 
     # Fuel
     "desc_liquidfuel_c": ("sl-fuel", "a"),
@@ -303,6 +305,13 @@ PRODUCT_TO_SUBGROUP = {
     "desc_ficsonium_c":           "sl-ficsonium-processing",
     "desc_ficsoniumfuelrod_c":    "sl-ficsonium-processing",
 
+    # High Tech
+    "desc_samfluctuator_c":     ("sl-high-tech", "a"),
+    "desc_singularitycell_c":   ("sl-high-tech", "b"),
+    "desc_ficsitemesh_c":       ("sl-high-tech", "c"),
+    "desc_darkmatter_c":        ("sl-high-tech", "d"),
+    "desc_diamond_c":           ("sl-high-tech", "e"),
+
     # Project Assembly
     "desc_spaceelevatorpart_1_c": ("sl-project-assembly", "a"),
     "desc_spaceelevatorpart_2_c": ("sl-project-assembly", "b"),
@@ -316,6 +325,10 @@ PRODUCT_TO_SUBGROUP = {
     "desc_spaceelevatorpart_10_c": ("sl-project-assembly", "j"),
     "desc_spaceelevatorpart_11_c": ("sl-project-assembly", "k"),
     "desc_spaceelevatorpart_12_c": ("sl-project-assembly", "l"),
+
+    # Military
+    "desc_gunpowder_c": "sl-military",
+    "desc_gunpowdermk2_c": "sl-military",
 
     # Alien
     "desc_genericbiomass_c": ("sl-biomass", "a"),
@@ -476,6 +489,14 @@ def process_item(entry: dict[str, str]) -> tuple[str, dict] | None:
 
     if float(entry["mEnergyValue"]) > 0:
         definition["fuel_value"] = entry["mEnergyValue"] + "MJ"
+
+    if entry_name in PRODUCT_TO_SUBGROUP:
+        subgroup_details = PRODUCT_TO_SUBGROUP[entry_name]
+        if isinstance(subgroup_details, str):
+            definition["subgroup"] = subgroup_details
+        else:
+            definition["subgroup"], order_prefix = subgroup_details
+            definition["order"] = f"{order_prefix}[{entry_name}]"
 
     if is_fluid:
         definition["auto_barrel"] = False
