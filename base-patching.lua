@@ -53,6 +53,8 @@ for _, name in pairs {
     "big-electric-pole",
     "substation",
     "accumulator",
+    "pipe",
+    "pump",
 
     -- Things to just Hide
     "boiler",

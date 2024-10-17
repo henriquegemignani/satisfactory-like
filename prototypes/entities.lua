@@ -57,6 +57,22 @@ local function copy_art_from(target, source)
     end
 end
 
+
+---Makes an item with the same name as given entity place it
+---@param entity data.EntityPrototype
+---@return data.ItemPrototype
+local function associate_entity_with_item(entity)
+    entity.minable.result = entity.name
+    local item = data.raw["item"][entity.name]
+    item.place_result = entity.name
+    item.icon = entity.icon
+    item.icon_size = entity.icon_size
+    item.icon_mipmaps = entity.icon_mipmaps
+    return item
+end
+
+require("prototypes.pipes")
+
 local machines = {
     -- smelter
     create_assembler {
@@ -118,7 +134,7 @@ local biomass_generator = data.raw["burner-generator"]["desc_generatorbiomass_au
 biomass_generator.max_power_output = "30MW"
 biomass_generator.burner.effectivity = 1
 biomass_generator.burner.fuel_category = nil
-biomass_generator.burner.fuel_categories = {"sl-biomass"}
+biomass_generator.burner.fuel_categories = { "sl-biomass" }
 
 -- make smelter look like electric furnace
 copy_art_from(
@@ -127,11 +143,15 @@ copy_art_from(
 )
 
 for i, machine in pairs(machines) do
-    local item = data.raw["item"][machine.name]
-    item.place_result = machine.name
-    item.icon = machine.icon
-    item.icon_size = machine.icon_size
-    item.icon_mipmaps = machine.icon_mipmaps
+    local item = associate_entity_with_item(machine)
     item.subgroup = "production-machine"
     item.order = string.format("f[%s]", string.char(string.byte("a") + i))
 end
+
+associate_entity_with_item(data.raw["pipe"]["desc_pipelinemk2_c"])
+associate_entity_with_item(data.raw["pump"]["desc_pipelinepumpmk2_c"])
+
+data.raw["item"]["desc_pipelinemk2_c"].subgroup = data.raw["item"]["pipe"].subgroup
+data.raw["item"]["desc_pipelinemk2_c"].order = data.raw["item"]["pipe"].order .. "-mk2"
+data.raw["item"]["desc_pipelinepumpmk2_c"].subgroup = data.raw["item"]["pump"].subgroup
+data.raw["item"]["desc_pipelinepumpmk2_c"].order = data.raw["item"]["pump"].order .. "-mk2"

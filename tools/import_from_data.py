@@ -46,6 +46,9 @@ sf_item_to_fac_name = {
     "Desc_PowerPoleMk3_C": "substation",
     "Desc_PowerTower_C": "big-electric-pole",
     "Desc_PowerStorageMk1_C": "accumulator",
+
+    "Desc_PipelinePump_C": "pump",
+    "Desc_Pipeline_C": "pipe",
     #
     "Desc_WaterPump_C": "offshore-pump",
     "Desc_OilPump_C": "pumpjack",
@@ -92,6 +95,7 @@ CUSTOM_ITEM_TYPE = {
 KEEP_ORIGINAL_ICONS = {
     "offshore-pump",
     "pumpjack",
+    "pipe",
     # Belts
     "sl-mk1-transport-belt",
     "transport-belt",
@@ -155,6 +159,14 @@ SF_THINGS_TO_IGNORE = {
     "Recipe_Fireworks_02_C",
     "Recipe_Fireworks_03_C",
 
+    # Pipe
+    "Desc_Valve_C",  # no valves for now
+    "Recipe_Valve_C",
+    "Desc_Pipeline_NoIndicator_C",
+    "Recipe_Pipeline_NoIndicator_C",
+    "Desc_PipelineMK2_NoIndicator_C",
+    "Recipe_PipelineMk2_NoIndicator_C",
+
     # Train Station
     "Desc_TrainDockingStation_C",
     "Desc_TrainDockingStationLiquid_C",
@@ -211,6 +223,11 @@ SF_ACCEPTABLE_PRODUCTS = {
     "substation",
     "big-electric-pole",
     "accumulator",
+    # Pipes
+    "pipe",
+    "pump",
+    "desc_pipelinemk2_c",
+    "desc_pipelinepumpmk2_c",
 }
 
 all_items = {}
@@ -509,7 +526,7 @@ def process_item(entry: dict[str, str]) -> tuple[str, dict] | None:
     if energy_value > 0:
         if is_fluid:
             energy_value *= 1000
-        definition["fuel_value"] = f"{energy_value} MJ"
+        definition["fuel_value"] = f"{energy_value}MJ"
 
     if entry_name in PRODUCT_TO_SUBGROUP:
         subgroup_details = PRODUCT_TO_SUBGROUP[entry_name]
@@ -527,10 +544,14 @@ def process_item(entry: dict[str, str]) -> tuple[str, dict] | None:
 
         color = entry["mFluidColor"]
         b, g, r = COLOR_RE.match(color).group(1, 2, 3)
-        definition["base_color"] = definition["flow_color"] = {
+        definition["base_color"] = {
             "r": int(r) / 255,
             "g": int(g) / 255,
             "b": int(b) / 255,
+        }
+        definition["flow_color"] = {
+            k: min(definition["base_color"][k] + 0.3, 1.0)
+            for k in ("r", "g", "b")
         }
 
     if entry_name != "rail":
@@ -593,6 +614,7 @@ def building_processor(data: list[dict[str, str]]) -> None:
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_ConveyLift.SC_ConveyLift_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_Trains.SC_Trains_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Power/SC_PowerPoles.SC_PowerPoles_C'",
+        "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_Pipes.SC_Pipes_C'",
     }
 
     for entry in data:
@@ -771,6 +793,7 @@ _KNOWN_PROCESSORS = {
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGEquipmentDescriptor'": equipment_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGRecipe'": recipe_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGResourceDescriptor'": resource_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildingDescriptor'": building_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableManufacturer'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableManufacturerVariablePower'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableResourceExtractor'": locale_only_processor,
@@ -780,7 +803,9 @@ _KNOWN_PROCESSORS = {
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableFrackingActivator'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildablePowerPole'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildablePowerStorage'": locale_only_processor,
-    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildingDescriptor'": building_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildablePipeline'": locale_only_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildablePipelinePump'": locale_only_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableRailroadTrack'": locale_only_processor,
 }
 
 
