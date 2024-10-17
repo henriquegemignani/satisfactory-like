@@ -82,12 +82,7 @@ local machines = {
     -- foundry
     require("prototypes.buildings.foundry"),
     -- Manufacturer
-    create_assembler {
-        base = data.raw["assembling-machine"]["assembling-machine-3"],
-        item = data.raw["item"]["desc_manufacturermk1_c"],
-        crafting_categories = { 'manufacturer', 'manufacturer-handcraft', },
-        energy_usage = "55MW",
-    },
+    require("prototypes.buildings.manufacturer"),
     -- Refinery
     create_assembler {
         base = data.raw["assembling-machine"]["chemical-plant"],
