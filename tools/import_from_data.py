@@ -505,8 +505,11 @@ def process_item(entry: dict[str, str]) -> tuple[str, dict] | None:
     # subgroup = "raw-resource",
     # order = "d[stone]",
 
-    if float(entry["mEnergyValue"]) > 0:
-        definition["fuel_value"] = entry["mEnergyValue"] + "MJ"
+    energy_value = float(entry["mEnergyValue"])
+    if energy_value > 0:
+        if is_fluid:
+            energy_value *= 1000
+        definition["fuel_value"] = f"{energy_value} MJ"
 
     if entry_name in PRODUCT_TO_SUBGROUP:
         subgroup_details = PRODUCT_TO_SUBGROUP[entry_name]
@@ -849,6 +852,7 @@ def main():
                 entry["type"] = "item"
             elif entry["name"] in all_fluids:
                 entry["type"] = "fluid"
+                entry["amount"] /= 1000
             else:
                 raise ValueError(f"unknown item {entry['name']} ({n})")
 
