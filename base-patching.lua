@@ -48,6 +48,11 @@ for _, name in pairs {
     "solid-fuel-from-light-oil",
     "solid-fuel-from-heavy-oil",
     "solid-fuel-from-petroleum-gas",
+    "small-electric-pole",
+    "medium-electric-pole",
+    "big-electric-pole",
+    "substation",
+    "accumulator",
 
     -- Things to just Hide
     "boiler",

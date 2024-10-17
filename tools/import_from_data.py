@@ -40,6 +40,12 @@ sf_item_to_fac_name = {
     "Desc_TrainStation_C": "train-stop",
     "Desc_Locomotive_C": "locomotive",
     "Desc_FreightWagon_C": "cargo-wagon",
+
+    "Desc_PowerPoleMk1_C": "small-electric-pole",
+    "Desc_PowerPoleMk2_C": "medium-electric-pole",
+    "Desc_PowerPoleMk3_C": "substation",
+    "Desc_PowerTower_C": "big-electric-pole",
+    "Desc_PowerStorageMk1_C": "accumulator",
     #
     "Desc_WaterPump_C": "offshore-pump",
     "Desc_OilPump_C": "pumpjack",
@@ -109,6 +115,12 @@ KEEP_ORIGINAL_ICONS = {
     "train-stop",
     "locomotive",
     "cargo-wagon",
+    # Power
+    "small-electric-pole",
+    "medium-electric-pole",
+    "substation",
+    "big-electric-pole",
+    "accumulator",
 }
 STACK_SIZES = {
     "SS_ONE": 1,
@@ -193,6 +205,12 @@ SF_ACCEPTABLE_PRODUCTS = {
     "train-stop",
     "locomotive",
     "cargo-wagon",
+    # Power
+    "small-electric-pole",
+    "medium-electric-pole",
+    "substation",
+    "big-electric-pole",
+    "accumulator",
 }
 
 all_items = {}
@@ -571,6 +589,7 @@ def building_processor(data: list[dict[str, str]]) -> None:
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_ConveyorBelts.SC_ConveyorBelts_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_ConveyLift.SC_ConveyLift_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_Trains.SC_Trains_C'",
+        "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Power/SC_PowerPoles.SC_PowerPoles_C'",
     }
 
     for entry in data:
@@ -756,6 +775,8 @@ _KNOWN_PROCESSORS = {
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableConveyorLift'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableGeneratorFuel'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableFrackingActivator'": locale_only_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildablePowerPole'": locale_only_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildablePowerStorage'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildingDescriptor'": building_processor,
 }
 
