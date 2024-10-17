@@ -155,6 +155,16 @@ data:extend {
     -- }),
 }
 
+-- Coal isn't a required starting item
+data.raw["resource"]["coal"].autoplace = resource_autoplace.resource_autoplace_settings {
+    name = "coal",
+    order = "b",
+    base_density = 8,
+    has_starting_area_placement = false,
+    regular_rq_factor_multiplier = 1.0,
+    starting_rq_factor_multiplier = 1.1,
+}
+
 -- Make uranium very rare
 data.raw["resource"]["uranium-ore"].autoplace = resource_autoplace.resource_autoplace_settings {
     name = "uranium-ore",

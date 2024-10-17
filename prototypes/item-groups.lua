@@ -48,6 +48,12 @@ data:extend {
         group = "production",
         order = "d-h[caterium]"
     },
+    {
+        type = "item-subgroup",
+        name = "sl-misc-smelting",
+        group = "production",
+        order = "d-i[misc]"
+    },
 
     -- Intermediates
     {

@@ -84,6 +84,9 @@ CUSTOM_ITEM_TYPE = {
     "cargo-wagon": "item-with-entity-data",
 }
 KEEP_ORIGINAL_ICONS = {
+    "offshore-pump",
+    "pumpjack",
+    # Belts
     "sl-mk1-transport-belt",
     "transport-belt",
     "fast-transport-belt",
@@ -118,6 +121,28 @@ STACK_SIZES = {
 COLOR_RE = re.compile(r"\(B=(\d+),G=(\d+),R=(\d+),A=(\d+)\)")
 SF_THINGS_TO_IGNORE = {
     "Recipe_CartridgeChaos_C",
+
+    # Equipment things we're ignoring for now
+    "Recipe_SpikedRebar_C",
+    "Recipe_CartridgeSmart_C",
+    "Recipe_Rebar_Stunshot_C",
+    "Recipe_NobeliskGas_C",
+    "Recipe_NobeliskShockwave_C",
+    "Recipe_Rebar_Spreadshot_C",
+    "Recipe_CartridgeChaos_Packaged_C",
+    "Recipe_NobeliskNuke_C",
+    "Recipe_Cartridge_C",
+    "Recipe_Rebar_Explosive_C",
+    "Recipe_NobeliskCluster_C",
+    "Recipe_Nobelisk_C",
+
+    "Recipe_FilterGasMask_C",
+    "Recipe_FilterHazmat_C",
+    
+    "Recipe_Fireworks_01_C",
+    "Recipe_Fireworks_02_C",
+    "Recipe_Fireworks_03_C",
+
     # Train Station
     "Desc_TrainDockingStation_C",
     "Desc_TrainDockingStationLiquid_C",
@@ -217,6 +242,12 @@ PRODUCT_TO_SUBGROUP = {
     # Caterium
     "desc_goldingot_c": "sl-caterium-smelting",
     "desc_highspeedwire_c": "sl-caterium-processing",
+
+    # Misc Smelting
+    "sulfuric-acid": "sl-misc-smelting",
+    "desc_nitricacid_c": "sl-misc-smelting",
+    "desc_samingot_c": "sl-misc-smelting",
+    "desc_compactedcoal_c": "sl-misc-smelting",
 
     # Frames
     "desc_modularframe_c":           ("sl-frame-processing", "a"),
@@ -564,15 +595,13 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
                 category = cat
 
             else:
-                # print(f"IGNORING {entry_name}")
-                # Build Gun, Equipment
-                return None
+                continue
 
         if category is None:
             if handcraft:
                 category = "handcraft"
             else:
-                raise ValueError("Error")
+                return None
 
         elif handcraft:
             category += "-handcraft"
