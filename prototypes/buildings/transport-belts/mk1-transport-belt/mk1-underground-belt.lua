@@ -8,7 +8,7 @@ data:extend({
     minable = { mining_time = 0.2, result = "sl-mk1-underground-belt" },
     max_health = 200,
     -- corpse = "sl-mk1-underground-belt-remnant",
-    max_distance = 30,
+    max_distance = 5,
     underground_sprite = {
       filename = "__core__/graphics/arrows/underground-lines.png",
       priority = "high",
