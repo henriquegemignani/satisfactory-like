@@ -117,12 +117,7 @@ local machines = {
     -- Particle Accelerator
     require("prototypes.buildings.particle-accelerator"),
     -- Converter
-    create_assembler {
-        base = data.raw["assembling-machine"]["assembling-machine-2"],
-        item = data.raw["item"]["desc_converter_c"],
-        crafting_categories = { 'converter', },
-        energy_usage = "200MW", -- TODO: make this varied
-    },
+    require("prototypes.buildings.converter"),
     -- Quantum Encoder
     require("prototypes.buildings.quantum-encoder"),
     -- Biomass Generator

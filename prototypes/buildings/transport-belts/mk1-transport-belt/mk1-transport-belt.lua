@@ -19,7 +19,7 @@ data:extend({
     working_sound = {
       sound = {
         filename = "__base__/sound/transport-belt.ogg",
-        volume = 0.4,
+        volume = 0.05
       },
       persistent = true,
     },

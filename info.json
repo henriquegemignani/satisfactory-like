@@ -7,6 +7,8 @@
     "factorio_version": "1.1",
     "dependencies": [
       "base",
-      "Krastorio2Assets"
+      "Krastorio2Assets",
+      "space-exploration-graphics",
+      "space-exploration-graphics-3"
     ]
   }

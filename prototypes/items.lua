@@ -34,3 +34,5 @@ data.raw["item"]["desc_packagedoil_c"].fuel_category = "sl-vehicle"
 data.raw["item"]["coal"].fuel_category = "sl-coal"
 data.raw["item"]["desc_compactedcoal_c"].fuel_category = "sl-coal"
 data.raw["item"]["desc_petroleumcoke_c"].fuel_category = "sl-coal"
+
+data.raw["item"]["coal"].dark_background_icon = nil
