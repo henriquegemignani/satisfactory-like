@@ -34,3 +34,5 @@ require("prototypes.recipes")
 require("prototypes.autoplace-controls")
 require("prototypes.resources")
 require("prototypes.entities")
+
+require("base-patching")

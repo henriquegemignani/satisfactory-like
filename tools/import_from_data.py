@@ -16,6 +16,10 @@ from PIL import Image
 import pprint
 import re
 
+# TODO:
+# Fuel values
+# Uranium/Plutonium waste
+
 output_locale = configparser.ConfigParser()
 sf_item_to_fac_name = {
     "Desc_Coal_C": "coal",
@@ -23,8 +27,7 @@ sf_item_to_fac_name = {
     "Desc_Stone_C": "stone",
     "Desc_OreIron_C": "iron-ore",
     "Desc_OreCopper_C": "copper-ore",
-    "Desc_IronPlate_C": "iron-plate",
-    "Desc_IronRod_C": "iron-stick",
+    "Desc_Wire_C": "copper-cable",
     "Desc_Water_C": "water",
     "Desc_Sulfur_C": "sulfur",
     "Desc_OreCopper_C": "copper-ore",
@@ -34,18 +37,37 @@ sf_item_to_fac_name = {
     "Desc_HeavyOilResidue_C": "heavy-oil",
     "ResourceSink_Battery_C": "battery",
     "Desc_Cement_C": "concrete",
-
+    #
     "Desc_WaterPump_C": "offshore-pump",
     "Desc_OilPump_C": "pumpjack",
     "BP_ItemDescriptorPortableMiner_C": "burner-mining-drill",
     "Desc_MinerMk1_C": "electric-mining-drill",
-
     "Desc_ConveyorBeltMk1_C": "sl-mk1-transport-belt",
     "Desc_ConveyorBeltMk2_C": "transport-belt",
     "Desc_ConveyorBeltMk3_C": "fast-transport-belt",
     "Desc_ConveyorBeltMk4_C": "express-transport-belt",
     "Desc_ConveyorBeltMk5_C": "sl-mk5-transport-belt",
     "Desc_ConveyorBeltMk6_C": "sl-mk6-transport-belt",
+    "Desc_ConveyorLiftMk1_C": "sl-mk1-underground-belt",
+    "Desc_ConveyorLiftMk2_C": "underground-belt",
+    "Desc_ConveyorLiftMk3_C": "fast-underground-belt",
+    "Desc_ConveyorLiftMk4_C": "express-underground-belt",
+    "Desc_ConveyorLiftMk5_C": "sl-mk5-underground-belt",
+    "Desc_ConveyorLiftMk6_C": "sl-mk6-underground-belt",
+    # Additional mapping just for mod compatibility
+    "Desc_IronIngot_C": "iron-plate",
+    "Desc_CopperIngot_C": "copper-plate",
+    "Desc_IronRod_C": "iron-stick",
+    "Desc_IronScrew_C": "iron-gear-wheel",
+    "Desc_CircuitBoard_C": "electronic-circuit",
+    "Desc_FluidCanister_C": "empty-barrel",
+    "Desc_Fuel_C": "solid-fuel",
+    "Desc_Plastic_C": "plastic-bar",
+    "Desc_PackagedRocketFuel_C": "solid-fuel",
+    "Desc_NuclearFuelRod_C": "uranium-fuel-cell",
+    "Desc_NuclearWaste_C": "used-up-uranium-fuel-cell",
+    "Desc_Motor_C": "engine-unit",
+    "Desc_MotorLightweight_C": "electric-engine-unit",
 }
 KEEP_ORIGINAL_ICONS = {
     "sl-mk1-transport-belt",
@@ -54,6 +76,14 @@ KEEP_ORIGINAL_ICONS = {
     "express-transport-belt",
     "sl-mk5-transport-belt",
     "sl-mk6-transport-belt",
+    "sl-mk1-underground-belt",
+    "underground-belt",
+    "fast-underground-belt",
+    "express-underground-belt",
+    "sl-mk5-underground-belt",
+    "sl-mk6-underground-belt",
+    # Miners
+    "burner-mining-drill",
     "electric-mining-drill",
 }
 STACK_SIZES = {
@@ -71,7 +101,6 @@ SF_THINGS_TO_IGNORE = {
 SF_ACCEPTABLE_PRODUCTS = {
     "burner-mining-drill",
     "electric-mining-drill",
-    
     "offshore-pump",
     "desc_quantumencoder_c",
     "desc_converter_c",
@@ -87,6 +116,19 @@ SF_ACCEPTABLE_PRODUCTS = {
     "desc_frackingsmasher_c",
     "desc_constructormk1_c",
     "desc_smeltermk1_c",
+    # Belts
+    "sl-mk1-transport-belt",
+    "transport-belt",
+    "fast-transport-belt",
+    "express-transport-belt",
+    "sl-mk5-transport-belt",
+    "sl-mk6-transport-belt",
+    "sl-mk1-underground-belt",
+    "underground-belt",
+    "fast-underground-belt",
+    "express-underground-belt",
+    "sl-mk5-underground-belt",
+    "sl-mk6-underground-belt",
 }
 
 all_items = {}
@@ -94,6 +136,7 @@ all_fluids = {}
 all_recipes = {}
 all_subgroups = {}
 assets_to_convert = {}
+
 
 def wrap_array_pretty(data: list) -> str:
     return "{\n    " + ",\n    ".join(wrap(item, "    ") for item in data) + "\n}"
@@ -114,7 +157,8 @@ def wrap(data: typing.Any, indent: str = "") -> str:
         return (
             "{\n"
             + "\n".join(
-                f"{indent}    {_dict_key(key)} = {wrap(value, f'{indent}    ')}," for key, value in data.items()
+                f"{indent}    {_dict_key(key)} = {wrap(value, f'{indent}    ')},"
+                for key, value in data.items()
             )
             + f"\n{indent}}}"
         )
@@ -144,18 +188,17 @@ def create_mipmap(input_path: Path, output_path: Path, *, mimaps: int = 3) -> No
     img = Image.open(input_path)
     if img.size != (64, 64):
         img = img.resize((64, 64))
-    
+
     height = img.size[1]
     crop = img.crop((0, 0, height, height))
 
-    result = Image.new("RGBA", (
-        sum(height // (2 ** mip) for mip in range(mimaps + 1)),
-        height
-    ))
+    result = Image.new(
+        "RGBA", (sum(height // (2**mip) for mip in range(mimaps + 1)), height)
+    )
 
     left = 0
     for mipmap in range(mimaps + 1):
-        d = 2 ** mipmap
+        d = 2**mipmap
         smaller = crop.resize((height // d, height // d))
 
         result.paste(smaller, (left, 0))
@@ -164,11 +207,12 @@ def create_mipmap(input_path: Path, output_path: Path, *, mimaps: int = 3) -> No
     result.save(output_path)
 
 
-
 def decode_item_list(entry: str) -> list[dict]:
     def split_ingredient(item: str) -> dict:
         raw_name, amount = item.split('",Amount=')
-        name = raw_name.replace("ItemClass=\"/Script/Engine.BlueprintGeneratedClass'", "")[:-1].split(".")[-1]
+        name = raw_name.replace(
+            "ItemClass=\"/Script/Engine.BlueprintGeneratedClass'", ""
+        )[:-1].split(".")[-1]
         if name in sf_item_to_fac_name:
             name = sf_item_to_fac_name[name]
         else:
@@ -184,11 +228,18 @@ def decode_item_list(entry: str) -> list[dict]:
         return []
 
 
-
 def create_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument("satisfactory_path", type=Path, help="Path to where Satisfactory files are located")
-    parser.add_argument("extracted_images", type=Path, help="Path to where Satisfactory images were extrcted, using FModel")
+    parser.add_argument(
+        "satisfactory_path",
+        type=Path,
+        help="Path to where Satisfactory files are located",
+    )
+    parser.add_argument(
+        "extracted_images",
+        type=Path,
+        help="Path to where Satisfactory images were extrcted, using FModel",
+    )
     return parser
 
 
@@ -196,7 +247,7 @@ def process_item(entry: dict[str, str]) -> tuple[str, dict]:
     entry_name = entry["ClassName"]
     is_fluid = entry["mForm"] in {"RF_GAS", "RF_LIQUID"}
     entry_type = "fluid" if is_fluid else "item"
-    
+
     definition = {
         "type": entry_type,
     }
@@ -208,31 +259,39 @@ def process_item(entry: dict[str, str]) -> tuple[str, dict]:
         definition["name"] = entry_name
 
     if entry_name not in KEEP_ORIGINAL_ICONS:
-        definition["icon"] = f"__satisfactory-like__/graphics/icons/generated/{entry_name}.png"
+        definition["icon"] = (
+            f"__satisfactory-like__/graphics/icons/generated/{entry_name}.png"
+        )
         definition["icon_size"] = 64
         definition["icon_mipmaps"] = 4
 
         icon_name = entry["mSmallIcon"].replace("Texture2D /Game/", "")
-        icon_name = icon_name[:icon_name.rfind(".")]
+        icon_name = icon_name[: icon_name.rfind(".")]
         assets_to_convert[icon_name] = f"graphics/icons/generated/{entry_name}.png"
     # subgroup = "raw-resource",
     # order = "d[stone]",
 
     if is_fluid:
         definition["auto_barrel"] = False
-        definition["default_temperature"] = 15        
+        definition["default_temperature"] = 15
         if entry["mForm"] == "RF_GAS":
             definition["gas_temperature"] = 0
 
         color = entry["mFluidColor"]
         b, g, r = COLOR_RE.match(color).group(1, 2, 3)
-        definition["base_color"] = definition["flow_color"] = {"r": int(r)/255, "g": int(g)/255, "b": int(b)/255}
+        definition["base_color"] = definition["flow_color"] = {
+            "r": int(r) / 255,
+            "g": int(g) / 255,
+            "b": int(b) / 255,
+        }
 
     definition["stack_size"] = STACK_SIZES[entry["mStackSize"]]
     (all_fluids if is_fluid else all_items)[entry_name] = definition
-    
+
     output_locale[f"{entry_type}-name"][entry_name] = entry["mDisplayName"]
-    output_locale[f"{entry_type}-description"][entry_name] = locale_wrap(entry["mDescription"])
+    output_locale[f"{entry_type}-description"][entry_name] = locale_wrap(
+        entry["mDescription"]
+    )
 
     return entry_name, definition
 
@@ -248,7 +307,9 @@ def locale_only_processor(data: list[dict[str, str]]) -> None:
         entry_name = sf_item_to_fac_name.get(entry_name, entry_name).lower()
         for entry_type in ["entity", "item"]:
             output_locale[f"{entry_type}-name"][entry_name] = entry["mDisplayName"]
-            output_locale[f"{entry_type}-description"][entry_name] = locale_wrap(entry["mDescription"])
+            output_locale[f"{entry_type}-description"][entry_name] = locale_wrap(
+                entry["mDescription"]
+            )
 
 
 def building_processor(data: list[dict[str, str]]) -> None:
@@ -259,6 +320,7 @@ def building_processor(data: list[dict[str, str]]) -> None:
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_OilProduction.SC_OilProduction_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Production/SC_Smelters.SC_Smelters_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_ConveyorBelts.SC_ConveyorBelts_C'",
+        "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_ConveyLift.SC_ConveyLift_C'",
     }
 
     for entry in data:
@@ -271,21 +333,21 @@ def building_processor(data: list[dict[str, str]]) -> None:
 
 def recipe_processor(data: list[dict[str, str]]) -> None:
     crafting_categories = {
-        '/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C': "handcraft",
+        "/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C": "handcraft",
         # '/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkshopComponent.BP_WorkshopComponent_C': "handcraft",
-        '/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C': "assembler",
-        '/Game/FactoryGame/Buildable/Factory/AutomatedWorkBench/Build_AutomatedWorkBench.Build_AutomatedWorkBench_C': "handcraft",
-        '/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C': "blender",
-        '/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C': "constructor",
-        '/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C': "converter",
-        '/Game/FactoryGame/Buildable/Factory/FoundryMk1/Build_FoundryMk1.Build_FoundryMk1_C': "foundry",
-        '/Game/FactoryGame/Buildable/Factory/HadronCollider/Build_HadronCollider.Build_HadronCollider_C': "collider",
-        '/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C': "manufacturer",
-        '/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C': "refinery",
-        '/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C': "packager",
-        '/Game/FactoryGame/Buildable/Factory/QuantumEncoder/Build_QuantumEncoder.Build_QuantumEncoder_C': "encoder",
-        '/Game/FactoryGame/Buildable/Factory/SmelterMk1/Build_SmelterMk1.Build_SmelterMk1_C': "smelter",
-        '/Script/FactoryGame.FGBuildableAutomatedWorkBench': "handcraft",
+        "/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C": "assembler",
+        "/Game/FactoryGame/Buildable/Factory/AutomatedWorkBench/Build_AutomatedWorkBench.Build_AutomatedWorkBench_C": "handcraft",
+        "/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C": "blender",
+        "/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C": "constructor",
+        "/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C": "converter",
+        "/Game/FactoryGame/Buildable/Factory/FoundryMk1/Build_FoundryMk1.Build_FoundryMk1_C": "foundry",
+        "/Game/FactoryGame/Buildable/Factory/HadronCollider/Build_HadronCollider.Build_HadronCollider_C": "collider",
+        "/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C": "manufacturer",
+        "/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C": "refinery",
+        "/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C": "packager",
+        "/Game/FactoryGame/Buildable/Factory/QuantumEncoder/Build_QuantumEncoder.Build_QuantumEncoder_C": "encoder",
+        "/Game/FactoryGame/Buildable/Factory/SmelterMk1/Build_SmelterMk1.Build_SmelterMk1_C": "smelter",
+        "/Script/FactoryGame.FGBuildableAutomatedWorkBench": "handcraft",
     }
 
     def get_category(produced_in: str) -> str | None:
@@ -300,14 +362,14 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
             elif cat is not None:
                 if category is not None:
                     print("TWO MACHINES FOR RECIPE")
-                
+
                 category = cat
 
             else:
                 # print(f"IGNORING {entry_name}")
                 # Build Gun, Equipment
                 return None
-            
+
         if category is None:
             if handcraft:
                 category = "handcraft"
@@ -316,7 +378,7 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
 
         elif handcraft:
             category += "-handcraft"
-        
+
         return category
 
     for entry in data:
@@ -325,7 +387,7 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
 
         if entry["mRelevantEvents"]:
             continue
-        
+
         entry_name = entry["ClassName"]
         if entry_name in SF_THINGS_TO_IGNORE:
             continue
@@ -345,10 +407,23 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
         main_product = product[0]["name"]
         subgroup = f"sf-{main_product}"
 
-        if category == "packager":
-            subgroup = "fill-barrel" if entry["mDisplayName"].startswith("Packaged") else "empty-barrel"
+        if category == "handcraft":
+            subgroup = (
+                f'data.raw.item["{main_product}"].subgroup or "production-machine"'
+            )
+
+        elif category == "packager":
+            subgroup = (
+                "fill-barrel"
+                if entry["mDisplayName"].startswith("Packaged")
+                else "empty-barrel"
+            )
         else:
-            all_subgroups[subgroup] = {"type": "item-subgroup", "name": subgroup, "group": "other"}
+            all_subgroups[subgroup] = {
+                "type": "item-subgroup",
+                "name": subgroup,
+                "group": "other",
+            }
 
         definition = {
             "type": "recipe",
@@ -358,10 +433,8 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
             "main_product": "",
             "subgroup": subgroup,
             "order": "b" if "Alternate" in entry["mDisplayName"] else "a",
-
             "icon_size": 64,
             "icon_mipmaps": 4,
-
             "category": category,
             "always_show_made_in": True,
             "energy_required": float(entry["mManufactoringDuration"]),
@@ -371,13 +444,13 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
         output_locale["recipe-name"][entry_name] = entry["mDisplayName"]
 
 
-
 def resource_processor(data: list[dict[str, str]]) -> None:
     for entry in data:
         entry_name, definition = process_item(entry)
         output_locale["entity-name"][entry_name] = entry["mDisplayName"]
-        output_locale["entity-description"][entry_name] = locale_wrap(entry["mDescription"])
-
+        output_locale["entity-description"][entry_name] = locale_wrap(
+            entry["mDescription"]
+        )
 
 
 def equipment_processor(data: list[dict[str, str]]) -> None:
@@ -386,7 +459,7 @@ def equipment_processor(data: list[dict[str, str]]) -> None:
         if entry_name == "BP_ItemDescriptorPortableMiner_C":
             entry_name = sf_item_to_fac_name[entry_name]
             entry_type = "item"
-            
+
             definition = {
                 "type": entry_type,
                 "_update": True,
@@ -394,7 +467,9 @@ def equipment_processor(data: list[dict[str, str]]) -> None:
             }
             all_items[entry_name] = definition
             output_locale[f"{entry_type}-name"][entry_name] = entry["mDisplayName"]
-            output_locale[f"{entry_type}-description"][entry_name] = locale_wrap(entry["mDescription"])
+            output_locale[f"{entry_type}-description"][entry_name] = locale_wrap(
+                entry["mDescription"]
+            )
 
 
 _KNOWN_PROCESSORS = {
@@ -410,8 +485,10 @@ _KNOWN_PROCESSORS = {
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableManufacturerVariablePower'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableResourceExtractor'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableConveyorBelt'": locale_only_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableConveyorLift'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildingDescriptor'": building_processor,
 }
+
 
 def create_update_file(data_dict: dict, output_file: Path) -> None:
     edit_code = []
@@ -421,10 +498,12 @@ def create_update_file(data_dict: dict, output_file: Path) -> None:
         update = entry.pop("_update", False)
         if update:
             type_name = entry.pop("type")
-            edit_code.extend([
-                f'data.raw["{type_name}"]["{name}"].{key} = {wrap(value)}'
-                for key, value in entry.items()
-            ])
+            edit_code.extend(
+                [
+                    f'data.raw["{type_name}"]["{name}"].{key} = {wrap(value)}'
+                    for key, value in entry.items()
+                ]
+            )
         else:
             extend_table.append(entry)
 
@@ -441,11 +520,13 @@ def create_files(extracted_images: Path) -> None:
             print(f"Creating {target_name}")
             create_mipmap(extracted_images.joinpath(source_name + ".png"), new_image)
 
-    create_update_file(all_items, export_root.joinpath("prototypes/generated-items.lua"))
+    create_update_file(
+        all_items, export_root.joinpath("prototypes/generated-items.lua")
+    )
     create_update_file(all_fluids, export_root.joinpath("prototypes/fluids.lua"))
     create_update_file(all_recipes, export_root.joinpath("prototypes/recipes.lua"))
     create_update_file(all_subgroups, export_root.joinpath("prototypes/subgroups.lua"))
-    
+
     with export_root.joinpath("locale/en/strings.cfg").open("w", encoding="utf-8") as f:
         output_locale.write(f, space_around_delimiters=False)
 
@@ -485,7 +566,9 @@ def main():
         add_item_or_fluid(recipe_data["results"], recipe_name)
 
         main_result = recipe_data["results"][0]
-        recipe_data["icon"] = f"data.raw.{main_result['type']}[\"{main_result['name']}\"].icon"
+        recipe_data["icon"] = (
+            f"data.raw.{main_result['type']}[\"{main_result['name']}\"].icon"
+        )
 
     create_files(args.extracted_images)
 

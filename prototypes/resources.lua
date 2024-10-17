@@ -32,7 +32,8 @@ local function makeStages(name, asset_folder)
     }
 end
 
--- @return ResourceEntityPrototype
+--- @param definition data.ResourceEntityPrototype
+--- @return data.ResourceEntityPrototype
 local function make_resource(name, definition)
     definition.type = "resource"
     definition.name = name
