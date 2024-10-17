@@ -103,12 +103,7 @@ local machines = {
         energy_usage = "75MW",
     },
     -- Packager
-    create_assembler {
-        base = data.raw["assembling-machine"]["chemical-plant"],
-        item = data.raw["item"]["desc_packager_c"],
-        crafting_categories = { 'packager', },
-        energy_usage = "10MW",
-    },
+    require("prototypes.buildings.packager"),
     -- Particle Accelerator
     require("prototypes.buildings.particle-accelerator"),
     -- Converter
