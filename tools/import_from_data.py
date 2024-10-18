@@ -526,7 +526,7 @@ def process_item(entry: dict[str, str]) -> tuple[str, dict] | None:
     energy_value = float(entry["mEnergyValue"])
     if energy_value > 0:
         if is_fluid:
-            energy_value *= 1000
+            energy_value *= 1000/60
         definition["fuel_value"] = f"{energy_value}MJ"
 
     if entry_name in PRODUCT_TO_SUBGROUP:
@@ -878,7 +878,7 @@ def main():
                 entry["type"] = "item"
             elif entry["name"] in all_fluids:
                 entry["type"] = "fluid"
-                entry["amount"] /= 1000
+                entry["amount"] /= 1000/60
             else:
                 raise ValueError(f"unknown item {entry['name']} ({n})")
 

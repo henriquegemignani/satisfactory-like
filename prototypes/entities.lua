@@ -74,7 +74,7 @@ end
 require("prototypes.pipes")
 require("prototypes.buildings.coal-powered-generator")
 
-local machines = {
+local production_machines = {
     -- smelter
     create_assembler {
         base = data.raw["assembling-machine"]["assembling-machine-1"],
@@ -122,14 +122,16 @@ local machines = {
     require("prototypes.buildings.converter"),
     -- Quantum Encoder
     require("prototypes.buildings.quantum-encoder"),
+}
+data:extend(production_machines)
+
+data:extend {
     -- Biomass Generator
     create_entity {
         base = data.raw["burner-generator"]["burner-generator"],
         item = data.raw["item"]["desc_generatorbiomass_automated_c"],
     }
 }
-
-data:extend(machines)
 
 local biomass_generator = data.raw["burner-generator"]["desc_generatorbiomass_automated_c"]
 biomass_generator.max_power_output = "30MW"
@@ -143,7 +145,7 @@ copy_art_from(
     data.raw["furnace"]["electric-furnace"]
 )
 
-for i, machine in pairs(machines) do
+for i, machine in pairs(production_machines) do
     local item = associate_entity_with_item(machine)
     item.subgroup = "production-machine"
     item.order = string.format("f[%s]", string.char(string.byte("a") + i))
@@ -151,13 +153,18 @@ end
 
 associate_entity_with_item(data.raw["pipe"]["desc_pipelinemk2_c"])
 associate_entity_with_item(data.raw["pump"]["desc_pipelinepumpmk2_c"])
-associate_entity_with_item(data.raw["boiler"]["desc_generatorcoal_c"])
+associate_entity_with_item(biomass_generator)
+associate_entity_with_item(data.raw["burner-generator"]["desc_generatorcoal_c"])
 
 data.raw["item"]["desc_pipelinemk2_c"].subgroup = data.raw["item"]["pipe"].subgroup
 data.raw["item"]["desc_pipelinemk2_c"].order = data.raw["item"]["pipe"].order .. "-mk2"
 data.raw["item"]["desc_pipelinepumpmk2_c"].subgroup = data.raw["item"]["pump"].subgroup
 data.raw["item"]["desc_pipelinepumpmk2_c"].order = data.raw["item"]["pump"].order .. "-mk2"
 
+data.raw["item"]["desc_generatorbiomass_automated_c"].subgroup = "energy"
+data.raw["item"]["desc_generatorbiomass_automated_c"].order = "d[biomass]"
+data.raw["item"]["desc_generatorcoal_c"].subgroup = "energy"
+data.raw["item"]["desc_generatorcoal_c"].order = "d[coal]"
 
 local accumulator = data.raw["accumulator"]["accumulator"]
 accumulator.energy_source.input_flow_limit = "100MW"
