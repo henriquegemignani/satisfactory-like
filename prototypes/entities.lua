@@ -155,3 +155,9 @@ data.raw["item"]["desc_pipelinemk2_c"].subgroup = data.raw["item"]["pipe"].subgr
 data.raw["item"]["desc_pipelinemk2_c"].order = data.raw["item"]["pipe"].order .. "-mk2"
 data.raw["item"]["desc_pipelinepumpmk2_c"].subgroup = data.raw["item"]["pump"].subgroup
 data.raw["item"]["desc_pipelinepumpmk2_c"].order = data.raw["item"]["pump"].order .. "-mk2"
+
+
+local accumulator = data.raw["accumulator"]["accumulator"]
+accumulator.energy_source.input_flow_limit = "100MW"
+accumulator.energy_source.output_flow_limit = "1TW"     -- "unlimited"
+accumulator.energy_source.buffer_capacity = "360GJ"  -- 100 MW for 1 hour
