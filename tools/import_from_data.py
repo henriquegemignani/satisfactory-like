@@ -223,6 +223,7 @@ SF_ACCEPTABLE_PRODUCTS = {
     "substation",
     "big-electric-pole",
     "accumulator",
+    "desc_generatorcoal_c",
     # Pipes
     "pipe",
     "pump",

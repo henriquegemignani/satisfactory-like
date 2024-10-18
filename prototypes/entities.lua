@@ -72,6 +72,7 @@ local function associate_entity_with_item(entity)
 end
 
 require("prototypes.pipes")
+require("prototypes.buildings.coal-powered-generator")
 
 local machines = {
     -- smelter
@@ -150,6 +151,7 @@ end
 
 associate_entity_with_item(data.raw["pipe"]["desc_pipelinemk2_c"])
 associate_entity_with_item(data.raw["pump"]["desc_pipelinepumpmk2_c"])
+associate_entity_with_item(data.raw["boiler"]["desc_generatorcoal_c"])
 
 data.raw["item"]["desc_pipelinemk2_c"].subgroup = data.raw["item"]["pipe"].subgroup
 data.raw["item"]["desc_pipelinemk2_c"].order = data.raw["item"]["pipe"].order .. "-mk2"
