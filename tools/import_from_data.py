@@ -759,10 +759,13 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
 def resource_processor(data: list[dict[str, str]]) -> None:
     for entry in data:
         entry_name, definition = process_item(entry)
-        output_locale["entity-name"][entry_name] = entry["mDisplayName"]
-        output_locale["entity-description"][entry_name] = locale_wrap(
-            entry["mDescription"]
-        )
+        for suffix_code, suffix_text in [
+            ("", ""), ("-impure", " (Impure)"), ("-pure", " (Pure)")
+        ]:
+            output_locale["entity-name"][entry_name + suffix_code] = entry["mDisplayName"] + suffix_text
+            output_locale["entity-description"][entry_name + suffix_code] = locale_wrap(
+                entry["mDescription"]
+            )
 
 
 def equipment_processor(data: list[dict[str, str]]) -> None:

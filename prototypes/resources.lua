@@ -1,11 +1,5 @@
+local noise = require("noise")
 local resource_autoplace = require("__core__/lualib/resource-autoplace")
-
-resource_autoplace.initialize_patch_set("desc_oregold_c", false)
-resource_autoplace.initialize_patch_set("desc_rawquartz_c", false)
-resource_autoplace.initialize_patch_set("desc_orebauxite_c", false)
-resource_autoplace.initialize_patch_set("desc_nitrogengas_c", false)
-resource_autoplace.initialize_patch_set("sl-sulfur", false)
-resource_autoplace.initialize_patch_set("desc_sam_c", false)
 
 local fluids = {
     ["crude-oil"] = true, ["desc_nitrogengas_c"] = true
@@ -58,18 +52,8 @@ end
 
 data:extend {
     make_resource("desc_oregold_c", {
-        stage_counts = { 15000, 9500, 5500, 2900, 1300, 400, 150, 80 },
+        stage_counts = { 120000, 110000, 80000, 70000, 1300, 400, 150, 80 },
         stages = makeStages("titanium-ore"),
-        autoplace = resource_autoplace.resource_autoplace_settings {
-            name = "desc_oregold_c",
-            order = "c",
-            base_density = 0.9,
-            base_spots_per_km2 = 1.25,
-            has_starting_area_placement = false,
-            random_spot_size_minimum = 2,
-            random_spot_size_maximum = 4,
-            regular_rq_factor_multiplier = 1
-        },
         map_color = { 0.65, 0.60, 0.41 },
     }),
     -- make_resource("desc_rawquartz_c", {
@@ -77,18 +61,8 @@ data:extend {
     --     stages = makeStages(""),
     -- }),
     make_resource("desc_orebauxite_c", {
-        stage_counts = { 15000, 9500, 5500, 2900, 1300, 400, 150, 80 },
+        stage_counts = { 120000, 110000, 80000, 70000, 1300, 400, 150, 80 },
         stages = makeStages("zircon"),
-        autoplace = resource_autoplace.resource_autoplace_settings {
-            name = "desc_orebauxite_c",
-            order = "c",
-            base_density = 0.9,
-            base_spots_per_km2 = 1.25,
-            has_starting_area_placement = false,
-            random_spot_size_minimum = 2,
-            random_spot_size_maximum = 4,
-            regular_rq_factor_multiplier = 1
-        },
         map_color = { 0.55, 0.47, 0.45 },
     }),
     make_resource("desc_nitrogengas_c", {
@@ -107,120 +81,183 @@ data:extend {
         collision_box = { { -1.4, -1.4 }, { 1.4, 1.4 } },
         selection_box = { { -0.5, -0.5 }, { 0.5, 0.5 } },
 
-        autoplace = resource_autoplace.resource_autoplace_settings {
-            name = "desc_nitrogengas_c",
-            order = "c",
-            base_density = 2,
-            base_spots_per_km2 = 0.8,
-            random_probability = 1 / 24,
-            random_spot_size_minimum = 1,
-            random_spot_size_maximum = 1, -- don't randomize spot size
-            additional_richness = 200000, -- this increases the total everywhere, so base_density needs to be decreased to compensate
-            has_starting_area_placement = false,
-            regular_rq_factor_multiplier = 1,
-            seed1 = 101,
-        },
         map_color = { 0.35, 0.35, 0.35 },
         map_grid = false,
     }),
     make_resource("sulfur", {
-        stage_counts = { 15000, 9500, 5500, 2900, 1300, 400, 150, 80 },
+        stage_counts = { 120000, 110000, 80000, 70000, 1300, 400, 150, 80 },
         stages = makeStages("gold-ore"),
-        autoplace = resource_autoplace.resource_autoplace_settings {
-            name = "sulfur",
-            order = "c",
-            base_density = 0.9,
-            base_spots_per_km2 = 1.25,
-            has_starting_area_placement = false,
-            random_spot_size_minimum = 2,
-            random_spot_size_maximum = 4,
-            regular_rq_factor_multiplier = 1
-        },
         map_color = { 0.89, 0.89, 0.26 },
     }),
     -- make_resource("desc_sam_c", {
-    --     stage_counts = { 15000, 9500, 5500, 2900, 1300, 400, 150, 80 },
+    --     stage_counts = { 120000, 110000, 80000, 70000, 1300, 400, 150, 80 },
     --     stages = makeStages(""),
-    --     autoplace = resource_autoplace.resource_autoplace_settings {
-    --         name = "desc_sam_c",
-    --         order = "c",
-    --         base_density = 0.3,
-    --         base_spots_per_km2 = 0.5,
-    --         has_starting_area_placement = false,
-    --         random_spot_size_minimum = 2,
-    --         random_spot_size_maximum = 4,
-    --         regular_rq_factor_multiplier = 1
-    --     },
-    -- map_color = {},
+    --     map_color = {},
     -- }),
 }
 
--- Coal isn't a required starting item
-data.raw["resource"]["coal"].autoplace = resource_autoplace.resource_autoplace_settings {
-    name = "coal",
-    order = "b",
-    base_density = 8,
-    has_starting_area_placement = false,
-    regular_rq_factor_multiplier = 1.0,
-    starting_rq_factor_multiplier = 1.1,
+-- -- Make uranium very rare
+-- data.raw["resource"]["uranium-ore"].autoplace = resource_autoplace.resource_autoplace_settings {
+--     name = "uranium-ore",
+--     order = "c",
+--     base_density = 0.1,
+--     random_probability = 0.5,
+--     base_spots_per_km2 = 0.4,
+--     has_starting_area_placement = false,
+--     random_spot_size_minimum = 0.25,
+--     random_spot_size_maximum = 2,
+-- }
+
+data.raw["resource"]["iron-ore"].stage_counts = { 120000, 110000, 80000, 70000, 1300, 400, 150, 80 }
+data.raw["resource"]["stone"].stage_counts = { 120000, 110000, 80000, 70000, 1300, 400, 150, 80 }
+data.raw["resource"]["coal"].stage_counts = { 120000, 110000, 80000, 70000, 1300, 400, 150, 80 }
+data.raw["resource"]["copper-ore"].stage_counts = { 120000, 110000, 80000, 70000, 1300, 400, 150, 80 }
+data.raw["resource"]["uranium-ore"].stage_counts = { 120000, 110000, 80000, 70000, 1300, 400, 150, 80 }
+
+local ore_configurations = {
+    -- 92100
+    ["iron-ore"] = {
+        impure = {
+            has_starting_area_placement = true,
+        },
+        normal = {
+            has_starting_area_placement = true,
+        },
+        pure = {
+            has_starting_area_placement = true,
+        },
+    },
+    -- 69300
+    ["stone"] = {
+        impure = {
+            has_starting_area_placement = true,
+        },
+        normal = {
+            has_starting_area_placement = true,
+        },
+        pure = {
+            has_starting_area_placement = true,
+        },
+    },
+    -- 42300
+    ["coal"] = {
+        impure = {},
+        normal = {},
+        pure = {},
+    },
+    -- 36900
+    ["copper-ore"] = {
+        impure = {
+            has_starting_area_placement = true,
+        },
+        normal = {
+            has_starting_area_placement = true,
+        },
+        pure = {
+            has_starting_area_placement = true,
+        },
+    },
+    -- 15000
+    ["desc_oregold_c"] = {
+        impure = {},
+        normal = {},
+        pure = {},
+    },
+    -- 13500
+    -- ["desc_rawquartz_c"] = {
+    --     impure = {},
+    --     normal = {},
+    --     pure = {},
+    -- },
+    -- 12600
+    ["crude-oil"] = {
+        impure = {},
+        normal = {},
+        pure = {},
+    },
+    -- 12300
+    ["desc_orebauxite_c"] = {
+        impure = {},
+        normal = {},
+        pure = {},
+    },
+    -- 12000
+    ["desc_nitrogengas_c"] = {
+        impure = {},
+        normal = {},
+        pure = {},
+    },
+    -- 10800
+    ["sulfur"] = {
+        impure = {},
+        normal = {},
+        pure = {},
+    },
+    -- 10200
+    -- ["desc_sam_c"] = {
+    --     impure = {},
+    --     normal = {},
+    --     pure = {},
+    -- },
+    -- 2100
+    ["uranium-ore"] = {
+        impure = {},
+        normal = {},
+    },
 }
 
--- Make uranium very rare
-data.raw["resource"]["uranium-ore"].autoplace = resource_autoplace.resource_autoplace_settings {
-    name = "uranium-ore",
-    order = "c",
-    base_density = 0.1,
-    random_probability = 0.5,
-    base_spots_per_km2 = 0.4,
-    has_starting_area_placement = false,
-    random_spot_size_minimum = 0.25,
-    random_spot_size_maximum = 2,
-}
+for name, details in pairs(ore_configurations) do
+    for rarity, properties in pairs(details) do
+        resource_autoplace.initialize_patch_set(name .. "-" .. rarity, properties.has_starting_area_placement)
+    end
+end
 
 
-for _, name in pairs {
-    "iron-ore",           -- 92100
-    "stone",              -- 69300
-    "coal",               -- 42300
-    "copper-ore",         -- 36900
-    "desc_oregold_c",     -- 15000
-    -- "desc_rawquartz_c",   -- 13500
-    "crude-oil",          -- 12600
-    "desc_orebauxite_c",  -- 12300
-    "desc_nitrogengas_c", -- 12000
-    "sulfur",             -- 10800
-    -- "desc_sam_c",         -- 10200
-    "uranium-ore",        -- 2100
-} do
+for name, details in pairs(ore_configurations) do
     local resource = data.raw.resource[name]
     resource.icon = data.raw[fluids[name] and "fluid" or "item"][name].icon
     resource.minable.required_fluid = nil
     resource.minable.fluid_amount = nil
+    resource.highlight = true
+    resource.infinite = true
+    resource.minimum = 100000
+    resource.normal = 100000
+    resource.infinite_depletion_amount = 0
+    resource.resource_patch_search_radius = 15
+    resource.collision_box = { { -1.4, -1.4 }, { 1.4, 1.4 } }
+    resource.selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } }
+    resource.map_grid = false
+    resource.stages.sheet.scale = 2
+    resource.stages.sheet.hr_version.scale = 1
+    resource.autoplace = nil
 
-    -- resource.highlight = true
-    -- resource.infinite = true
-    -- resource.minimum = 100000
-    -- resource.normal = 100000
-    -- resource.infinite_depletion_amount = 0
-    -- resource.resource_patch_search_radius = 12
-
-    -- resource.collision_box = { { -1.4, -1.4 }, { 1.4, 1.4 } }
-    -- resource.selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } }
-    -- resource.map_grid = false
-
-    -- resource.autoplace = resource_autoplace.resource_autoplace_settings({
-    --     name = name,
-    --     order = "b",
-    --     base_density = 4,
-    --     richness_multiplier = 1,
-    --     base_spots_per_km2 = 0.005,
-    --     has_starting_area_placement = true,
-    --     random_spot_size_minimum = 0.01,
-    --     random_spot_size_maximum = 0.1,
-    --     regular_blob_amplitude_multiplier = 1,
-    --     richness_post_multiplier = 1.0,
-    --     starting_rq_factor_multiplier = 0.1, -- Makes patches have only one entity
-    --     regular_rq_factor_multiplier = 0.1,
-    --     candidate_spot_count = 22,
-    -- })
+    for rarity, noise_rarity in pairs { impure = 50000, pure = 200000, normal = 100000 } do
+        local properties = details[rarity]
+        if properties then
+            local rarity_resource
+            if rarity ~= "normal" then
+                rarity_resource = table.deepcopy(resource)
+                rarity_resource.name = name .. "-" .. rarity
+                data:extend { rarity_resource }
+            else
+                rarity_resource = resource
+            end
+            rarity_resource.autoplace = resource_autoplace.resource_autoplace_settings({
+                name = rarity_resource.name,
+                autoplace_control_name = name,
+                order = "b",
+                base_density = 5,
+                richness_multiplier = 1,
+                base_spots_per_km2 = 0.02,
+                has_starting_area_placement = properties.has_starting_area_placement,
+                random_spot_size_minimum = 0.01,
+                random_spot_size_maximum = 0.1,
+                regular_blob_amplitude_multiplier = 1,
+                starting_rq_factor_multiplier = 0.05, -- Makes patches have only one entity
+                regular_rq_factor_multiplier = 0.05,
+                candidate_spot_count = 22,
+            })
+            rarity_resource.autoplace.richness_expression = noise.to_noise_expression(noise_rarity)
+        end
+    end
 end
