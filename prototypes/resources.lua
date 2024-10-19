@@ -113,6 +113,10 @@ data.raw["resource"]["stone"].stage_counts = { 120000, 110000, 80000, 70000, 130
 data.raw["resource"]["coal"].stage_counts = { 120000, 110000, 80000, 70000, 1300, 400, 150, 80 }
 data.raw["resource"]["copper-ore"].stage_counts = { 120000, 110000, 80000, 70000, 1300, 400, 150, 80 }
 data.raw["resource"]["uranium-ore"].stage_counts = { 120000, 110000, 80000, 70000, 1300, 400, 150, 80 }
+data.raw["resource"]["uranium-ore"].minable.mining_time = 1
+
+data.raw["resource"]["crude-oil"].minable.results[1].amount = 60
+data.raw["resource"]["desc_nitrogengas_c"].minable.results[1].amount = 60
 
 local ore_configurations = {
     -- 92100

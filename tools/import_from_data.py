@@ -181,6 +181,8 @@ SF_THINGS_TO_IGNORE = {
 SF_ACCEPTABLE_PRODUCTS = {
     "burner-mining-drill",
     "electric-mining-drill",
+    "desc_minermk2_c",
+    "desc_minermk3_c",
     "offshore-pump",
     "desc_quantumencoder_c",
     "desc_converter_c",
@@ -691,7 +693,7 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
         ingredients = decode_item_list(entry["mIngredients"])
         product = decode_item_list(entry["mProduct"])
 
-        if len(product) == 1 and product[0]["name"] in SF_ACCEPTABLE_PRODUCTS:
+        if category is None and len(product) == 1 and product[0]["name"] in SF_ACCEPTABLE_PRODUCTS:
             category = "crafting"
 
         if category is None:
@@ -781,8 +783,9 @@ def equipment_processor(data: list[dict[str, str]]) -> None:
                 "stack_size": STACK_SIZES[entry["mStackSize"]],
             }
             all_items[entry_name] = definition
-            output_locale[f"{entry_type}-name"][entry_name] = entry["mDisplayName"]
-            output_locale[f"{entry_type}-description"][entry_name] = locale_wrap(
+            output_locale["entity-name"][entry_name] = entry["mDisplayName"]
+            output_locale["item-name"][entry_name] = entry["mDisplayName"]
+            output_locale["item-description"][entry_name] = locale_wrap(
                 entry["mDescription"]
             )
 

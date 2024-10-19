@@ -73,6 +73,7 @@ end
 
 require("prototypes.pipes")
 require("prototypes.buildings.coal-powered-generator")
+require("prototypes.buildings.miner")
 
 local production_machines = {
     -- smelter
@@ -151,6 +152,13 @@ for i, machine in pairs(production_machines) do
     item.order = string.format("f[%s]", string.char(string.byte("a") + i))
 end
 
+associate_entity_with_item(data.raw["mining-drill"]["desc_minermk2_c"])
+associate_entity_with_item(data.raw["mining-drill"]["desc_minermk3_c"])
+data.raw["item"]["desc_minermk2_c"].subgroup = data.raw["item"]["electric-mining-drill"].subgroup
+data.raw["item"]["desc_minermk2_c"].order = data.raw["item"]["electric-mining-drill"].order .. "-mk2"
+data.raw["item"]["desc_minermk3_c"].subgroup = data.raw["item"]["electric-mining-drill"].subgroup
+data.raw["item"]["desc_minermk3_c"].order = data.raw["item"]["electric-mining-drill"].order .. "-mk3"
+
 associate_entity_with_item(data.raw["pipe"]["desc_pipelinemk2_c"])
 associate_entity_with_item(data.raw["pump"]["desc_pipelinepumpmk2_c"])
 associate_entity_with_item(biomass_generator)
@@ -168,5 +176,5 @@ data.raw["item"]["desc_generatorcoal_c"].order = "d[coal]"
 
 local accumulator = data.raw["accumulator"]["accumulator"]
 accumulator.energy_source.input_flow_limit = "100MW"
-accumulator.energy_source.output_flow_limit = "1TW"     -- "unlimited"
-accumulator.energy_source.buffer_capacity = "360GJ"  -- 100 MW for 1 hour
+accumulator.energy_source.output_flow_limit = "1TW" -- "unlimited"
+accumulator.energy_source.buffer_capacity = "360GJ" -- 100 MW for 1 hour
