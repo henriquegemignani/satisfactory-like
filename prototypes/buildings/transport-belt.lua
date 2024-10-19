@@ -56,3 +56,9 @@ for _, tier in pairs(BeltTiers) do
     data.raw["underground-belt"][tier.underground].speed = baseSpeed * tier.speed_multiplier
     data.raw["underground-belt"][tier.underground].max_distance = 10
 end
+
+for i = 1, #BeltTiers - 1 do
+    data.raw["transport-belt"][BeltTiers[i].belt].next_upgrade = BeltTiers[i + 1].belt
+    data.raw["splitter"][BeltTiers[i].splitter].next_upgrade = BeltTiers[i + 1].splitter
+    data.raw["underground-belt"][BeltTiers[i].underground].next_upgrade = BeltTiers[i + 1].underground
+end

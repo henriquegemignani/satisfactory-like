@@ -66,6 +66,9 @@ sf_item_to_fac_name = {
     "Desc_ConveyorLiftMk4_C": "express-underground-belt",
     "Desc_ConveyorLiftMk5_C": "sl-mk5-underground-belt",
     "Desc_ConveyorLiftMk6_C": "sl-mk6-underground-belt",
+    "Desc_ConveyorAttachmentSplitter_C": "sl-mk1-splitter",
+    "Desc_ConveyorAttachmentSplitterSmart_C": "sl-mk5-splitter",
+    "Desc_ConveyorAttachmentSplitterProgrammable_C": "sl-mk6-splitter",
     # Additional mapping just for mod compatibility
     "Desc_IronIngot_C": "iron-plate",
     "Desc_CopperIngot_C": "copper-plate",
@@ -109,6 +112,9 @@ KEEP_ORIGINAL_ICONS = {
     "express-underground-belt",
     "sl-mk5-underground-belt",
     "sl-mk6-underground-belt",
+    "sl-mk1-splitter",
+    "sl-mk5-splitter",
+    "sl-mk6-splitter",
     # Miners
     "burner-mining-drill",
     "electric-mining-drill",
@@ -212,6 +218,9 @@ SF_ACCEPTABLE_PRODUCTS = {
     "express-underground-belt",
     "sl-mk5-underground-belt",
     "sl-mk6-underground-belt",
+    "sl-mk1-splitter",
+    "sl-mk5-splitter",
+    "sl-mk6-splitter",
     # Trains
     "rail",
     "rail-signal",
@@ -618,6 +627,7 @@ def building_processor(data: list[dict[str, str]]) -> None:
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_Trains.SC_Trains_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Power/SC_PowerPoles.SC_PowerPoles_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_Pipes.SC_Pipes_C'",
+        "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_ConveyorAttachments.SC_ConveyorAttachments_C'",
     }
 
     for entry in data:
