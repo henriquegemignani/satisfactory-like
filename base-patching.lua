@@ -1,4 +1,9 @@
 
+data.raw["assembling-machine"]["assembling-machine-1"].crafting_categories = {"smelting"}
+data.raw["assembling-machine"]["assembling-machine-2"].crafting_categories = {"smelting"}
+data.raw["assembling-machine"]["assembling-machine-3"].crafting_categories = {"smelting"}
+data.raw["recipe"]["uranium-processing"].category = "collider"
+
 for _, name in pairs {
     -- Belts
     "transport-belt",

@@ -79,21 +79,21 @@ local production_machines = {
     create_assembler {
         base = data.raw["assembling-machine"]["assembling-machine-1"],
         item = data.raw["item"]["desc_smeltermk1_c"],
-        crafting_categories = { 'smelter', 'smelter-handcraft', },
+        crafting_categories = { 'smelter', 'smelter-handcraft', 'smelting' },
         energy_usage = "4MW",
     },
     -- constructor
     create_assembler {
         base = data.raw["assembling-machine"]["assembling-machine-1"],
         item = data.raw["item"]["desc_constructormk1_c"],
-        crafting_categories = { 'constructor', 'constructor-handcraft', },
+        crafting_categories = { 'constructor', 'constructor-handcraft', 'crafting' },
         energy_usage = "4MW",
     },
     -- asembler
     create_assembler {
         base = data.raw["assembling-machine"]["assembling-machine-2"],
         item = data.raw["item"]["desc_assemblermk1_c"],
-        crafting_categories = { 'assembler', 'assembler-handcraft', },
+        crafting_categories = { 'assembler', 'assembler-handcraft', 'crafting' },
         energy_usage = "15MW",
     },
     -- foundry
@@ -104,7 +104,7 @@ local production_machines = {
     create_assembler {
         base = data.raw["assembling-machine"]["chemical-plant"],
         item = data.raw["item"]["desc_oilrefinery_c"],
-        crafting_categories = { 'refinery', },
+        crafting_categories = { 'refinery', 'crafting-with-fluid' },
         energy_usage = "30MW",
     },
     -- Blender

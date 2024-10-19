@@ -26,7 +26,7 @@ return {
     emissions_per_minute = 5,
   },
   crafting_categories = {
-    'manufacturer', 'manufacturer-handcraft'
+    'manufacturer', 'manufacturer-handcraft', 'crafting'
   },
   energy_usage = "55MW",
   module_specification = nil,

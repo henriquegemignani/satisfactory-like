@@ -10,7 +10,7 @@ return {
     dying_explosion = "medium-explosion",
     collision_box = { { -2.1, -2.1 }, { 2.1, 2.1 } },
     selection_box = { { -2.5, -2.5 }, { 2.5, 2.5 } },
-    crafting_categories = { 'foundry', 'foundry-handcraft' },
+    crafting_categories = { 'foundry', 'foundry-handcraft', 'smelting' },
     crafting_speed = 1,
     energy_source = {
         type = "electric",

@@ -665,7 +665,7 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
 
         if category is None:
             if handcraft:
-                category = "handcraft"
+                category = "crafting"
             else:
                 return None
 
@@ -692,7 +692,7 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
         product = decode_item_list(entry["mProduct"])
 
         if len(product) == 1 and product[0]["name"] in SF_ACCEPTABLE_PRODUCTS:
-            category = "handcraft"
+            category = "crafting"
 
         if category is None:
             continue
@@ -702,7 +702,7 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
         order_prefix = "r"
         order = main_product
         
-        if category == "handcraft":
+        if category == "crafting":
             subgroup = "other"
 
         elif category == "packager":
@@ -745,7 +745,7 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
             "always_show_made_in": True,
             "energy_required": float(entry["mManufactoringDuration"]),
         }
-        if category == "handcraft":
+        if category == "crafting":
             definition["main_product"] = main_product
             definition.pop("icon_size")
             definition.pop("icon_mipmaps")
