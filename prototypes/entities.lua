@@ -73,6 +73,7 @@ end
 
 require("prototypes.pipes")
 require("prototypes.buildings.coal-powered-generator")
+require("prototypes.buildings.fuel-powered-generator")
 require("prototypes.buildings.miner")
 
 local production_machines = {
@@ -163,6 +164,7 @@ associate_entity_with_item(data.raw["pipe"]["desc_pipelinemk2_c"])
 associate_entity_with_item(data.raw["pump"]["desc_pipelinepumpmk2_c"])
 associate_entity_with_item(biomass_generator)
 associate_entity_with_item(data.raw["burner-generator"]["desc_generatorcoal_c"])
+associate_entity_with_item(data.raw["generator"]["desc_generatorfuel_c"])
 
 data.raw["item"]["desc_pipelinemk2_c"].subgroup = data.raw["item"]["pipe"].subgroup
 data.raw["item"]["desc_pipelinemk2_c"].order = data.raw["item"]["pipe"].order .. "-mk2"
@@ -173,6 +175,8 @@ data.raw["item"]["desc_generatorbiomass_automated_c"].subgroup = "energy"
 data.raw["item"]["desc_generatorbiomass_automated_c"].order = "d[biomass]"
 data.raw["item"]["desc_generatorcoal_c"].subgroup = "energy"
 data.raw["item"]["desc_generatorcoal_c"].order = "d[coal]"
+data.raw["item"]["desc_generatorfuel_c"].subgroup = "energy"
+data.raw["item"]["desc_generatorfuel_c"].order = "e[fuel]"
 
 local accumulator = data.raw["accumulator"]["accumulator"]
 accumulator.energy_source.input_flow_limit = "100MW"

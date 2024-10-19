@@ -207,7 +207,6 @@ SF_ACCEPTABLE_PRODUCTS = {
     "desc_frackingsmasher_c",
     "desc_constructormk1_c",
     "desc_smeltermk1_c",
-    "desc_generatorbiomass_automated_c",
     "roboport",
     "flying-robot-frame",
     # Belts
@@ -239,7 +238,9 @@ SF_ACCEPTABLE_PRODUCTS = {
     "substation",
     "big-electric-pole",
     "accumulator",
+    "desc_generatorbiomass_automated_c",
     "desc_generatorcoal_c",
+    "desc_generatorfuel_c",
     # Pipes
     "pipe",
     "pump",
