@@ -203,6 +203,7 @@ SF_ACCEPTABLE_PRODUCTS = {
     "desc_assemblermk1_c",
     "desc_hadroncollider_c",
     "desc_blender_c",
+    "desc_resourcesink_c",
     # "desc_frackingextractor_c",
     "desc_frackingsmasher_c",
     "desc_constructormk1_c",
@@ -635,6 +636,7 @@ def building_processor(data: list[dict[str, str]]) -> None:
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_Pipes.SC_Pipes_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_ConveyorAttachments.SC_ConveyorAttachments_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_Vehicles.SC_Vehicles_C'",
+        "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Special/SC_AWESOME.SC_AWESOME_C'",
     }
 
     for entry in data:
@@ -831,6 +833,7 @@ _KNOWN_PROCESSORS = {
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildablePipelinePump'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableRailroadTrack'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableGeneratorNuclear'": locale_only_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableResourceSink'": locale_only_processor,
 }
 
 

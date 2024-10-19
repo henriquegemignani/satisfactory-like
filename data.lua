@@ -7,6 +7,8 @@ local crafting_categories = {
   'assembler', 'assembler-handcraft',
   'foundry', 'foundry-handcraft',
   'manufacturer', 'manufacturer-handcraft',
+
+  "sl-sinking",
 }
 for _, cat in pairs(crafting_categories) do
   data:extend {

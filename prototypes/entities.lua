@@ -76,6 +76,7 @@ require("prototypes.buildings.coal-powered-generator")
 require("prototypes.buildings.fuel-powered-generator")
 require("prototypes.buildings.nuclear-power-plant")
 require("prototypes.buildings.miner")
+require("prototypes.buildings.awesome-sink")
 
 local production_machines = {
     -- smelter
@@ -167,6 +168,7 @@ associate_entity_with_item(biomass_generator)
 associate_entity_with_item(data.raw["burner-generator"]["desc_generatorcoal_c"])
 associate_entity_with_item(data.raw["generator"]["desc_generatorfuel_c"])
 associate_entity_with_item(data.raw["burner-generator"]["desc_generatornuclear_c"])
+associate_entity_with_item(data.raw["furnace"]["desc_resourcesink_c"])
 
 data.raw["item"]["desc_pipelinemk2_c"].subgroup = data.raw["item"]["pipe"].subgroup
 data.raw["item"]["desc_pipelinemk2_c"].order = data.raw["item"]["pipe"].order .. "-mk2"

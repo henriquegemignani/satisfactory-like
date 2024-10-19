@@ -204,4 +204,12 @@ data:extend {
         group = "sl-alien",
         order = "e"
     },
+
+    -- Voiding
+    {
+        type = "item-subgroup",
+        name = "sl-void",
+        group = "other",
+        order = "z"
+    },
 }
