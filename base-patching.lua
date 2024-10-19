@@ -4,6 +4,9 @@ data.raw["assembling-machine"]["assembling-machine-2"].crafting_categories = {"s
 data.raw["assembling-machine"]["assembling-machine-3"].crafting_categories = {"smelting"}
 data.raw["recipe"]["uranium-processing"].category = "collider"
 
+data.raw["roboport"]["roboport"].construction_radius = 250
+data.raw["roboport"]["roboport"].logistics_radius = 100
+
 for _, name in pairs {
     -- Belts
     "transport-belt",

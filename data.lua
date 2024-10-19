@@ -129,4 +129,20 @@ for _, tier in pairs(SplitterTiers) do
   data.raw["recipe"][tier.recipe].ingredients = ingredients
 end
 
+
+data.raw["recipe"]["inserter"].ingredients = {
+  {
+    name = "iron-plate",
+    amount = 1,
+  },
+  {
+    name = "iron-gear-wheel",
+    amount = 1,
+  },
+  {
+    name = "copper-cable",
+    amount = 2,
+  }
+}
+
 require("base-patching")

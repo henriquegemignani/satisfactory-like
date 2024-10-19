@@ -49,6 +49,9 @@ sf_item_to_fac_name = {
 
     "Desc_PipelinePump_C": "pump",
     "Desc_Pipeline_C": "pipe",
+    # 
+    "Desc_DroneStation_C": "roboport",
+    "Desc_DroneTransport_C": "flying-robot-frame",
     #
     "Desc_WaterPump_C": "offshore-pump",
     "Desc_OilPump_C": "pumpjack",
@@ -205,6 +208,8 @@ SF_ACCEPTABLE_PRODUCTS = {
     "desc_constructormk1_c",
     "desc_smeltermk1_c",
     "desc_generatorbiomass_automated_c",
+    "roboport",
+    "flying-robot-frame",
     # Belts
     "sl-mk1-transport-belt",
     "transport-belt",
@@ -628,6 +633,7 @@ def building_processor(data: list[dict[str, str]]) -> None:
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Power/SC_PowerPoles.SC_PowerPoles_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_Pipes.SC_Pipes_C'",
         "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_ConveyorAttachments.SC_ConveyorAttachments_C'",
+        "/Script/Engine.BlueprintGeneratedClass'/Game/FactoryGame/Interface/UI/InGame/BuildMenu/BuildCategories/Sub_Transport/SC_Vehicles.SC_Vehicles_C'",
     }
 
     for entry in data:
