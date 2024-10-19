@@ -56,10 +56,58 @@ data:extend {
         stages = makeStages("titanium-ore"),
         map_color = { 0.65, 0.60, 0.41 },
     }),
-    -- make_resource("desc_rawquartz_c", {
-    --     stage_counts = { 15000, 9500, 5500, 2900, 1300, 400, 150, 80 },
-    --     stages = makeStages(""),
-    -- }),
+    make_resource("desc_rawquartz_c", {
+        stage_counts = { 120000, 110000, 80000, 70000, 1300, 400, 150, 80 },
+        stages = {
+            sheet = {
+              filename = "__Krastorio2Assets__/resources/rare-metals/rare-metals.png",
+              priority = "extra-high",
+              width = 64,
+              height = 64,
+              frame_count = 8,
+              variation_count = 8,
+              hr_version = {
+                filename = "__Krastorio2Assets__/resources/rare-metals/hr-rare-metals.png",
+                priority = "extra-high",
+                width = 128,
+                height = 128,
+                frame_count = 8,
+                variation_count = 8,
+                scale = 0.5,
+              },
+            },
+          },
+          stages_effect = {
+            sheet = {
+              filename = "__Krastorio2Assets__/resources/rare-metals/rare-metals-glow.png",
+              priority = "extra-high",
+              width = 64,
+              height = 64,
+              frame_count = 8,
+              animation_speed = 3,
+              variation_count = 8,
+              draw_as_glow = true,
+              hr_version = {
+                filename = "__Krastorio2Assets__/resources/rare-metals/hr-rare-metals-glow.png",
+                priority = "extra-high",
+                width = 128,
+                height = 128,
+                frame_count = 8,
+                animation_speed = 3,
+                variation_count = 8,
+                scale = 0.5,
+                draw_as_glow = true,
+              },
+            },
+          },
+          effect_animation_period = 5,
+          effect_animation_period_deviation = 1,
+          effect_darkness_multiplier = 5,
+          min_effect_alpha = 0.2,
+          max_effect_alpha = 0.3,
+          map_color = { r = 0.6, g = 0.3, b = 1 },
+          mining_visualisation_tint = { r = 0.258, g = 0.960, b = 0.529 },
+    }),
     make_resource("desc_orebauxite_c", {
         stage_counts = { 120000, 110000, 80000, 70000, 1300, 400, 150, 80 },
         stages = makeStages("zircon"),
@@ -89,11 +137,59 @@ data:extend {
         stages = makeStages("gold-ore"),
         map_color = { 0.89, 0.89, 0.26 },
     }),
-    -- make_resource("desc_sam_c", {
-    --     stage_counts = { 120000, 110000, 80000, 70000, 1300, 400, 150, 80 },
-    --     stages = makeStages(""),
-    --     map_color = {},
-    -- }),
+    make_resource("desc_sam_c", {
+        stage_counts = { 0 },
+        stages = {
+            sheet = {
+              filename = "__Krastorio2Assets__/resources/imersite/imersite-rift.png",
+              priority = "extra-high",
+              width = 250,
+              height = 250,
+              frame_count = 6,
+              variation_count = 1,
+              scale = 0.8,
+              hr_version = {
+                filename = "__Krastorio2Assets__/resources/imersite/hr-imersite-rift.png",
+                priority = "extra-high",
+                width = 500,
+                height = 500,
+                frame_count = 6,
+                variation_count = 1,
+                scale = 0.4,
+              },
+            },
+          },
+          stages_effect = {
+            sheets = {
+              {
+                filename = "__Krastorio2Assets__/resources/imersite/imersite-rift-glow.png",
+                priority = "extra-high",
+                width = 250,
+                height = 250,
+                frame_count = 6,
+                variation_count = 1,
+                draw_as_glow = true,
+                scale = 0.8,
+                hr_version = {
+                  filename = "__Krastorio2Assets__/resources/imersite/hr-imersite-rift-glow.png",
+                  priority = "extra-high",
+                  width = 500,
+                  height = 500,
+                  frame_count = 6,
+                  variation_count = 1,
+                  scale = 0.4,
+                  draw_as_glow = true,
+                },
+              },
+            },
+          },
+          effect_animation_period = 5,
+          effect_animation_period_deviation = 1,
+          effect_darkness_multiplier = 3.5,
+          min_effect_alpha = 0.2,
+          max_effect_alpha = 0.3,
+          map_color = { r = 1, g = 0.5, b = 1 },
+    }),
 }
 
 -- -- Make uranium very rare
@@ -168,11 +264,11 @@ local ore_configurations = {
         pure = {},
     },
     -- 13500
-    -- ["desc_rawquartz_c"] = {
-    --     impure = {},
-    --     normal = {},
-    --     pure = {},
-    -- },
+    ["desc_rawquartz_c"] = {
+        impure = {},
+        normal = {},
+        pure = {},
+    },
     -- 12600
     ["crude-oil"] = {
         impure = {},
@@ -198,11 +294,11 @@ local ore_configurations = {
         pure = {},
     },
     -- 10200
-    -- ["desc_sam_c"] = {
-    --     impure = {},
-    --     normal = {},
-    --     pure = {},
-    -- },
+    ["desc_sam_c"] = {
+        impure = {},
+        normal = {},
+        pure = {},
+    },
     -- 2100
     ["uranium-ore"] = {
         impure = {},
@@ -264,4 +360,13 @@ for name, details in pairs(ore_configurations) do
             rarity_resource.autoplace.richness_expression = noise.to_noise_expression(noise_rarity)
         end
     end
+end
+
+for _, resource in pairs {
+    data.raw["resource"]["desc_sam_c"],
+    data.raw["resource"]["desc_sam_c-impure"],
+    data.raw["resource"]["desc_sam_c-pure"],
+} do
+    resource.stages.sheet.scale = 0.5
+    resource.stages.sheet.hr_version.scale = 0.25
 end
