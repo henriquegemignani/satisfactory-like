@@ -241,6 +241,7 @@ SF_ACCEPTABLE_PRODUCTS = {
     "desc_generatorbiomass_automated_c",
     "desc_generatorcoal_c",
     "desc_generatorfuel_c",
+    "desc_generatornuclear_c",
     # Pipes
     "pipe",
     "pump",
@@ -593,21 +594,20 @@ def item_processor(data: list[dict[str, str]]) -> None:
 def nuclear_fuel_processor(data: list[dict[str, str]]) -> None:
     for entry in data:
 
-        defintion = process_item(entry)[1]
-        defintion["fuel_category"] = "nuclear"
+        definition = process_item(entry)[1]
+        definition["fuel_category"] = "nuclear"
         
-        # mAmountOfWaste!!
-        # TODO: reduce the energy value by how much waste is generated and multiply recipes that generate by the same amount
-
         spent_fuel = entry["mSpentFuelClass"][:-1].split(".")[-1]
         if spent_fuel != "Non":
-            defintion["burnt_result"] = translate_item_name(spent_fuel)
+            energy_value = float(entry["mEnergyValue"]) / int(entry["mAmountOfWaste"])
+            definition["fuel_value"] = f"{energy_value}MJ"
+            definition["burnt_result"] = translate_item_name(spent_fuel)
 
 
 def biomass_processor(data: list[dict[str, str]]) -> None:
     for entry in data:
-        defintion = process_item(entry)[1]
-        defintion["fuel_category"] = "sl-biomass"
+        definition = process_item(entry)[1]
+        definition["fuel_category"] = "sl-biomass"
 
 
 def locale_only_processor(data: list[dict[str, str]]) -> None:
@@ -830,6 +830,7 @@ _KNOWN_PROCESSORS = {
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildablePipeline'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildablePipelinePump'": locale_only_processor,
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableRailroadTrack'": locale_only_processor,
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGBuildableGeneratorNuclear'": locale_only_processor,
 }
 
 
@@ -918,6 +919,13 @@ def main():
             recipe_data["icon"] = (
                 f'data.raw["{result_type}"]["{main_result['name']}"].icon'
             )
+
+        for entry in recipe_data["results"]:
+            if entry["name"] == "desc_plutoniumfuelrod_c":
+                entry["amount"] *= 10
+                
+            elif entry["name"] == "uranium-fuel-cell":
+                entry["amount"] *= 50
 
     create_files(args.extracted_images)
 
