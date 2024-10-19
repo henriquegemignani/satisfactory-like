@@ -754,13 +754,13 @@ local drillmk1 = data.raw["mining-drill"]["electric-mining-drill"]
 drillmk1.mining_speed = 1
 drillmk1.energy_usage = "5MW"
 drillmk1.resource_searching_radius = 0.49
-drillmk1.allowed_effects = "speed"
+drillmk1.allowed_effects = {"speed", "consumption"}
 drillmk1.module_specification = { module_slots = 3 }
 
 local oil_extractor = data.raw["mining-drill"]["pumpjack"]
 oil_extractor.mining_speed = 2
 oil_extractor.energy_usage = "40MW"
-oil_extractor.allowed_effects = "speed"
+oil_extractor.allowed_effects = {"speed", "consumption"}
 oil_extractor.module_specification = { module_slots = 3 }
 
 data:extend({
@@ -780,7 +780,7 @@ data:extend({
         energy_usage = "15MW",
         resource_searching_radius = 0.49,
         next_upgrade = "desc_minermk3_c",
-        allowed_effects = "speed",
+        allowed_effects = {"speed", "consumption"},
         module_specification = {
             module_slots = 3,
         },
@@ -2902,7 +2902,7 @@ data:extend({
         mining_speed = 4,
         energy_usage = "45MW",
         resource_searching_radius = 0.49,
-        allowed_effects = "speed",
+        allowed_effects = {"speed", "consumption"},
         module_specification = {
             module_slots = 3,
         },
