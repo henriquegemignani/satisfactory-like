@@ -144,7 +144,24 @@ for _, tier in pairs(SplitterTiers) do
   end
 end
 
+for _, recipe_name in pairs {
+  "recipe_conveyorliftmk1_c",
+  "recipe_conveyorliftmk2_c",
+  "recipe_conveyorliftmk3_c",
+  "recipe_conveyorliftmk4_c",
+  "recipe_conveyorliftmk5_c",
+  "recipe_conveyorliftmk6_c",
+} do
+  local recipe = data.raw["recipe"][recipe_name]
+  for _, ingredient in pairs(recipe.ingredients) do
+    ingredient.amount = ingredient.amount * 2
+  end
+  recipe.results[1].amount = recipe.results[1].amount * 2
+end
+
 data.raw["recipe"]["recipe_portableminer_c"].category = "handcraft"
+data.raw["recipe"]["recipe_alternate_automatedminer_c"].subgroup = data.raw["item"]["burner-mining-drill"].subgroup
+data.raw["recipe"]["recipe_alternate_automatedminer_c"].order = data.raw["item"]["burner-mining-drill"].order .. "-automated"
 data.raw["recipe"]["inserter"].ingredients = {
   {
     name = "iron-plate",
