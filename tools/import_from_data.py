@@ -92,6 +92,7 @@ sf_item_to_fac_name = {
     "Desc_SulfuricAcid_C": "sulfuric-acid",
     "Desc_HeavyOilResidue_C": "heavy-oil",
     "Desc_Battery_C": "battery",
+    "Desc_Gunpowder_C": "explosives",
 }
 CUSTOM_ITEM_TYPE = {
     "rail": "rail-planner",
@@ -382,8 +383,8 @@ PRODUCT_TO_SUBGROUP = {
     "desc_spaceelevatorpart_12_c": ("sl-project-assembly", "l"),
 
     # Military
-    "desc_gunpowder_c": "sl-military",
-    "desc_gunpowdermk2_c": "sl-military",
+    "explosives": ("sl-military", "a"),
+    "desc_gunpowdermk2_c": ("sl-military", "b"),
 
     # Alien
     "desc_genericbiomass_c": ("sl-biomass", "a"),

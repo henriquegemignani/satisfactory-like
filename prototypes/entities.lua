@@ -27,8 +27,6 @@ local function create_assembler(params)
     result.crafting_speed = 1
     result.crafting_categories = params.crafting_categories
     result.energy_usage = params.energy_usage
-    result.allowed_effects = nil
-    result.module_specification = nil
     return result
 end
 
@@ -183,6 +181,9 @@ copy_art_from(
 )
 
 for i, machine in pairs(ProductionMachines) do
+    machine.allowed_effects = {"speed", "consumption"}
+    machine.module_specification = {module_slots = 3}
+    
     local item = associate_entity_with_item(machine)
     item.subgroup = "production-machine"
     item.order = string.format("f[%s]", string.char(string.byte("a") + i))
