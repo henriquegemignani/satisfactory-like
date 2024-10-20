@@ -115,7 +115,16 @@ data:extend {
     }),
     make_resource("desc_nitrogengas_c", {
         stage_counts = { 0 },
-        stages = data.raw["resource"]["crude-oil"].stages,
+        stages = {
+          sheet = {
+            filename = "__Krastorio2Assets__/resources/mineral-water.png",
+            priority = "extra-high",
+            width = 128,
+            height = 128,
+            frame_count = 8,
+            variation_count = 1,
+          },
+        },
         category = "sl-resource-well",
 
         infinite = true,
@@ -328,7 +337,9 @@ for name, details in pairs(ore_configurations) do
     resource.selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } }
     resource.map_grid = false
     resource.stages.sheet.scale = 2
-    resource.stages.sheet.hr_version.scale = 1
+    if resource.stages.sheet.hr_version then
+        resource.stages.sheet.hr_version.scale = 1
+    end
     resource.autoplace = nil
 
     for rarity, noise_rarity in pairs { impure = 50000, pure = 200000, normal = 100000 } do
