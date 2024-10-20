@@ -231,3 +231,5 @@ data:extend({
     max_power_output = "250MW",
   },
 })
+
+return data.raw["generator"]["desc_generatorfuel_c"]

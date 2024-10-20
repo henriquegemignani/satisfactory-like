@@ -382,3 +382,5 @@ data:extend {
 --     generator_engine,
 --     generator_engine_item,
 -- }
+
+return data.raw["burner-generator"]["desc_generatorcoal_c"]

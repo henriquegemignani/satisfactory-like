@@ -16,7 +16,7 @@ return {
         type = "electric",
         usage_priority = "secondary-input",
         emissions_per_minute = 1,
-        drain = "300kW",
+        drain = "0.1MW",
     },
     energy_usage = "10MW",
     allowed_effects = nil,

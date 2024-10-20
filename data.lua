@@ -1,3 +1,7 @@
+function speed_multipler()
+  return settings["startup"]["sl-speed-multiplier"].value
+end
+
 local crafting_categories = {
   'blender', 'collider', 'converter', 'encoder',
   'handcraft', 'packager', 'refinery',
@@ -148,3 +152,5 @@ data.raw["recipe"]["inserter"].ingredients = {
 }
 
 require("base-patching")
+
+require("prototypes.speed-multiplier")

@@ -49,7 +49,11 @@ BeltTiers = {
     },
 }
 
-local baseSpeed = 0.00390625
+local baseSpeed = math.max(
+    0.00390625, -- Factorio minimum
+    speed_multipler() / 480
+)
+
 for _, tier in pairs(BeltTiers) do
     data.raw["transport-belt"][tier.belt].speed = baseSpeed * tier.speed_multiplier
     data.raw["splitter"][tier.splitter].speed = baseSpeed * tier.speed_multiplier

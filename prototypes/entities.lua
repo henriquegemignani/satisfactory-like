@@ -72,13 +72,59 @@ local function associate_entity_with_item(entity)
 end
 
 require("prototypes.pipes")
-require("prototypes.buildings.coal-powered-generator")
-require("prototypes.buildings.fuel-powered-generator")
-require("prototypes.buildings.nuclear-power-plant")
-require("prototypes.buildings.miner")
-require("prototypes.buildings.awesome-sink")
 
-local production_machines = {
+-- Power
+
+---@type data.EntityWithOwnerPrototype[]
+PowerMachines = {
+    require("prototypes.buildings.biomass-generator"),
+    require("prototypes.buildings.coal-powered-generator"),
+    require("prototypes.buildings.fuel-powered-generator"),
+    require("prototypes.buildings.nuclear-power-plant"),
+}
+
+data.raw["item"]["desc_generatorbiomass_automated_c"].subgroup = "energy"
+data.raw["item"]["desc_generatorbiomass_automated_c"].order = "d[biomass]"
+data.raw["item"]["desc_generatorcoal_c"].subgroup = "energy"
+data.raw["item"]["desc_generatorcoal_c"].order = "d[coal]"
+data.raw["item"]["desc_generatorfuel_c"].subgroup = "energy"
+data.raw["item"]["desc_generatorfuel_c"].order = "e[fuel]"
+data.raw["item"]["desc_generatornuclear_c"].subgroup = "energy"
+data.raw["item"]["desc_generatornuclear_c"].order = "f[nuclear]"
+
+for _, generator in pairs(PowerMachines) do
+    associate_entity_with_item(generator)
+end
+
+local accumulator = data.raw["accumulator"]["accumulator"]
+accumulator.energy_source.input_flow_limit = "100MW"
+accumulator.energy_source.output_flow_limit = "1TW" -- "unlimited"
+accumulator.energy_source.buffer_capacity = "360GJ" -- 100 MW for 1 hour
+
+-- Miners
+require("prototypes.buildings.miner")
+associate_entity_with_item(data.raw["mining-drill"]["desc_minermk2_c"])
+associate_entity_with_item(data.raw["mining-drill"]["desc_minermk3_c"])
+data.raw["item"]["desc_minermk2_c"].subgroup = data.raw["item"]["electric-mining-drill"].subgroup
+data.raw["item"]["desc_minermk2_c"].order = data.raw["item"]["electric-mining-drill"].order .. "-mk2"
+data.raw["item"]["desc_minermk3_c"].subgroup = data.raw["item"]["electric-mining-drill"].subgroup
+data.raw["item"]["desc_minermk3_c"].order = data.raw["item"]["electric-mining-drill"].order .. "-mk3"
+
+MinerMachines = {
+    data.raw["mining-drill"]["electric-mining-drill"],
+    data.raw["mining-drill"]["desc_minermk2_c"],
+    data.raw["mining-drill"]["desc_minermk3_c"],
+    data.raw["mining-drill"]["pumpjack"],
+}
+
+-- Util
+require("prototypes.buildings.awesome-sink")
+associate_entity_with_item(data.raw["furnace"]["desc_resourcesink_c"])
+
+-- Production
+
+---@type data.CraftingMachinePrototype[]
+ProductionMachines = {
     -- smelter
     create_assembler {
         base = data.raw["assembling-machine"]["assembling-machine-1"],
@@ -127,21 +173,7 @@ local production_machines = {
     -- Quantum Encoder
     require("prototypes.buildings.quantum-encoder"),
 }
-data:extend(production_machines)
-
-data:extend {
-    -- Biomass Generator
-    create_entity {
-        base = data.raw["burner-generator"]["burner-generator"],
-        item = data.raw["item"]["desc_generatorbiomass_automated_c"],
-    }
-}
-
-local biomass_generator = data.raw["burner-generator"]["desc_generatorbiomass_automated_c"]
-biomass_generator.max_power_output = "30MW"
-biomass_generator.burner.effectivity = 1
-biomass_generator.burner.fuel_category = nil
-biomass_generator.burner.fuel_categories = { "sl-biomass" }
+data:extend(ProductionMachines)
 
 -- make smelter look like electric furnace
 copy_art_from(
@@ -149,42 +181,21 @@ copy_art_from(
     data.raw["furnace"]["electric-furnace"]
 )
 
-for i, machine in pairs(production_machines) do
+for i, machine in pairs(ProductionMachines) do
     local item = associate_entity_with_item(machine)
     item.subgroup = "production-machine"
     item.order = string.format("f[%s]", string.char(string.byte("a") + i))
 end
 
-associate_entity_with_item(data.raw["mining-drill"]["desc_minermk2_c"])
-associate_entity_with_item(data.raw["mining-drill"]["desc_minermk3_c"])
-data.raw["item"]["desc_minermk2_c"].subgroup = data.raw["item"]["electric-mining-drill"].subgroup
-data.raw["item"]["desc_minermk2_c"].order = data.raw["item"]["electric-mining-drill"].order .. "-mk2"
-data.raw["item"]["desc_minermk3_c"].subgroup = data.raw["item"]["electric-mining-drill"].subgroup
-data.raw["item"]["desc_minermk3_c"].order = data.raw["item"]["electric-mining-drill"].order .. "-mk3"
-
 associate_entity_with_item(data.raw["pipe"]["desc_pipelinemk2_c"])
 associate_entity_with_item(data.raw["pump"]["desc_pipelinepumpmk2_c"])
-associate_entity_with_item(biomass_generator)
-associate_entity_with_item(data.raw["burner-generator"]["desc_generatorcoal_c"])
-associate_entity_with_item(data.raw["generator"]["desc_generatorfuel_c"])
-associate_entity_with_item(data.raw["burner-generator"]["desc_generatornuclear_c"])
-associate_entity_with_item(data.raw["furnace"]["desc_resourcesink_c"])
 
 data.raw["item"]["desc_pipelinemk2_c"].subgroup = data.raw["item"]["pipe"].subgroup
 data.raw["item"]["desc_pipelinemk2_c"].order = data.raw["item"]["pipe"].order .. "-mk2"
 data.raw["item"]["desc_pipelinepumpmk2_c"].subgroup = data.raw["item"]["pump"].subgroup
 data.raw["item"]["desc_pipelinepumpmk2_c"].order = data.raw["item"]["pump"].order .. "-mk2"
 
-data.raw["item"]["desc_generatorbiomass_automated_c"].subgroup = "energy"
-data.raw["item"]["desc_generatorbiomass_automated_c"].order = "d[biomass]"
-data.raw["item"]["desc_generatorcoal_c"].subgroup = "energy"
-data.raw["item"]["desc_generatorcoal_c"].order = "d[coal]"
-data.raw["item"]["desc_generatorfuel_c"].subgroup = "energy"
-data.raw["item"]["desc_generatorfuel_c"].order = "e[fuel]"
-data.raw["item"]["desc_generatornuclear_c"].subgroup = "energy"
-data.raw["item"]["desc_generatornuclear_c"].order = "f[nuclear]"
-
-local accumulator = data.raw["accumulator"]["accumulator"]
-accumulator.energy_source.input_flow_limit = "100MW"
-accumulator.energy_source.output_flow_limit = "1TW" -- "unlimited"
-accumulator.energy_source.buffer_capacity = "360GJ" -- 100 MW for 1 hour
+PumpEntities = {
+    data.raw["pump"]["pump"],
+    data.raw["pump"]["desc_pipelinepumpmk2_c"],
+}

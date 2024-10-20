@@ -3,6 +3,7 @@ data.raw["assembling-machine"]["assembling-machine-1"].crafting_categories = {"s
 data.raw["assembling-machine"]["assembling-machine-2"].crafting_categories = {"smelting"}
 data.raw["assembling-machine"]["assembling-machine-3"].crafting_categories = {"smelting"}
 data.raw["recipe"]["uranium-processing"].category = "collider"
+data.raw["recipe"]["explosives"].category = "refinery"
 
 data.raw["roboport"]["roboport"].construction_radius = 250
 data.raw["roboport"]["roboport"].logistics_radius = 100

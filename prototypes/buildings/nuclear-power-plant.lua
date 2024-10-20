@@ -100,3 +100,4 @@ data:extend {
         close_sound = sounds.machine_close,
     },
 }
+return data.raw["burner-generator"]["desc_generatornuclear_c"]

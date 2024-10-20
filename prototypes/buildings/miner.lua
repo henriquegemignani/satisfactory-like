@@ -756,6 +756,8 @@ drillmk1.energy_usage = "5MW"
 drillmk1.resource_searching_radius = 0.49
 drillmk1.allowed_effects = {"speed", "consumption"}
 drillmk1.module_specification = { module_slots = 3 }
+drillmk1.fast_replaceable_group = "electric-mining-drill"
+drillmk1.next_upgrade = "desc_minermk2_c"
 
 local oil_extractor = data.raw["mining-drill"]["pumpjack"]
 oil_extractor.mining_speed = 2
