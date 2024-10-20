@@ -109,17 +109,16 @@ data.raw["item"]["desc_minermk2_c"].subgroup = data.raw["item"]["electric-mining
 data.raw["item"]["desc_minermk2_c"].order = data.raw["item"]["electric-mining-drill"].order .. "-mk2"
 data.raw["item"]["desc_minermk3_c"].subgroup = data.raw["item"]["electric-mining-drill"].subgroup
 data.raw["item"]["desc_minermk3_c"].order = data.raw["item"]["electric-mining-drill"].order .. "-mk3"
+data.raw["item"]["desc_frackingsmasher_c"].subgroup = data.raw["item"]["pumpjack"].subgroup
+data.raw["item"]["desc_frackingsmasher_c"].order = data.raw["item"]["pumpjack"].order .. "-smasher"
 
 MinerMachines = {
     data.raw["mining-drill"]["electric-mining-drill"],
     data.raw["mining-drill"]["desc_minermk2_c"],
     data.raw["mining-drill"]["desc_minermk3_c"],
     data.raw["mining-drill"]["pumpjack"],
+    data.raw["mining-drill"]["pumpjack"],
 }
-
--- Util
-require("prototypes.buildings.awesome-sink")
-associate_entity_with_item(data.raw["furnace"]["desc_resourcesink_c"])
 
 -- Production
 
@@ -172,6 +171,8 @@ ProductionMachines = {
     require("prototypes.buildings.converter"),
     -- Quantum Encoder
     require("prototypes.buildings.quantum-encoder"),
+    -- Sink
+    require("prototypes.buildings.awesome-sink")
 }
 data:extend(ProductionMachines)
 

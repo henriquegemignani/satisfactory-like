@@ -245,3 +245,4 @@ data:extend({
     close_sound = sounds.machine_close,
   },
 })
+return data.raw["furnace"]["desc_resourcesink_c"]

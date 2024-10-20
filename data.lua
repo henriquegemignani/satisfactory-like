@@ -132,10 +132,19 @@ for _, tier in pairs(SplitterTiers) do
   for name, amount in pairs(tier.ingredients) do
     table.insert(ingredients, { type = "item", name = name, amount = amount})
   end
-  data.raw["recipe"][tier.recipe].ingredients = ingredients
+  local recipe = data.raw["recipe"][tier.recipe]
+  recipe.ingredients = ingredients
+  if recipe.result then
+    recipe.main_product = recipe.result
+    recipe.results = {
+      { type = "item", name = recipe.result, amount = 1}
+    }
+    recipe.category = "crafting"
+    recipe.result = nil
+  end
 end
 
-
+data.raw["recipe"]["recipe_portableminer_c"].category = "handcraft"
 data.raw["recipe"]["inserter"].ingredients = {
   {
     name = "iron-plate",
@@ -152,5 +161,6 @@ data.raw["recipe"]["inserter"].ingredients = {
 }
 
 require("base-patching")
+require("prototypes.recycling")
 
 require("prototypes.speed-multiplier")

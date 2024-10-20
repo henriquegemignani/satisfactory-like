@@ -212,4 +212,14 @@ data:extend {
         group = "other",
         order = "z"
     },
+
+    -- Deconstruct
+    {
+        type = "item-group",
+        name = "sl-recycle",
+        icon = "__base__/graphics/icons/shortcut-toolbar/mip/undo-x32-white.png",
+        icon_size = 32,
+        icon_mipmaps = 1,
+        order = "z",
+    },
 }

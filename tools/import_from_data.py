@@ -511,6 +511,13 @@ def create_parser():
     return parser
 
 
+def add_locale_entry(kind: str, entry_name: str,  name: str, description: str) -> None:
+    if name:
+        output_locale[f"{kind}-name"][entry_name] = name
+    if description:
+        output_locale[f"{kind}-description"][entry_name] = locale_wrap(description)
+
+
 def process_item(entry: dict[str, str]) -> tuple[str, dict] | None:
     entry_name = entry["ClassName"]
     is_fluid = entry["mForm"] in {"RF_GAS", "RF_LIQUID"}
@@ -578,11 +585,7 @@ def process_item(entry: dict[str, str]) -> tuple[str, dict] | None:
         definition["stack_size"] = STACK_SIZES[entry["mStackSize"]]
     
     (all_fluids if is_fluid else all_items)[entry_name] = definition
-
-    output_locale[f"{entry_type}-name"][entry_name] = entry["mDisplayName"]
-    output_locale[f"{entry_type}-description"][entry_name] = locale_wrap(
-        entry["mDescription"]
-    )
+    add_locale_entry(entry_type, entry_name, entry["mDisplayName"], entry["mDescription"])
 
     return entry_name, definition
 
@@ -608,7 +611,8 @@ def nuclear_fuel_processor(data: list[dict[str, str]]) -> None:
 def biomass_processor(data: list[dict[str, str]]) -> None:
     for entry in data:
         definition = process_item(entry)[1]
-        definition["fuel_category"] = "sl-biomass"
+        if "fuel_value" in definition:
+            definition["fuel_category"] = "sl-biomass"
 
 
 def locale_only_processor(data: list[dict[str, str]]) -> None:
@@ -616,10 +620,7 @@ def locale_only_processor(data: list[dict[str, str]]) -> None:
         entry_name = entry["ClassName"].replace("Build_", "Desc_")
         entry_name = sf_item_to_fac_name.get(entry_name, entry_name).lower()
         for entry_type in ["entity", "item"]:
-            output_locale[f"{entry_type}-name"][entry_name] = entry["mDisplayName"]
-            output_locale[f"{entry_type}-description"][entry_name] = locale_wrap(
-                entry["mDescription"]
-            )
+            add_locale_entry(entry_type, entry_name, entry["mDisplayName"], entry["mDescription"])
 
 
 def building_processor(data: list[dict[str, str]]) -> None:
@@ -783,9 +784,9 @@ def resource_processor(data: list[dict[str, str]]) -> None:
         for suffix_code, suffix_text in [
             ("", ""), ("-impure", " (Impure)"), ("-pure", " (Pure)")
         ]:
-            output_locale["entity-name"][entry_name + suffix_code] = entry["mDisplayName"] + suffix_text
-            output_locale["entity-description"][entry_name + suffix_code] = locale_wrap(
-                entry["mDescription"]
+            add_locale_entry(
+                "entity", entry_name + suffix_code,
+                entry["mDisplayName"] + suffix_text, entry["mDescription"],
             )
 
 
@@ -802,11 +803,8 @@ def equipment_processor(data: list[dict[str, str]]) -> None:
                 "stack_size": STACK_SIZES[entry["mStackSize"]],
             }
             all_items[entry_name] = definition
-            output_locale["entity-name"][entry_name] = entry["mDisplayName"]
-            output_locale["item-name"][entry_name] = entry["mDisplayName"]
-            output_locale["item-description"][entry_name] = locale_wrap(
-                entry["mDescription"]
-            )
+            add_locale_entry("entity", entry_name, entry["mDisplayName"], "")
+            add_locale_entry("item", entry_name, entry["mDisplayName"], entry["mDescription"])
 
 
 _KNOWN_PROCESSORS = {

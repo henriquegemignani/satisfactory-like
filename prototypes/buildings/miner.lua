@@ -765,6 +765,12 @@ oil_extractor.energy_usage = "40MW"
 oil_extractor.allowed_effects = {"speed", "consumption"}
 oil_extractor.module_specification = { module_slots = 3 }
 
+local nitrogen_extractor = table.deepcopy(data.raw["mining-drill"]["pumpjack"])
+nitrogen_extractor.name = "desc_frackingsmasher_c"
+nitrogen_extractor.energy_usage = "150MW"
+nitrogen_extractor.resource_categories = {"sl-resource-well"}
+nitrogen_extractor.fast_replaceable_group = nil
+
 data:extend({
     {
         type = "mining-drill",
@@ -5011,4 +5017,6 @@ data:extend({
         circuit_connector_sprites = circuit_connector_definitions["electric-mining-drill"].sprites,
         circuit_wire_max_distance = default_circuit_wire_max_distance,
     },
+
+    nitrogen_extractor,
 })

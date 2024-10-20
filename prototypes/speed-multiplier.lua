@@ -16,7 +16,8 @@ local fuelCategoryToChange = {
 }
 
 for _, item in pairs(data.raw["item"]) do
-    if fuelCategoryToChange[item.fuel_category] then
+    if item.fuel_category and fuelCategoryToChange[item.fuel_category] then
+        print(item.name)
         local energy_suffix = item.fuel_value:sub(-2)
         local energy = tonumber(item.fuel_value:sub(1, -3)) / multiplier
         item.fuel_value = tostring(energy) .. energy_suffix
