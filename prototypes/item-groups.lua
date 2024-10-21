@@ -1,3 +1,5 @@
+require("prototypes.generated-subgroups")
+
 data:extend {
     -- Production
     {

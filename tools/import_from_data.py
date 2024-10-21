@@ -869,9 +869,9 @@ def create_files(extracted_images: Path) -> None:
     create_update_file(
         all_items, export_root.joinpath("prototypes/generated-items.lua")
     )
-    create_update_file(all_fluids, export_root.joinpath("prototypes/fluids.lua"))
-    create_update_file(all_recipes, export_root.joinpath("prototypes/recipes.lua"))
-    create_update_file(all_subgroups, export_root.joinpath("prototypes/subgroups.lua"))
+    create_update_file(all_fluids, export_root.joinpath("prototypes/generated-fluids.lua"))
+    create_update_file(all_recipes, export_root.joinpath("prototypes/generated-recipes.lua"))
+    create_update_file(all_subgroups, export_root.joinpath("prototypes/generated-subgroups.lua"))
 
     with export_root.joinpath("locale/en/generated.cfg").open("w", encoding="utf-8") as f:
         output_locale.write(f, space_around_delimiters=False)

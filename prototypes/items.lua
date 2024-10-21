@@ -1,8 +1,8 @@
-local function make_belt_item(name, order, prototype)
+local function make_belt_item(name, order, icon)
     return {
         type = "item",
         name = name,
-        icon = data.raw[prototype][name].icon,
+        icon = icon,
         icon_size = 64, icon_mipmaps = 4,
         subgroup = "belt",
         order = order,
@@ -12,15 +12,15 @@ local function make_belt_item(name, order, prototype)
 end
 
 data:extend {
-    make_belt_item("sl-mk1-transport-belt", "a[transport-belt]-0[transport-belt]", "transport-belt"),
-    make_belt_item("sl-mk5-transport-belt", "a[transport-belt]-d[transport-belt]", "transport-belt"),
-    make_belt_item("sl-mk6-transport-belt", "a[transport-belt]-e[transport-belt]", "transport-belt"),
-    make_belt_item("sl-mk1-underground-belt", "b[underground-belt]-0[underground-belt]", "underground-belt"),
-    make_belt_item("sl-mk5-underground-belt", "b[underground-belt]-d[underground-belt]", "underground-belt"),
-    make_belt_item("sl-mk6-underground-belt", "b[underground-belt]-e[underground-belt]", "underground-belt"),
-    make_belt_item("sl-mk1-splitter", "c[splitter]-0[splitter]", "splitter"),
-    make_belt_item("sl-mk5-splitter", "c[splitter]-d[splitter]", "splitter"),
-    make_belt_item("sl-mk6-splitter", "c[splitter]-e[splitter]", "splitter"),
+    make_belt_item("sl-mk1-transport-belt", "a[transport-belt]-0[transport-belt]", "__satisfactory-like__/graphics/icons/transport-belt/transport-belt.png"),
+    make_belt_item("sl-mk5-transport-belt", "a[transport-belt]-d[transport-belt]", "__Krastorio2Assets__/icons/entities/transport-belts/advanced-transport-belt/advanced-transport-belt.png"),
+    make_belt_item("sl-mk6-transport-belt", "a[transport-belt]-e[transport-belt]", "__Krastorio2Assets__/icons/entities/transport-belts/superior-transport-belt/superior-transport-belt.png"),
+    make_belt_item("sl-mk1-underground-belt", "b[underground-belt]-0[underground-belt]", "__satisfactory-like__/graphics/icons/underground-belt/underground-belt.png"),
+    make_belt_item("sl-mk5-underground-belt", "b[underground-belt]-d[underground-belt]", "__Krastorio2Assets__/icons/entities/transport-belts/advanced-transport-belt/advanced-underground-belt.png"),
+    make_belt_item("sl-mk6-underground-belt", "b[underground-belt]-e[underground-belt]", "__Krastorio2Assets__/icons/entities/transport-belts/superior-transport-belt/superior-underground-belt.png"),
+    make_belt_item("sl-mk1-splitter", "c[splitter]-0[splitter]", "__satisfactory-like__/graphics/icons/splitter/splitter.png"),
+    make_belt_item("sl-mk5-splitter", "c[splitter]-d[splitter]", "__Krastorio2Assets__/icons/entities/transport-belts/advanced-transport-belt/advanced-splitter.png"),
+    make_belt_item("sl-mk6-splitter", "c[splitter]-e[splitter]", "__Krastorio2Assets__/icons/entities/transport-belts/superior-transport-belt/superior-splitter.png"),
 }
 
 require("prototypes.generated-items")

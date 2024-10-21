@@ -2,30 +2,7 @@ function speed_multipler()
   return settings["startup"]["sl-speed-multiplier"].value
 end
 
-local crafting_categories = {
-  'blender', 'collider', 'converter', 'encoder',
-  'handcraft', 'packager', 'refinery',
-
-  'smelter', 'smelter-handcraft',
-  'constructor', 'constructor-handcraft',
-  'assembler', 'assembler-handcraft',
-  'foundry', 'foundry-handcraft',
-  'manufacturer', 'manufacturer-handcraft',
-
-  "sl-sinking",
-}
-for _, cat in pairs(crafting_categories) do
-  data:extend {
-    {
-      type = "recipe-category",
-      name = cat,
-    }
-  }
-  if cat:find("handcraft") then
-    table.insert(data.raw["character"]["character"].crafting_categories, cat)
-  end
-end
-
+require("prototypes.recipe-categories")
 data:extend {
   {
     type = "resource-category",
@@ -44,13 +21,14 @@ data:extend {
     name = "sl-coal"
   }
 }
-require("prototypes.buildings.transport-belt")
 require("prototypes.item-groups")
-require("prototypes.subgroups")
+
 require("prototypes.items")
-require("prototypes.fluids")
-require("prototypes.recipes")
+require("prototypes.generated-fluids")
 require("prototypes.autoplace-controls")
+
+require("prototypes.buildings.transport-belt")
+require("prototypes.recipes")
 require("prototypes.resources")
 require("prototypes.entities")
 

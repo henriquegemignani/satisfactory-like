@@ -1,5 +1,4 @@
-fluids.lua
+generated-fluids.lua
 generated-items.lua
-recipes.lua
-subgroups.lua
-autoplace-controls.lua
+generated-recipes.lua
+generated-subgroups.lua
