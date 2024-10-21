@@ -212,15 +212,30 @@ PumpEntities = {
 
 -- Vehicle fuel
 
-data.raw["car"]["car"].consumption = "55MW"
+---Adjusts the car velocity, while making the fuel less efficient so it's not any faster
+---@param car data.CarPrototype
+---@param consumption_in_mw int
+local function adjust_car_consumption(car, consumption_in_mw)
+    assert(car.consumption:sub(-2) == "kW", "only original consumption in kW supported")
+    local old_consumption = tonumber(car.consumption:sub(1, -3)) / 1000
+    car.effectivity = old_consumption / consumption_in_mw
+    car.consumption = tostring(consumption_in_mw) .. "MW"
+end
+
+function adjust_vehicle_burner(burner)
+    burner.fuel_category = "sl-vehicle"
+    burner.burnt_inventory_size = burner.fuel_inventory_size
+end
+
 data.raw["car"]["car"].inventory_size = 25
-data.raw["car"]["car"].burner.fuel_category = "sl-vehicle"
-data.raw["car"]["tank"].consumption = "75MW"
-data.raw["car"]["tank"].burner.fuel_category = "sl-vehicle"
 data.raw["car"]["tank"].inventory_size = 48
+adjust_car_consumption(data.raw["car"]["car"], 55)
+adjust_vehicle_burner(data.raw["car"]["car"].burner)
+adjust_car_consumption(data.raw["car"]["tank"], 75)
+adjust_vehicle_burner(data.raw["car"]["tank"].burner)
 
 local locomotive = data.raw["locomotive"]["locomotive"]
 locomotive.max_power = "110MW"
-locomotive.burner.fuel_category = "sl-vehicle"
+adjust_vehicle_burner(locomotive.burner)
 locomotive.energy_source = settings["startup"]["sl-train-fuel"].value and locomotive.burner or { type = "void" }
 locomotive.burner = nil
