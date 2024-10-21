@@ -5,9 +5,11 @@ data:extend {
     {
         type = "burner-generator",
         name = "desc_generatornuclear_c",
-        icon = "__base__/graphics/icons/nuclear-reactor.png",
-        icon_size = 64,
-        icon_mipmaps = 4,
+        icons = {{
+          icon = "__base__/graphics/icons/nuclear-reactor.png",
+          icon_size = 64,
+          icon_mipmaps = 4,
+        }},
         flags = { "placeable-neutral", "placeable-player", "player-creation" },
         minable = { mining_time = 1, result = "desc_generatornuclear_c" },
         max_health = 2000,

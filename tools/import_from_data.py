@@ -538,12 +538,13 @@ def process_item(entry: dict[str, str]) -> tuple[str, dict] | None:
         definition["name"] = entry_name
 
     if entry_name not in KEEP_ORIGINAL_ICONS:
-        definition["icon"] = (
-            f"__satisfactory-like__/graphics/icons/generated/{entry_name}.png"
-        )
-        definition["icon_size"] = 64
-        definition["icon_mipmaps"] = 4
-
+        definition["icons"] = [
+            {
+                "icon": f"__satisfactory-like__/graphics/icons/generated/{entry_name}.png",
+                "icon_size": 64,
+                "icon_mipmaps": 4,
+            }
+        ]
         icon_name = entry["mSmallIcon"].replace("Texture2D /Game/", "")
         icon_name = icon_name[: icon_name.rfind(".")]
         assets_to_convert[icon_name] = f"graphics/icons/generated/{entry_name}.png"
@@ -760,18 +761,23 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
             "ingredients": ingredients,
             "results": product,
             "main_product": "",
+            "category": category,
+            "energy_required": float(entry["mManufactoringDuration"]),
+
             "subgroup": subgroup,
             "order": f"{order_prefix}[{order}]" + ("b" if "Alternate" in entry["mDisplayName"] else "a"),
-            "icon_size": 64,
-            "icon_mipmaps": 4,
-            "category": category,
+            "icons": [
+                {
+                    "icon": None,
+                    "icon_size": 64,
+                    "icon_mipmaps": 4,
+                },
+            ],
             "always_show_made_in": True,
-            "energy_required": float(entry["mManufactoringDuration"]),
         }
         if category == "crafting":
             definition["main_product"] = main_product
-            definition.pop("icon_size")
-            definition.pop("icon_mipmaps")
+            definition.pop("icons")
             definition.pop("subgroup")
             definition.pop("order")
 
@@ -918,9 +924,7 @@ def main():
             result_type = CUSTOM_ITEM_TYPE.get(main_result['name'], result_type)
         
         if recipe_data["main_product"] == "":
-            recipe_data["icon"] = (
-                f'data.raw["{result_type}"]["{main_result['name']}"].icon'
-            )
+            recipe_data["icons"] = f'data.raw["{result_type}"]["{main_result['name']}"].icons'
 
         for entry in recipe_data["results"]:
             if entry["name"] == "desc_plutoniumfuelrod_c":

@@ -777,9 +777,11 @@ data:extend({
         name = "desc_minermk2_c",
         minable = { mining_time = 0.5, result = "desc_minermk2_c" },
 
-        icon = "__Krastorio2Assets__/icons/entities/electric-mining-drill-mk2.png",
-        icon_size = 64,
-        icon_mipmaps = 4,
+        icons = {{
+            icon = "__Krastorio2Assets__/icons/entities/electric-mining-drill-mk2.png",
+            icon_size = 64,
+            icon_mipmaps = 4,
+        }},
         flags = { "placeable-neutral", "player-creation" },
         max_health = 350,
 
@@ -2899,9 +2901,11 @@ data:extend({
     {
         type = "mining-drill",
         name = "desc_minermk3_c",
-        icon = "__Krastorio2Assets__/icons/entities/electric-mining-drill-mk3.png",
-        icon_size = 64,
-        icon_mipmaps = 4,
+        icons = {{
+            icon = "__Krastorio2Assets__/icons/entities/electric-mining-drill-mk3.png",
+            icon_size = 64,
+            icon_mipmaps = 4,
+        }},
         flags = { "placeable-neutral", "player-creation" },
         minable = { mining_time = 0.5, result = "desc_minermk3_c" },
         max_health = 400,

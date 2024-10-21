@@ -20,6 +20,24 @@ for name, recipe in pairs(data.raw["recipe"]) do
             data:extend { recycling_groups[subgroup] }
         end
 
+        local icons
+        if recipe.icons or target_item.icons then
+            icons = table.deepcopy(recipe.icons or target_item.icons)
+        else
+            icons = {{
+                icon = recipe.icon or target_item.icon,
+                icon_size = recipe.icon_size or target_item.icon_size,
+                icon_mipmaps = recipe.icon_mipmaps or target_item.icon_mipmaps,
+            }}
+        end
+        table.insert(icons, {
+            icon = "__base__/graphics/icons/shortcut-toolbar/mip/undo-x32-white.png",
+            icon_size = 32,
+            icon_mipmaps = 1,
+            scale = 0.5,
+            shift = {8, 8}
+        })
+
         ---@type data.RecipePrototype
         local recycle = {
             type = "recipe",
@@ -41,20 +59,7 @@ for name, recipe in pairs(data.raw["recipe"]) do
                 "recipe-name.sl-recycle",
                 target_item.localised_name or {"?", {"item-name." .. recipe.main_product}, {"entity-name." .. recipe.main_product}}
             },
-            icons = {
-                {
-                    icon = recipe.icon or target_item.icon,
-                    icon_size = recipe.icon_size or target_item.icon_size,
-                    icon_mipmaps = recipe.icon_mipmaps or target_item.icon_mipmaps,
-                },
-                {
-                    icon = "__base__/graphics/icons/shortcut-toolbar/mip/undo-x32-white.png",
-                    icon_size = 32,
-                    icon_mipmaps = 1,
-                    scale = 0.5,
-                    shift = {8, 8}
-                }
-            }
+            icons = icons,
         }
         recycling_for[recipe.main_product] = recycle
         data:extend { recycle }

@@ -63,9 +63,17 @@ local function associate_entity_with_item(entity)
     entity.minable.result = entity.name
     local item = data.raw["item"][entity.name]
     item.place_result = entity.name
-    item.icon = entity.icon
-    item.icon_size = entity.icon_size
-    item.icon_mipmaps = entity.icon_mipmaps
+    if entity.icons then
+        item.icons = entity.icons
+        item.icon = nil
+        item.icon_size = nil
+        item.icon_mipmaps = nil
+    else
+        item.icon = entity.icon
+        item.icon_size = entity.icon_size
+        item.icon_mipmaps = entity.icon_mipmaps
+        item.icons = nil
+    end
     return item
 end
 

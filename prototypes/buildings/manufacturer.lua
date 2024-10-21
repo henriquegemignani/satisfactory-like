@@ -4,8 +4,10 @@ local sounds = require("__base__/prototypes/entity/sounds")
 return {
   type = "assembling-machine",
   name = "desc_manufacturermk1_c",
-  icon = "__Krastorio2Assets__/icons/entities/advanced-assembling-machine.png",
-  icon_size = 64,
+  icons = {{
+    icon = "__Krastorio2Assets__/icons/entities/advanced-assembling-machine.png",
+    icon_size = 64,
+  }},
   flags = { "placeable-neutral", "placeable-player", "player-creation" },
   minable = { mining_time = 1, result = "desc_manufacturermk1_c" },
   max_health = 800,

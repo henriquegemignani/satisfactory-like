@@ -2,8 +2,10 @@ data:extend({
   {
     type = "underground-belt",
     name = "sl-mk6-underground-belt",
-    icon = "__Krastorio2Assets__/icons/entities/transport-belts/superior-transport-belt/superior-underground-belt.png",
-    icon_size = 64,
+    icons = {{
+      icon = "__Krastorio2Assets__/icons/entities/transport-belts/superior-transport-belt/superior-underground-belt.png",
+      icon_size = 64,
+    }},
     flags = { "placeable-neutral", "player-creation" },
     minable = { mining_time = 0.2, result = "sl-mk6-underground-belt" },
     max_health = 200,

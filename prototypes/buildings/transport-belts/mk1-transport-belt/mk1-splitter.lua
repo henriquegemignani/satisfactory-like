@@ -3,8 +3,10 @@ data:extend({
     type = "splitter",
     name = "sl-mk1-splitter",
     localised_description = { "entity-description.splitter" },
-    icon = "__satisfactory-like__/graphics/icons/splitter/splitter.png",
-    icon_size = 64,
+    icons = {{
+      icon = "__satisfactory-like__/graphics/icons/splitter/splitter.png",
+      icon_size = 64,
+    }},
     flags = { "placeable-neutral", "player-creation" },
     minable = { mining_time = 0.2, result = "sl-mk1-splitter" },
     max_health = 250,

@@ -2,8 +2,10 @@ data:extend({
   {
     type = "transport-belt",
     name = "sl-mk5-transport-belt",
-    icon = "__Krastorio2Assets__/icons/entities/transport-belts/advanced-transport-belt/advanced-transport-belt.png",
-    icon_size = 64,
+    icons = {{
+      icon = "__Krastorio2Assets__/icons/entities/transport-belts/advanced-transport-belt/advanced-transport-belt.png",
+      icon_size = 64,
+    }},
     flags = { "placeable-neutral", "player-creation" },
     minable = { mining_time = 0.2, result = "sl-mk5-transport-belt" },
     max_health = 200,

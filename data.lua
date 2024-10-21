@@ -2,6 +2,21 @@ function speed_multipler()
   return settings["startup"]["sl-speed-multiplier"].value
 end
 
+---Converts base icon to icons style
+function adjust_to_icons(proto)
+  if not proto.icons then
+    assert(proto.icon, "Prototype " .. proto.name .. " doesn't have an icon or icons")
+    proto.icons = {{
+      icon = proto.icon,
+      icon_size = proto.icon_size,
+      icon_mipmaps = proto.icon_mipmaps,
+    }}
+    proto.icon = nil
+    proto.icon_size = nil
+    proto.icon_mipmaps = nil
+  end
+end
+
 require("prototypes.recipe-categories")
 data:extend {
   {

@@ -14,9 +14,11 @@ data:extend({
     {
         type = "pipe",
         name = "desc_pipelinemk2_c",
-        icon = "__Krastorio2Assets__/icons/entities/steel-pipe.png",
-        icon_size = 64,
-        icon_mipmaps = 4,
+        icons = {{
+            icon = "__Krastorio2Assets__/icons/entities/steel-pipe.png",
+            icon_size = 64,
+            icon_mipmaps = 4,
+        }},
         flags = { "placeable-neutral", "player-creation", "fast-replaceable-no-build-while-moving" },
         minable = { mining_time = 0.1, result = "desc_pipelinemk2_c" },
 

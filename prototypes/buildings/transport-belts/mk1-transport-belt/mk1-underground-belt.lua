@@ -2,8 +2,10 @@ data:extend({
   {
     type = "underground-belt",
     name = "sl-mk1-underground-belt",
-    icon = "__satisfactory-like__/graphics/icons/underground-belt/underground-belt.png",
-    icon_size = 64,
+    icons = {{
+      icon = "__satisfactory-like__/graphics/icons/underground-belt/underground-belt.png",
+      icon_size = 64,
+    }},
     flags = { "placeable-neutral", "player-creation" },
     minable = { mining_time = 0.2, result = "sl-mk1-underground-belt" },
     max_health = 200,

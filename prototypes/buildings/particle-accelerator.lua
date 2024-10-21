@@ -41,9 +41,11 @@ return {
   type = "assembling-machine",
   name = "desc_hadroncollider_c",
 
-  icon = "__Krastorio2Assets__/icons/entities/matter-assembler.png",
-  icon_size = 128,
-  icon_mipmaps = 4,
+  icons = {{
+    icon = "__Krastorio2Assets__/icons/entities/matter-assembler.png",
+    icon_size = 128,
+    icon_mipmaps = 4,
+  }},
   flags = { "placeable-neutral", "placeable-player", "player-creation" },
   minable = { mining_time = 1, result = "desc_hadroncollider_c" },
 

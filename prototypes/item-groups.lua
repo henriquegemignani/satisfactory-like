@@ -173,9 +173,11 @@ data:extend {
     {
         type = "item-group",
         name = "sl-converter",
-        icon = "__core__/graphics/icons/category/unsorted.png",
-        icon_size = 128,
-        icon_mipmaps = 2,
+        icons = {{
+            icon = "__core__/graphics/icons/category/unsorted.png",
+            icon_size = 128,
+            icon_mipmaps = 2,
+        }},
         order = "y"
     },
 
@@ -183,9 +185,11 @@ data:extend {
     {
         type = "item-group",
         name = "sl-alien",
-        icon = "__core__/graphics/icons/category/unsorted.png",
-        icon_size = 128,
-        icon_mipmaps = 2,
+        icons = {{
+            icon = "__core__/graphics/icons/category/unsorted.png",
+            icon_size = 128,
+            icon_mipmaps = 2,
+        }},
         order = "y"
     },
     {
@@ -219,9 +223,11 @@ data:extend {
     {
         type = "item-group",
         name = "sl-recycle",
-        icon = "__base__/graphics/icons/shortcut-toolbar/mip/undo-x32-white.png",
-        icon_size = 32,
-        icon_mipmaps = 1,
+        icons = {{
+            icon = "__base__/graphics/icons/shortcut-toolbar/mip/undo-x32-white.png",
+            icon_size = 32,
+            icon_mipmaps = 1,
+        }},
         order = "z",
     },
 }

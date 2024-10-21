@@ -4,9 +4,11 @@ data:extend({
   {
     type = "furnace",
     name = "desc_resourcesink_c",
-    icon = "__Krastorio2Assets__/icons/entities/fluid-burner.png",
-    icon_size = 64,
-    icon_mipmaps = 4,
+    icons = { {
+      icon = "__Krastorio2Assets__/icons/entities/fluid-burner.png",
+      icon_size = 64,
+      icon_mipmaps = 4,
+    } },
     flags = { "placeable-neutral", "placeable-player", "player-creation" },
     minable = { mining_time = 0.5, result = "desc_resourcesink_c" },
     max_health = 250,
@@ -14,7 +16,7 @@ data:extend({
     dying_explosion = "medium-explosion",
     resistances = {
       { type = "physical", percent = 50 },
-      { type = "fire", percent = 95 },
+      { type = "fire",     percent = 95 },
     },
 
     crafting_categories = { "sl-sinking" },

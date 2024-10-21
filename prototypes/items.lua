@@ -2,8 +2,13 @@ local function make_belt_item(name, order, icon)
     return {
         type = "item",
         name = name,
-        icon = icon,
-        icon_size = 64, icon_mipmaps = 4,
+        icons = {
+            {
+                icon = icon,
+                icon_size = 64,
+                icon_mipmaps = 4,
+            }
+        },
         subgroup = "belt",
         order = order,
         place_result = name,
@@ -22,6 +27,8 @@ data:extend {
     make_belt_item("sl-mk5-splitter", "c[splitter]-d[splitter]", "__Krastorio2Assets__/icons/entities/transport-belts/advanced-transport-belt/advanced-splitter.png"),
     make_belt_item("sl-mk6-splitter", "c[splitter]-e[splitter]", "__Krastorio2Assets__/icons/entities/transport-belts/superior-transport-belt/superior-splitter.png"),
 }
+
+adjust_to_icons(data.raw["item"]["burner-mining-drill"])
 
 require("prototypes.generated-items")
 data.raw["item"]["battery"].fuel_category = "sl-vehicle"

@@ -32,8 +32,10 @@ local pipe_patch = data.raw["assembling-machine"]["assembling-machine-3"].fluid_
 return {
     type = "assembling-machine",
     name = "desc_converter_c",
-    icon = "__space-exploration-graphics__/graphics/icons/nexus.png",
-    icon_size = 64,
+    icons = {{
+        icon = "__space-exploration-graphics__/graphics/icons/nexus.png",
+        icon_size = 64,
+    }},
     flags = { "placeable-neutral", "placeable-player", "player-creation" },
     minable = { mining_time = 1, result = "desc_converter_c" },
     max_health = 500,

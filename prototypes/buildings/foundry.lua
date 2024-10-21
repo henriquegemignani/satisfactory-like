@@ -1,8 +1,10 @@
 return {
     name = "desc_foundrymk1_c",
     type = "assembling-machine",
-    icon = "__satisfactory-like__/graphics/icons/arc-furnace.png",
-    icon_size = 64,
+    icons = {{
+        icon = "__satisfactory-like__/graphics/icons/arc-furnace.png",
+        icon_size = 64,
+    }},
     flags = { "placeable-neutral", "placeable-player", "player-creation" },
     minable = { mining_time = 0.5, result = "desc_foundrymk1_c" },
     max_health = 300,

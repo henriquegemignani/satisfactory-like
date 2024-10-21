@@ -3,9 +3,11 @@ local sounds = require("__base__/prototypes/entity/sounds")
 return {
     type = "assembling-machine",
     name = "desc_packager_c",
-    icon = "__Krastorio2Assets__/icons/entities/fuel-refinery.png",
-    icon_size = 64,
-    icon_mipmaps = 4,
+    icons = { {
+        icon = "__Krastorio2Assets__/icons/entities/fuel-refinery.png",
+        icon_size = 64,
+        icon_mipmaps = 4,
+    } },
     flags = { "placeable-neutral", "placeable-player", "player-creation" },
     minable = { mining_time = 1, result = "desc_packager_c" },
     max_health = 300,

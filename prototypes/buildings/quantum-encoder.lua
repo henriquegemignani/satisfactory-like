@@ -105,9 +105,11 @@ return {
   type = "assembling-machine",
   name = "desc_quantumencoder_c",
 
-  icon = "__Krastorio2Assets__/icons/entities/quantum-computer.png",
-  icon_size = 64,
-  icon_mipmaps = 4,
+  icons = {{
+    icon = "__Krastorio2Assets__/icons/entities/quantum-computer.png",
+    icon_size = 64,
+    icon_mipmaps = 4,
+  }},
   flags = { "placeable-neutral", "placeable-player", "player-creation" },
 
   minable = { mining_time = 1, result = "desc_quantumencoder_c" },

@@ -31,8 +31,6 @@ end
 local function make_resource(name, definition)
     definition.type = "resource"
     definition.name = name
-    definition.icon_size = 64
-    definition.icon_mipmaps = 4
     definition.flags = { "placeable-neutral" }
     definition.minable = {
         mining_time = 1,
@@ -324,7 +322,10 @@ end
 
 for name, details in pairs(ore_configurations) do
     local resource = data.raw.resource[name]
-    resource.icon = data.raw[fluids[name] and "fluid" or "item"][name].icon
+    resource.icons = data.raw[fluids[name] and "fluid" or "item"][name].icons
+    resource.icon = nil
+    resource.icon_size = nil
+
     resource.minable.required_fluid = nil
     resource.minable.fluid_amount = nil
     resource.highlight = true
