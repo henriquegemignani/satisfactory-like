@@ -174,9 +174,8 @@ data:extend {
         type = "item-group",
         name = "sl-converter",
         icons = {{
-            icon = "__core__/graphics/icons/category/unsorted.png",
-            icon_size = 128,
-            icon_mipmaps = 2,
+            icon = "__space-exploration-graphics__/graphics/icons/nexus.png",
+            icon_size = 64,
         }},
         order = "y"
     },
