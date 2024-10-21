@@ -7,6 +7,16 @@ data.raw["recipe"]["uranium-processing"].category = "collider"
 data.raw["roboport"]["roboport"].construction_radius = 250
 data.raw["roboport"]["roboport"].logistics_radius = 100
 
+-- Make vanilla modules not modules at all
+-- But keep around because they're used in recipes
+for name, definition in pairs (data.raw["module"]) do
+    if name ~= "desc_crystalshard_c" then
+        definition.type = "item"
+        data.raw["module"][name] = nil
+        data:extend{definition}
+    end
+end
+
 for _, name in pairs {
     -- Belts
     "transport-belt",

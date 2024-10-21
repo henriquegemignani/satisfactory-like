@@ -1,3 +1,8 @@
+
+-- Create recycling recipes
+require("prototypes.recycling")
+
+-- Create voiding recipes
 for name, item in pairs(data.raw["item"]) do
     ---@type data.RecipePrototype
     local void_recipe = {
