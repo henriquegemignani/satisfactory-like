@@ -10,6 +10,7 @@ import configparser
 import json
 import os
 from pathlib import Path
+import shutil
 import string
 import typing
 from PIL import Image
@@ -881,6 +882,19 @@ def create_files(extracted_images: Path) -> None:
         if not new_image.exists():
             print(f"Creating {target_name}")
             create_mipmap(extracted_images.joinpath(source_name + ".png"), new_image)
+
+    shutil.copy2(
+        extracted_images.joinpath("FactoryGame/Resource/Environment/Crystal/UI/PowerSlugGreen_256.png"),
+        export_root.joinpath("graphics/entity/generated/blue-slug.png"),
+    )
+    shutil.copy2(
+        extracted_images.joinpath("FactoryGame/Resource/Environment/Crystal/UI/PowerSlugYellow_256.png"),
+        export_root.joinpath("graphics/entity/generated/yellow-slug.png"),
+    )
+    shutil.copy2(
+        extracted_images.joinpath("FactoryGame/Resource/Environment/Crystal/UI/PowerSlugPurple_256.png"),
+        export_root.joinpath("graphics/entity/generated/purple-slug.png"),
+    )
 
     create_update_file(
         all_items, export_root.joinpath("prototypes/generated-items.lua")

@@ -46,6 +46,7 @@ require("prototypes.buildings.transport-belt")
 require("prototypes.recipes")
 require("prototypes.resources")
 require("prototypes.entities")
+require("prototypes.map-resources")
 
 require("base-patching")
 
