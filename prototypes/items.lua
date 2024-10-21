@@ -52,3 +52,12 @@ shard.effect = {
     speed = { bonus = 0.5 },
     consumption = { bonus = 0.75 }
 }
+
+-- Packaged Fuel has Empty Canister as spent result
+if settings["startup"]["sl-packaged-fuel-return-canister"].value then
+    for _, name in pairs({
+        "solid-fuel", "rocket-fuel", "desc_packagedionizedfuel_c", "desc_turbofuel_c", "desc_packagedoilresidue_c", "desc_packagedoil_c", "desc_packagedbiofuel_c", 
+    }) do
+        data.raw["item"][name].burnt_result = "empty-barrel"
+    end
+end

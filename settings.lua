@@ -15,4 +15,11 @@ data:extend {
       default_value = false,
       order = "a2",
     },
+    {
+      type = "bool-setting",
+      name = "sl-packaged-fuel-return-canister",
+      setting_type = "startup",
+      default_value = false,
+      order = "a2",
+    },
 }
