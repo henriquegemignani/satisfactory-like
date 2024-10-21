@@ -189,9 +189,9 @@ copy_art_from(
 )
 
 for i, machine in pairs(ProductionMachines) do
-    machine.allowed_effects = {"speed", "consumption"}
-    machine.module_specification = {module_slots = 3}
-    
+    machine.allowed_effects = { "speed", "consumption" }
+    machine.module_specification = { module_slots = 3 }
+
     local item = associate_entity_with_item(machine)
     item.subgroup = "production-machine"
     item.order = string.format("f[%s]", string.char(string.byte("a") + i))
@@ -209,3 +209,16 @@ PumpEntities = {
     data.raw["pump"]["pump"],
     data.raw["pump"]["desc_pipelinepumpmk2_c"],
 }
+
+-- Vehicle fuel
+
+data.raw["car"]["car"].consumption = "55MW"
+data.raw["car"]["car"].burner.fuel_category = "sl-vehicle"
+data.raw["car"]["tank"].consumption = "75MW"
+data.raw["car"]["tank"].burner.fuel_category = "sl-vehicle"
+
+local locomotive = data.raw["locomotive"]["locomotive"]
+locomotive.max_power = "110MW"
+locomotive.burner.fuel_category = "sl-vehicle"
+locomotive.energy_source = settings["startup"]["sl-train-fuel"].value and locomotive.burner or { type = "void" }
+locomotive.burner = nil
