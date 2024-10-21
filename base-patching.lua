@@ -74,6 +74,10 @@ for _, name in pairs {
     "pipe",
     "pump",
     "explosives",
+    "car",
+    "tank",
+    "flying-robot-frame",
+    "roboport",
 
     -- Things to just Hide
     "boiler",

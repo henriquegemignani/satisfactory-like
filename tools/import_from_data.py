@@ -52,6 +52,8 @@ sf_item_to_fac_name = {
     # 
     "Desc_DroneStation_C": "roboport",
     "Desc_DroneTransport_C": "flying-robot-frame",
+    "Desc_Tractor_C": "car",
+    "Desc_Truck_C": "tank",
     #
     "Desc_WaterPump_C": "offshore-pump",
     "Desc_OilPump_C": "pumpjack",
@@ -98,6 +100,8 @@ CUSTOM_ITEM_TYPE = {
     "rail": "rail-planner",
     "locomotive": "item-with-entity-data",
     "cargo-wagon": "item-with-entity-data",
+    "car": "item-with-entity-data",
+    "tank": "item-with-entity-data",
 }
 KEEP_ORIGINAL_ICONS = {
     "offshore-pump",
@@ -129,6 +133,9 @@ KEEP_ORIGINAL_ICONS = {
     "train-stop",
     "locomotive",
     "cargo-wagon",
+    # Vehicles
+    "car",
+    "tank",
     # Power
     "small-electric-pole",
     "medium-electric-pole",
@@ -137,7 +144,7 @@ KEEP_ORIGINAL_ICONS = {
     "accumulator",
 }
 STACK_SIZES = {
-    "SS_ONE": 1,
+    "SS_ONE": 5,  # only used for vehicles, which don't use inventory in satisfactory...
     "SS_SMALL": 50,
     "SS_MEDIUM": 100,
     "SS_BIG": 200,
@@ -183,8 +190,6 @@ SF_THINGS_TO_IGNORE = {
     "Desc_TrainPlatformEmpty_C",
     "Desc_TrainPlatformEmpty_02_C",
     # Vehicle
-    "Desc_Truck_C",
-    "Desc_Tractor_C",
     "Desc_Explorer_C",
     "Desc_CyberWagon_C",
 }
@@ -211,6 +216,8 @@ SF_ACCEPTABLE_PRODUCTS = {
     "desc_smeltermk1_c",
     "roboport",
     "flying-robot-frame",
+    "car",
+    "tank",
     # Belts
     "sl-mk1-transport-belt",
     "transport-belt",

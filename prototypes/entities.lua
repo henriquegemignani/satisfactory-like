@@ -213,9 +213,11 @@ PumpEntities = {
 -- Vehicle fuel
 
 data.raw["car"]["car"].consumption = "55MW"
+data.raw["car"]["car"].inventory_size = 25
 data.raw["car"]["car"].burner.fuel_category = "sl-vehicle"
 data.raw["car"]["tank"].consumption = "75MW"
 data.raw["car"]["tank"].burner.fuel_category = "sl-vehicle"
+data.raw["car"]["tank"].inventory_size = 48
 
 local locomotive = data.raw["locomotive"]["locomotive"]
 locomotive.max_power = "110MW"
