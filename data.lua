@@ -47,20 +47,6 @@ require("prototypes.recipes")
 require("prototypes.resources")
 require("prototypes.entities")
 
--- Make shardsa  module, but only after we made the recipes as that would complicate generated-recipes.lua
-
-local shard = data.raw["item"]["desc_crystalshard_c"]
-shard.type = "module"
----@cast shard data.ModulePrototype
-shard.category = "speed"
-shard.effect = {
-  speed = { bonus = 0.5 },
-  consumption = { bonus = 0.75 }
-}
-shard.tier = 1
-data.raw["item"]["desc_crystalshard_c"] = nil
-data:extend { shard }
-
 require("base-patching")
 
 require("prototypes.speed-multiplier")

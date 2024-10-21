@@ -43,3 +43,12 @@ data.raw["item"]["desc_compactedcoal_c"].fuel_category = "sl-coal"
 data.raw["item"]["desc_petroleumcoke_c"].fuel_category = "sl-coal"
 
 data.raw["item"]["coal"].dark_background_icon = nil
+
+-- Power Shards
+local shard = data.raw["module"]["desc_crystalshard_c"]
+shard.tier = 1
+shard.category = "speed"
+shard.effect = {
+    speed = { bonus = 0.5 },
+    consumption = { bonus = 0.75 }
+}

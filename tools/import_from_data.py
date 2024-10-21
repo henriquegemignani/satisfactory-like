@@ -102,6 +102,7 @@ CUSTOM_ITEM_TYPE = {
     "cargo-wagon": "item-with-entity-data",
     "car": "item-with-entity-data",
     "tank": "item-with-entity-data",
+    "desc_crystalshard_c": "module",
 }
 KEEP_ORIGINAL_ICONS = {
     "offshore-pump",
@@ -529,13 +530,12 @@ def add_locale_entry(kind: str, entry_name: str,  name: str, description: str) -
 def process_item(entry: dict[str, str]) -> tuple[str, dict] | None:
     entry_name = entry["ClassName"]
     is_fluid = entry["mForm"] in {"RF_GAS", "RF_LIQUID"}
-    entry_type = "fluid" if is_fluid else "item"
 
     if entry_name in SF_THINGS_TO_IGNORE:
         return None
 
     definition = {
-        "type": entry_type,
+        "type": None,
     }
     if entry_name in sf_item_to_fac_name:
         entry_name = sf_item_to_fac_name[entry_name]
@@ -543,6 +543,9 @@ def process_item(entry: dict[str, str]) -> tuple[str, dict] | None:
     else:
         entry_name = entry_name.lower()
         definition["name"] = entry_name
+
+    entry_type = "fluid" if is_fluid else "item"
+    definition["type"] = CUSTOM_ITEM_TYPE.get(entry_name, entry_type)
 
     if entry_name not in KEEP_ORIGINAL_ICONS:
         definition["icons"] = [
