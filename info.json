@@ -4,7 +4,7 @@
     "title": "Satisfactory Like",
     "author": "Darkszero",
     "description": "Satisfactory, but in Factorio's engine! Play with all the recipes and buildings of Satisfactory but in Factorio.",
-    "factorio_version": "1.1",
+    "factorio_version": "2.0",
     "dependencies": [
       "base",
       "Krastorio2Assets",
