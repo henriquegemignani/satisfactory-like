@@ -3,7 +3,6 @@ return {
     type = "assembling-machine",
     icons = {{
         icon = "__satisfactory-like__/graphics/icons/arc-furnace.png",
-        icon_size = 64,
     }},
     flags = { "placeable-neutral", "placeable-player", "player-creation" },
     minable = { mining_time = 0.5, result = "desc_foundrymk1_c" },
@@ -17,7 +16,7 @@ return {
     energy_source = {
         type = "electric",
         usage_priority = "secondary-input",
-        emissions_per_minute = 1,
+        emissions_per_minute = { pollution = 1 },
         drain = "0.1MW",
     },
     energy_usage = "10MW",
@@ -27,7 +26,7 @@ return {
     idle_animation = {
         layers = {
             {
-                filename = "__satisfactory-like__/graphics/entity/arc-furnace/arc-furnace-hr-shadow.png",
+                filename = "__satisfactory-like__/graphics/entity/arc-furnace/arc-furnace-shadow.png",
                 size = { 600, 400 },
                 shift = { 0, 0 },
                 scale = 0.5,
@@ -38,7 +37,7 @@ return {
                 animation_speed = 0.25,
             },
             {
-                filename = "__satisfactory-like__/graphics/entity/arc-furnace/arc-furnace-hr-structure.png",
+                filename = "__satisfactory-like__/graphics/entity/arc-furnace/arc-furnace-structure.png",
                 size = { 320, 320 },
                 shift = { 0, 0 },
                 scale = 0.5,
@@ -57,7 +56,7 @@ return {
                 layers = {
                     {
                         filename =
-                        "__satisfactory-like__/graphics/entity/arc-furnace/arc-furnace-hr-animation-emission-1.png",
+                        "__satisfactory-like__/graphics/entity/arc-furnace/arc-furnace-animation-emission-1.png",
                         size = { 320, 320 },
                         shift = { 0, 0 },
                         scale = 0.5,

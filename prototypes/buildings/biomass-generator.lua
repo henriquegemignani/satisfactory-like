@@ -5,7 +5,6 @@ biomass_generator.fast_replaceable_group = nil
 biomass_generator.next_upgrade = nil
 biomass_generator.max_power_output = "30MW"
 biomass_generator.burner.effectivity = 1
-biomass_generator.burner.fuel_category = nil
 biomass_generator.burner.fuel_categories = { "sl-biomass" }
 
 data:extend { biomass_generator }

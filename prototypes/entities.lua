@@ -34,6 +34,7 @@ local function copy_art_from(target, source)
     local fields = {
         "collision_box",
         "selection_box",
+        "graphics_set",
 
         "icon",
         "icon_size",
@@ -222,20 +223,22 @@ local function adjust_car_consumption(car, consumption_in_mw)
     car.consumption = tostring(consumption_in_mw) .. "MW"
 end
 
-function adjust_vehicle_burner(burner)
-    burner.fuel_category = "sl-vehicle"
-    burner.burnt_inventory_size = burner.fuel_inventory_size
+---
+---@param source data.BurnerEnergySource|data.VoidEnergySource
+function adjust_vehicle_burner(source)
+    assert(source.type == "burner")
+    source.fuel_categories = {"sl-vehicle"}
+    source.burnt_inventory_size = source.fuel_inventory_size
 end
 
 data.raw["car"]["car"].inventory_size = 25
 data.raw["car"]["tank"].inventory_size = 48
 adjust_car_consumption(data.raw["car"]["car"], 55)
-adjust_vehicle_burner(data.raw["car"]["car"].burner)
+adjust_vehicle_burner(data.raw["car"]["car"].energy_source)
 adjust_car_consumption(data.raw["car"]["tank"], 75)
-adjust_vehicle_burner(data.raw["car"]["tank"].burner)
+adjust_vehicle_burner(data.raw["car"]["tank"].energy_source)
 
 local locomotive = data.raw["locomotive"]["locomotive"]
 locomotive.max_power = "110MW"
-adjust_vehicle_burner(locomotive.burner)
-locomotive.energy_source = settings["startup"]["sl-train-fuel"].value and locomotive.burner or { type = "void" }
-locomotive.burner = nil
+adjust_vehicle_burner(locomotive.energy_source)
+locomotive.energy_source = settings["startup"]["sl-train-fuel"].value and locomotive.energy_source or { type = "void" }

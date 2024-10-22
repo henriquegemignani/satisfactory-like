@@ -31,9 +31,8 @@ for name, recipe in pairs(data.raw["recipe"]) do
             }}
         end
         table.insert(icons, {
-            icon = "__base__/graphics/icons/shortcut-toolbar/mip/undo-x32-white.png",
+            icon = "__satisfactory-like__/graphics/icons/undo-x32.png",
             icon_size = 32,
-            icon_mipmaps = 1,
             scale = 0.5,
             shift = {8, 8}
         })

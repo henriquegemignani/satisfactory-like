@@ -2,19 +2,11 @@ return {
   animation_set = {
     filename = "__satisfactory-like__/graphics/entity/transport-belt/transport-belt.png",
     priority = "extra-high",
-    width = 64,
-    height = 64,
+    width = 128,
+    height = 128,
+    scale = 0.5,
     frame_count = 32,
     direction_count = 20,
-    hr_version = {
-      filename = "__satisfactory-like__/graphics/entity/transport-belt/hr-transport-belt.png",
-      priority = "extra-high",
-      width = 128,
-      height = 128,
-      scale = 0.5,
-      frame_count = 32,
-      direction_count = 20,
-    },
   },
 
   east_index = 1,
