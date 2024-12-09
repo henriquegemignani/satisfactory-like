@@ -3,7 +3,7 @@ data:extend({
     type = "transport-belt",
     name = "sl-mk6-transport-belt",
     icons = {{
-      icon = "__Krastorio2Assets__/icons/entities/transport-belts/superior-transport-belt/superior-transport-belt.png",
+      icon = "__Krastorio2Assets__/icons/entities/superior-transport-belt.png",
       icon_size = 64,
     }},
     flags = { "placeable-neutral", "player-creation" },
@@ -26,7 +26,7 @@ data:extend({
       persistent = true,
     },
     animations = {
-      filename = "__Krastorio2Assets__/entities/transport-belts/superior-transport-belt/transport-belt/superior-transport-belt.png",
+      filename = "__Krastorio2Assets__/buildings/superior-transport-belt/superior-transport-belt.png",
       priority = "extra-high",
       width = 128,
       height = 128,

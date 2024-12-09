@@ -5,7 +5,7 @@ local hit_effects = require("__base__/prototypes/entity/hit-effects")
 local animation = {
   layers = {
     {
-      filename = "__Krastorio2Assets__/entities/gas-power-station/gas-power-station.png",
+      filename = "__Krastorio2Assets__/buildings/gas-power-station/gas-power-station.png",
       width = 380,
       height = 380,
       scale = 0.5,
@@ -15,7 +15,7 @@ local animation = {
       shift = { 0, 0 },
     },
     {
-      filename = "__Krastorio2Assets__/entities/pipe-patch/pipe-patch.png",
+      filename = "__Krastorio2Assets__/buildings/pipe-patch/pipe-patch.png",
       width = 55,
       height = 50,
       frame_count = 1,
@@ -24,7 +24,7 @@ local animation = {
       shift = { 0, 2.5 },
     },
     {
-      filename = "__Krastorio2Assets__/entities/gas-power-station/gas-power-station-sh.png",
+      filename = "__Krastorio2Assets__/buildings/gas-power-station/gas-power-station-sh.png",
       width = 380,
       height = 380,
       scale = 0.5,
@@ -37,27 +37,18 @@ local animation = {
   },
 }
 
-local empty_sprite = {
-  filename = "__Krastorio2Assets__/entities/empty.png",
-  priority = "high",
-  width = 1,
-  height = 1,
-  scale = 0.5,
-  shift = { 0, 0 },
-}
-
 local kr_pipe_path = {
-  north = empty_sprite,
-  east = empty_sprite,
+  north = util.empty_sprite(),
+  east = util.empty_sprite(),
   south = {
-    filename = "__Krastorio2Assets__/entities/pipe-patch/pipe-patch.png",
+    filename = "__Krastorio2Assets__/buildings/pipe-patch/pipe-patch.png",
     priority = "high",
     width = 55,
     height = 50,
     scale = 0.5,
     shift = { 0.01, -0.58 },
   },
-  west = empty_sprite,
+  west = util.empty_sprite(),
 }
 
 ---@type data.TrivialSmokePrototype
@@ -81,7 +72,7 @@ local smoke = {
     shift = { -0.53125, -0.4375 },
     priority = "high",
     animation_speed = 0.25,
-    filename = "__base__/graphics/entity/smoke/smoke.png", --"__Krastorio2Assets__/entities/gas-power-station/gas-power-station-smoke.png",
+    filename = "__base__/graphics/entity/smoke/smoke.png", --"__Krastorio2Assets__/buildings/gas-power-station/gas-power-station-smoke.png",
     flags = { "smoke" },
   },
 }
@@ -180,7 +171,7 @@ local generator = {
 
   water_reflection = {
     pictures = {
-      filename = "__Krastorio2Assets__/entities/gas-power-station/gas-power-station-reflection.png",
+      filename = "__Krastorio2Assets__/buildings/gas-power-station/gas-power-station-reflection.png",
       priority = "extra-high",
       width = 42,
       height = 38,

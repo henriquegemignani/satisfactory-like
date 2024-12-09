@@ -154,7 +154,7 @@ data:extend {
             animation = {
                 layers = {
                     {
-                        filename = "__Krastorio2Assets__/entities/advanced-furnace/advanced-furnace.png",
+                        filename = "__Krastorio2Assets__/buildings/advanced-furnace/advanced-furnace.png",
                         priority = "high",
                         width = 480,
                         height = 480,
@@ -163,7 +163,7 @@ data:extend {
                         scale = 0.5,
                     },
                     {
-                        filename = "__Krastorio2Assets__/entities/advanced-furnace/advanced-furnace-sh.png",
+                        filename = "__Krastorio2Assets__/buildings/advanced-furnace/advanced-furnace-sh.png",
                         priority = "high",
                         width = 165,
                         height = 480,
@@ -178,7 +178,7 @@ data:extend {
                 {
                     constant_speed = true,
                     animation = {
-                        filename = "__Krastorio2Assets__/entities/advanced-furnace/advanced-furnace-anim-light.png",
+                        filename = "__Krastorio2Assets__/buildings/advanced-furnace/advanced-furnace-anim-light.png",
                         priority = "high",
                         width = 480,
                         height = 480,
@@ -193,7 +193,7 @@ data:extend {
                 {
                     constant_speed = true,
                     animation = {
-                        filename = "__Krastorio2Assets__/entities/advanced-furnace/advanced-furnace-anim-glow.png",
+                        filename = "__Krastorio2Assets__/buildings/advanced-furnace/advanced-furnace-anim-glow.png",
                         priority = "high",
                         width = 480,
                         height = 480,
@@ -210,7 +210,7 @@ data:extend {
                 {
                     constant_speed = true,
                     animation = {
-                        filename = "__Krastorio2Assets__/entities/advanced-furnace/advanced-furnace-anim.png",
+                        filename = "__Krastorio2Assets__/buildings/advanced-furnace/advanced-furnace-anim.png",
                         priority = "high",
                         width = 480,
                         height = 480,
@@ -233,7 +233,7 @@ data:extend {
             },
             water_reflection = {
                 pictures = {
-                    filename = "__Krastorio2Assets__/entities/advanced-furnace/advanced-furnace-reflection.png",
+                    filename = "__Krastorio2Assets__/buildings/advanced-furnace/advanced-furnace-reflection.png",
                     priority = "extra-high",
                     width = 80,
                     height = 60,

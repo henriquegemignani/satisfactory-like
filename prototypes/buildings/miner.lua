@@ -87,7 +87,7 @@ local drill_mk2 = {
     vector_to_place_result = { 0, -1.85 },
     radius_visualisation_picture = {
         filename =
-        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-radius-visualization.png",
+        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-radius-visualization.png",
         width = 10,
         height = 10,
     },
@@ -113,7 +113,7 @@ local drill_mk2 = {
                 layers = {
                     {
                         priority = "high",
-                        filename = "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N.png",
+                        filename = "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N.png",
                         line_length = 1,
                         width = 194,
                         height = 242,
@@ -127,7 +127,7 @@ local drill_mk2 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-output.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-output.png",
                         line_length = 5,
                         width = 72,
                         height = 66,
@@ -140,7 +140,7 @@ local drill_mk2 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-shadow.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-shadow.png",
                         line_length = 1,
                         width = 274,
                         height = 206,
@@ -157,7 +157,7 @@ local drill_mk2 = {
                 layers = {
                     {
                         priority = "high",
-                        filename = "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E.png",
+                        filename = "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E.png",
                         line_length = 1,
                         width = 194,
                         height = 94,
@@ -171,7 +171,7 @@ local drill_mk2 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E-output.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E-output.png",
                         line_length = 5,
                         width = 50,
                         height = 56,
@@ -184,7 +184,7 @@ local drill_mk2 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E-shadow.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E-shadow.png",
                         line_length = 1,
                         width = 276,
                         height = 170,
@@ -201,7 +201,7 @@ local drill_mk2 = {
                 layers = {
                     {
                         priority = "high",
-                        filename = "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S.png",
+                        filename = "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S.png",
                         line_length = 1,
                         width = 194,
                         height = 240,
@@ -215,7 +215,7 @@ local drill_mk2 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S-shadow.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S-shadow.png",
                         line_length = 1,
                         width = 274,
                         height = 204,
@@ -232,7 +232,7 @@ local drill_mk2 = {
                 layers = {
                     {
                         priority = "high",
-                        filename = "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W.png",
+                        filename = "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W.png",
                         line_length = 1,
                         width = 194,
                         height = 94,
@@ -246,7 +246,7 @@ local drill_mk2 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W-output.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W-output.png",
                         line_length = 5,
                         width = 50,
                         height = 56,
@@ -259,7 +259,7 @@ local drill_mk2 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W-shadow.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W-shadow.png",
                         line_length = 1,
                         width = 282,
                         height = 170,
@@ -315,7 +315,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-smoke.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-smoke.png",
                             line_length = 5,
                             width = 46,
                             height = 58,
@@ -386,7 +386,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E-smoke.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E-smoke.png",
                             line_length = 5,
                             width = 52,
                             height = 56,
@@ -403,7 +403,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S-smoke.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S-smoke.png",
                             line_length = 5,
                             width = 48,
                             height = 36,
@@ -420,7 +420,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W-smoke.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W-smoke.png",
                             line_length = 5,
                             width = 46,
                             height = 54,
@@ -441,7 +441,7 @@ local drill_mk2 = {
                 east_animation = {
                     priority = "high",
                     filename =
-                    "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E-front.png",
+                    "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E-front.png",
                     line_length = 1,
                     width = 208,
                     height = 186,
@@ -456,7 +456,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S-output.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S-output.png",
                             line_length = 5,
                             width = 82,
                             height = 56,
@@ -468,7 +468,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S-front.png",
                             line_length = 1,
                             width = 172,
                             height = 42,
@@ -483,7 +483,7 @@ local drill_mk2 = {
                 west_animation = {
                     priority = "high",
                     filename =
-                    "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W-front.png",
+                    "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W-front.png",
                     line_length = 1,
                     width = 210,
                     height = 190,
@@ -537,7 +537,7 @@ local drill_mk2 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-wet.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-wet.png",
                         line_length = 1,
                         width = 194,
                         height = 242,
@@ -551,7 +551,7 @@ local drill_mk2 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-output.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-output.png",
                         line_length = 5,
                         width = 72,
                         height = 66,
@@ -564,7 +564,7 @@ local drill_mk2 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-wet-shadow.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-wet-shadow.png",
                         line_length = 1,
                         width = 276,
                         height = 222,
@@ -582,7 +582,7 @@ local drill_mk2 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W-wet.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W-wet.png",
                         line_length = 1,
                         width = 194,
                         height = 94,
@@ -596,7 +596,7 @@ local drill_mk2 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W-output.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W-output.png",
                         line_length = 5,
                         width = 50,
                         height = 56,
@@ -609,7 +609,7 @@ local drill_mk2 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W-wet-shadow.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W-wet-shadow.png",
                         line_length = 1,
                         width = 284,
                         height = 194,
@@ -627,7 +627,7 @@ local drill_mk2 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S-wet.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S-wet.png",
                         line_length = 1,
                         width = 194,
                         height = 240,
@@ -641,7 +641,7 @@ local drill_mk2 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S-wet-shadow.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S-wet-shadow.png",
                         line_length = 1,
                         width = 276,
                         height = 204,
@@ -659,7 +659,7 @@ local drill_mk2 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E-wet.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E-wet.png",
                         line_length = 1,
                         width = 194,
                         height = 94,
@@ -673,7 +673,7 @@ local drill_mk2 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E-output.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E-output.png",
                         line_length = 5,
                         width = 50,
                         height = 56,
@@ -686,7 +686,7 @@ local drill_mk2 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E-wet-shadow.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E-wet-shadow.png",
                         line_length = 1,
                         width = 276,
                         height = 194,
@@ -730,7 +730,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-smoke.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-smoke.png",
                             line_length = 5,
                             width = 46,
                             height = 58,
@@ -797,7 +797,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E-smoke.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E-smoke.png",
                             line_length = 5,
                             width = 52,
                             height = 56,
@@ -814,7 +814,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S-smoke.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S-smoke.png",
                             line_length = 5,
                             width = 48,
                             height = 36,
@@ -831,7 +831,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W-smoke.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W-smoke.png",
                             line_length = 5,
                             width = 46,
                             height = 54,
@@ -855,7 +855,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-wet-window-background-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-wet-window-background-front.png",
                             line_length = 1,
                             width = 132,
                             height = 28,
@@ -873,7 +873,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S-wet-window-background.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S-wet-window-background.png",
                             line_length = 1,
                             width = 132,
                             height = 88,
@@ -896,7 +896,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-wet-window-background.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-wet-window-background.png",
                             line_length = 1,
                             width = 30,
                             height = 20,
@@ -913,7 +913,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W-wet-window-background-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W-wet-window-background-front.png",
                             line_length = 1,
                             width = 88,
                             height = 86,
@@ -931,7 +931,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E-wet-window-background-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E-wet-window-background-front.png",
                             line_length = 1,
                             width = 86,
                             height = 86,
@@ -955,7 +955,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-wet-fluid-background-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-wet-fluid-background-front.png",
                             line_length = 1,
                             width = 130,
                             height = 36,
@@ -973,7 +973,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S-wet-fluid-background.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S-wet-fluid-background.png",
                             line_length = 1,
                             width = 130,
                             height = 96,
@@ -997,7 +997,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-wet-fluid-background.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-wet-fluid-background.png",
                             line_length = 1,
                             width = 28,
                             height = 22,
@@ -1014,7 +1014,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W-wet-fluid-background-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W-wet-fluid-background-front.png",
                             line_length = 1,
                             width = 82,
                             height = 88,
@@ -1032,7 +1032,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E-wet-fluid-background-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E-wet-fluid-background-front.png",
                             line_length = 1,
                             width = 82,
                             height = 88,
@@ -1057,7 +1057,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-wet-fluid-flow-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-wet-fluid-flow-front.png",
                             line_length = 1,
                             width = 130,
                             height = 28,
@@ -1075,7 +1075,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S-wet-fluid-flow.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S-wet-fluid-flow.png",
                             line_length = 1,
                             width = 130,
                             height = 88,
@@ -1099,7 +1099,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-wet-fluid-flow.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-wet-fluid-flow.png",
                             line_length = 1,
                             width = 26,
                             height = 20,
@@ -1116,7 +1116,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W-wet-fluid-flow-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W-wet-fluid-flow-front.png",
                             line_length = 1,
                             width = 84,
                             height = 86,
@@ -1134,7 +1134,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E-wet-fluid-flow-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E-wet-fluid-flow-front.png",
                             line_length = 1,
                             width = 82,
                             height = 86,
@@ -1156,7 +1156,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-wet-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-wet-front.png",
                             line_length = 1,
                             width = 162,
                             height = 124,
@@ -1173,7 +1173,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W-wet-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W-wet-front.png",
                             line_length = 1,
                             width = 210,
                             height = 190,
@@ -1190,7 +1190,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S-output.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S-output.png",
                             line_length = 5,
                             width = 82,
                             height = 56,
@@ -1202,7 +1202,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S-wet-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S-wet-front.png",
                             line_length = 1,
                             width = 192,
                             height = 70,
@@ -1219,7 +1219,7 @@ local drill_mk2 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E-wet-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E-wet-front.png",
                             line_length = 1,
                             width = 208,
                             height = 186,
@@ -1257,7 +1257,7 @@ local drill_mk2 = {
     integration_patch = {
         north = {
             priority = "high",
-            filename = "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-integration.png",
+            filename = "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-integration.png",
             line_length = 1,
             width = 230,
             height = 236,
@@ -1270,7 +1270,7 @@ local drill_mk2 = {
         },
         east = {
             priority = "high",
-            filename = "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E-integration.png",
+            filename = "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E-integration.png",
             line_length = 1,
             width = 238,
             height = 204,
@@ -1283,7 +1283,7 @@ local drill_mk2 = {
         },
         south = {
             priority = "high",
-            filename = "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S-integration.png",
+            filename = "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S-integration.png",
             line_length = 1,
             width = 224,
             height = 228,
@@ -1296,7 +1296,7 @@ local drill_mk2 = {
         },
         west = {
             priority = "high",
-            filename = "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W-integration.png",
+            filename = "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W-integration.png",
             line_length = 1,
             width = 234,
             height = 202,
@@ -1362,7 +1362,7 @@ local drill_mk3 = {
     vector_to_place_result = { 0, -1.85 },
     radius_visualisation_picture = {
         filename =
-        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-radius-visualization.png",
+        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-radius-visualization.png",
         width = 10,
         height = 10,
     },
@@ -1389,7 +1389,7 @@ local drill_mk3 = {
                 layers = {
                     {
                         priority = "high",
-                        filename = "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-N.png",
+                        filename = "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-N.png",
                         line_length = 1,
                         width = 194,
                         height = 242,
@@ -1403,7 +1403,7 @@ local drill_mk3 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-N-output.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-N-output.png",
                         line_length = 5,
                         width = 72,
                         height = 66,
@@ -1416,7 +1416,7 @@ local drill_mk3 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-shadow.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-shadow.png",
                         line_length = 1,
                         width = 274,
                         height = 206,
@@ -1433,7 +1433,7 @@ local drill_mk3 = {
                 layers = {
                     {
                         priority = "high",
-                        filename = "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-E.png",
+                        filename = "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-E.png",
                         line_length = 1,
                         width = 194,
                         height = 94,
@@ -1447,7 +1447,7 @@ local drill_mk3 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-E-output.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-E-output.png",
                         line_length = 5,
                         width = 50,
                         height = 56,
@@ -1460,7 +1460,7 @@ local drill_mk3 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E-shadow.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E-shadow.png",
                         line_length = 1,
                         width = 276,
                         height = 170,
@@ -1477,7 +1477,7 @@ local drill_mk3 = {
                 layers = {
                     {
                         priority = "high",
-                        filename = "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-S.png",
+                        filename = "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-S.png",
                         line_length = 1,
                         width = 194,
                         height = 240,
@@ -1491,7 +1491,7 @@ local drill_mk3 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S-shadow.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S-shadow.png",
                         line_length = 1,
                         width = 274,
                         height = 204,
@@ -1508,7 +1508,7 @@ local drill_mk3 = {
                 layers = {
                     {
                         priority = "high",
-                        filename = "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-W.png",
+                        filename = "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-W.png",
                         line_length = 1,
                         width = 194,
                         height = 94,
@@ -1522,7 +1522,7 @@ local drill_mk3 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-W-output.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-W-output.png",
                         line_length = 5,
                         width = 50,
                         height = 56,
@@ -1535,7 +1535,7 @@ local drill_mk3 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W-shadow.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W-shadow.png",
                         line_length = 1,
                         width = 282,
                         height = 170,
@@ -1591,7 +1591,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-smoke.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-smoke.png",
                             line_length = 5,
                             width = 46,
                             height = 58,
@@ -1662,7 +1662,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E-smoke.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E-smoke.png",
                             line_length = 5,
                             width = 52,
                             height = 56,
@@ -1679,7 +1679,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S-smoke.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S-smoke.png",
                             line_length = 5,
                             width = 48,
                             height = 36,
@@ -1696,7 +1696,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W-smoke.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W-smoke.png",
                             line_length = 5,
                             width = 46,
                             height = 54,
@@ -1717,7 +1717,7 @@ local drill_mk3 = {
                 east_animation = {
                     priority = "high",
                     filename =
-                    "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-E-front.png",
+                    "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-E-front.png",
                     line_length = 1,
                     width = 208,
                     height = 186,
@@ -1732,7 +1732,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-S-output.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-S-output.png",
                             line_length = 5,
                             width = 82,
                             height = 56,
@@ -1744,7 +1744,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-S-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-S-front.png",
                             line_length = 1,
                             width = 172,
                             height = 42,
@@ -1759,7 +1759,7 @@ local drill_mk3 = {
                 west_animation = {
                     priority = "high",
                     filename =
-                    "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-W-front.png",
+                    "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-W-front.png",
                     line_length = 1,
                     width = 210,
                     height = 190,
@@ -1813,7 +1813,7 @@ local drill_mk3 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-N-wet.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-N-wet.png",
                         line_length = 1,
                         width = 194,
                         height = 242,
@@ -1827,7 +1827,7 @@ local drill_mk3 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-N-output.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-N-output.png",
                         line_length = 5,
                         width = 72,
                         height = 66,
@@ -1840,7 +1840,7 @@ local drill_mk3 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-wet-shadow.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-wet-shadow.png",
                         line_length = 1,
                         width = 276,
                         height = 222,
@@ -1858,7 +1858,7 @@ local drill_mk3 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-W-wet.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-W-wet.png",
                         line_length = 1,
                         width = 194,
                         height = 94,
@@ -1872,7 +1872,7 @@ local drill_mk3 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-W-output.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-W-output.png",
                         line_length = 5,
                         width = 50,
                         height = 56,
@@ -1885,7 +1885,7 @@ local drill_mk3 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W-wet-shadow.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W-wet-shadow.png",
                         line_length = 1,
                         width = 284,
                         height = 194,
@@ -1903,7 +1903,7 @@ local drill_mk3 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-S-wet.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-S-wet.png",
                         line_length = 1,
                         width = 194,
                         height = 240,
@@ -1917,7 +1917,7 @@ local drill_mk3 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S-wet-shadow.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S-wet-shadow.png",
                         line_length = 1,
                         width = 276,
                         height = 204,
@@ -1935,7 +1935,7 @@ local drill_mk3 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-E-wet.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-E-wet.png",
                         line_length = 1,
                         width = 194,
                         height = 94,
@@ -1949,7 +1949,7 @@ local drill_mk3 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-E-output.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-E-output.png",
                         line_length = 5,
                         width = 50,
                         height = 56,
@@ -1962,7 +1962,7 @@ local drill_mk3 = {
                     {
                         priority = "high",
                         filename =
-                        "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E-wet-shadow.png",
+                        "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E-wet-shadow.png",
                         line_length = 1,
                         width = 276,
                         height = 194,
@@ -2006,7 +2006,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-smoke.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-smoke.png",
                             line_length = 5,
                             width = 46,
                             height = 58,
@@ -2073,7 +2073,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E-smoke.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E-smoke.png",
                             line_length = 5,
                             width = 52,
                             height = 56,
@@ -2090,7 +2090,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S-smoke.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S-smoke.png",
                             line_length = 5,
                             width = 48,
                             height = 36,
@@ -2107,7 +2107,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W-smoke.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W-smoke.png",
                             line_length = 5,
                             width = 46,
                             height = 54,
@@ -2131,7 +2131,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-N-wet-window-background-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-N-wet-window-background-front.png",
                             line_length = 1,
                             width = 132,
                             height = 28,
@@ -2149,7 +2149,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-S-wet-window-background.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-S-wet-window-background.png",
                             line_length = 1,
                             width = 132,
                             height = 88,
@@ -2172,7 +2172,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-N-wet-window-background.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-N-wet-window-background.png",
                             line_length = 1,
                             width = 30,
                             height = 20,
@@ -2189,7 +2189,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-W-wet-window-background-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-W-wet-window-background-front.png",
                             line_length = 1,
                             width = 88,
                             height = 86,
@@ -2207,7 +2207,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-E-wet-window-background-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-E-wet-window-background-front.png",
                             line_length = 1,
                             width = 86,
                             height = 86,
@@ -2231,7 +2231,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-N-wet-fluid-background-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-N-wet-fluid-background-front.png",
                             line_length = 1,
                             width = 130,
                             height = 36,
@@ -2249,7 +2249,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-S-wet-fluid-background.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-S-wet-fluid-background.png",
                             line_length = 1,
                             width = 130,
                             height = 96,
@@ -2273,7 +2273,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-N-wet-fluid-background.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-N-wet-fluid-background.png",
                             line_length = 1,
                             width = 28,
                             height = 22,
@@ -2290,7 +2290,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-W-wet-fluid-background-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-W-wet-fluid-background-front.png",
                             line_length = 1,
                             width = 82,
                             height = 88,
@@ -2308,7 +2308,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-E-wet-fluid-background-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-E-wet-fluid-background-front.png",
                             line_length = 1,
                             width = 82,
                             height = 88,
@@ -2333,7 +2333,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-N-wet-fluid-flow-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-N-wet-fluid-flow-front.png",
                             line_length = 1,
                             width = 130,
                             height = 28,
@@ -2351,7 +2351,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-S-wet-fluid-flow.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-S-wet-fluid-flow.png",
                             line_length = 1,
                             width = 130,
                             height = 88,
@@ -2375,7 +2375,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-N-wet-fluid-flow.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-N-wet-fluid-flow.png",
                             line_length = 1,
                             width = 26,
                             height = 20,
@@ -2392,7 +2392,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-W-wet-fluid-flow-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-W-wet-fluid-flow-front.png",
                             line_length = 1,
                             width = 84,
                             height = 86,
@@ -2410,7 +2410,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-E-wet-fluid-flow-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-E-wet-fluid-flow-front.png",
                             line_length = 1,
                             width = 82,
                             height = 86,
@@ -2432,7 +2432,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-N-wet-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-N-wet-front.png",
                             line_length = 1,
                             width = 162,
                             height = 124,
@@ -2449,7 +2449,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-W-wet-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-W-wet-front.png",
                             line_length = 1,
                             width = 210,
                             height = 190,
@@ -2466,7 +2466,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-S-output.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-S-output.png",
                             line_length = 5,
                             width = 82,
                             height = 56,
@@ -2478,7 +2478,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-S-wet-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-S-wet-front.png",
                             line_length = 1,
                             width = 192,
                             height = 70,
@@ -2495,7 +2495,7 @@ local drill_mk3 = {
                         {
                             priority = "high",
                             filename =
-                            "__Krastorio2Assets__/entities/electric-mining-drill-mk3/electric-mining-drill-E-wet-front.png",
+                            "__Krastorio2Assets__/buildings/electric-mining-drill-mk3/electric-mining-drill-E-wet-front.png",
                             line_length = 1,
                             width = 208,
                             height = 186,
@@ -2533,7 +2533,7 @@ local drill_mk3 = {
     integration_patch = {
         north = {
             priority = "high",
-            filename = "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-N-integration.png",
+            filename = "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-N-integration.png",
             line_length = 1,
             width = 230,
             height = 236,
@@ -2546,7 +2546,7 @@ local drill_mk3 = {
         },
         east = {
             priority = "high",
-            filename = "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-E-integration.png",
+            filename = "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-E-integration.png",
             line_length = 1,
             width = 238,
             height = 204,
@@ -2559,7 +2559,7 @@ local drill_mk3 = {
         },
         south = {
             priority = "high",
-            filename = "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-S-integration.png",
+            filename = "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-S-integration.png",
             line_length = 1,
             width = 224,
             height = 228,
@@ -2572,7 +2572,7 @@ local drill_mk3 = {
         },
         west = {
             priority = "high",
-            filename = "__Krastorio2Assets__/entities/electric-mining-drill-mk2/electric-mining-drill-W-integration.png",
+            filename = "__Krastorio2Assets__/buildings/electric-mining-drill-mk2/electric-mining-drill-W-integration.png",
             line_length = 1,
             width = 234,
             height = 202,

@@ -6,7 +6,7 @@ local sounds = require("__base__.prototypes.entity.sounds")
 
 local pipe_pictures = {
   north = {
-    filename = "__Krastorio2Assets__/entities/quantum-computer/quantum-computer-k-pipe-N.png",
+    filename = "__Krastorio2Assets__/buildings/quantum-computer/quantum-computer-k-pipe-N.png",
     priority = "extra-high",
     width = 78,
     height = 71,
@@ -14,7 +14,7 @@ local pipe_pictures = {
     scale = 0.5,
   },
   east = {
-    filename = "__Krastorio2Assets__/entities/quantum-computer/quantum-computer-k-pipe-E.png",
+    filename = "__Krastorio2Assets__/buildings/quantum-computer/quantum-computer-k-pipe-E.png",
     priority = "extra-high",
     width = 42,
     height = 76,
@@ -22,7 +22,7 @@ local pipe_pictures = {
     scale = 0.5,
   },
   south = {
-    filename = "__Krastorio2Assets__/entities/quantum-computer/quantum-computer-k-pipe-S.png",
+    filename = "__Krastorio2Assets__/buildings/quantum-computer/quantum-computer-k-pipe-S.png",
     priority = "extra-high",
     width = 88,
     height = 61,
@@ -30,7 +30,7 @@ local pipe_pictures = {
     scale = 0.5,
   },
   west = {
-    filename = "__Krastorio2Assets__/entities/quantum-computer/quantum-computer-k-pipe-W.png",
+    filename = "__Krastorio2Assets__/buildings/quantum-computer/quantum-computer-k-pipe-W.png",
     priority = "extra-high",
     width = 39,
     height = 73,
@@ -119,7 +119,7 @@ return {
     animation = {
       layers = {
         {
-          filename = "__Krastorio2Assets__/entities/quantum-computer/quantum-computer.png",
+          filename = "__Krastorio2Assets__/buildings/quantum-computer/quantum-computer.png",
           priority = "high",
           width = 400,
           height = 420,
@@ -130,7 +130,7 @@ return {
           scale = 0.5,
         },
         {
-          filename = "__Krastorio2Assets__/entities/quantum-computer/quantum-computer-sh.png",
+          filename = "__Krastorio2Assets__/buildings/quantum-computer/quantum-computer-sh.png",
           priority = "medium",
           width = 402,
           height = 362,
@@ -147,7 +147,7 @@ return {
       {
         draw_as_light = true,
         animation = {
-          filename = "__Krastorio2Assets__/entities/quantum-computer/quantum-computer-light.png",
+          filename = "__Krastorio2Assets__/buildings/quantum-computer/quantum-computer-light.png",
           priority = "extra-high",
           width = 400,
           height = 420,
@@ -162,7 +162,7 @@ return {
         draw_as_glow = true,
         blend_mode = "additive-soft",
         animation = {
-          filename = "__Krastorio2Assets__/entities/quantum-computer/quantum-computer-glow.png",
+          filename = "__Krastorio2Assets__/buildings/quantum-computer/quantum-computer-glow.png",
           priority = "extra-high",
           width = 400,
           height = 420,

@@ -4,7 +4,7 @@ data:extend({
     name = "sl-mk6-splitter",
     localised_description = { "entity-description.splitter" },
     icons = {{
-      icon = "__Krastorio2Assets__/icons/entities/transport-belts/superior-transport-belt/superior-splitter.png",
+      icon = "__Krastorio2Assets__/icons/entities/superior-splitter.png",
       icon_size = 64,
     }},
     flags = { "placeable-neutral", "player-creation" },
@@ -27,7 +27,7 @@ data:extend({
     animation_speed_coefficient = 30,
     structure = {
       north = {
-        filename = "__Krastorio2Assets__/entities/transport-belts/superior-transport-belt/splitter/superior-splitter-north.png",
+        filename = "__Krastorio2Assets__/buildings/superior-splitter/superior-splitter-north.png",
         frame_count = 32,
         line_length = 8,
         priority = "extra-high",
@@ -37,7 +37,7 @@ data:extend({
         scale = 0.5,
       },
       east = {
-        filename = "__Krastorio2Assets__/entities/transport-belts/superior-transport-belt/splitter/superior-splitter-east.png",
+        filename = "__Krastorio2Assets__/buildings/superior-splitter/superior-splitter-east.png",
         frame_count = 32,
         line_length = 8,
         priority = "extra-high",
@@ -47,7 +47,7 @@ data:extend({
         scale = 0.5,
       },
       south = {
-        filename = "__Krastorio2Assets__/entities/transport-belts/superior-transport-belt/splitter/superior-splitter-south.png",
+        filename = "__Krastorio2Assets__/buildings/superior-splitter/superior-splitter-south.png",
         frame_count = 32,
         line_length = 8,
         priority = "extra-high",
@@ -57,7 +57,7 @@ data:extend({
         scale = 0.5,
       },
       west = {
-        filename = "__Krastorio2Assets__/entities/transport-belts/superior-transport-belt/splitter/superior-splitter-west.png",
+        filename = "__Krastorio2Assets__/buildings/superior-splitter/superior-splitter-west.png",
         frame_count = 32,
         line_length = 8,
         priority = "extra-high",
@@ -70,7 +70,7 @@ data:extend({
     structure_patch = {
       north = util.empty_sprite(),
       east = {
-        filename = "__Krastorio2Assets__/entities/transport-belts/superior-transport-belt/splitter/superior-splitter-east-top_patch.png",
+        filename = "__Krastorio2Assets__/buildings/superior-splitter/superior-splitter-east-top_patch.png",
         frame_count = 32,
         line_length = 8,
         priority = "extra-high",
@@ -81,7 +81,7 @@ data:extend({
       },
       south = util.empty_sprite(),
       west = {
-        filename = "__Krastorio2Assets__/entities/transport-belts/superior-transport-belt/splitter/superior-splitter-west-top_patch.png",
+        filename = "__Krastorio2Assets__/buildings/superior-splitter/superior-splitter-west-top_patch.png",
         frame_count = 32,
         line_length = 8,
         priority = "extra-high",
