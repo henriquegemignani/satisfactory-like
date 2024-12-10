@@ -5,8 +5,6 @@ return {
     name = "desc_packager_c",
     icons = { {
         icon = "__Krastorio2Assets__/icons/entities/fuel-refinery.png",
-        icon_size = 64,
-        icon_mipmaps = 4,
     } },
     flags = { "placeable-neutral", "placeable-player", "player-creation" },
     minable = { mining_time = 1, result = "desc_packager_c" },
@@ -18,10 +16,38 @@ return {
     energy_source = {
         type = "electric",
         usage_priority = "secondary-input",
-        emissions_per_minute = 10,
+        emissions_per_minute = { pollution = 10 },
     },
     energy_usage = "10MW",
     crafting_categories = { "packager" },
+
+    fluid_boxes = {
+        {
+            production_type = "input",
+            pipe_covers = pipecoverspictures(),
+            volume = 1000,
+            pipe_connections = { { flow_direction = "input", direction = defines.direction.north, position = { -1, -1 } } },
+        },
+        {
+            production_type = "input",
+            pipe_covers = pipecoverspictures(),
+            volume = 1000,
+            pipe_connections = { { flow_direction = "input", direction = defines.direction.north, position = { 1, -1 } } },
+        },
+        {
+            production_type = "output",
+            pipe_covers = pipecoverspictures(),
+            volume = 1000,
+            pipe_connections = { { flow_direction = "output", direction = defines.direction.south, position = { -1, 1 } } },
+        },
+        {
+            production_type = "output",
+            pipe_covers = pipecoverspictures(),
+            volume = 1000,
+            pipe_connections = { { flow_direction = "output", direction = defines.direction.south, position = { 1, 1 } } },
+        },
+    },
+
 
     corpse = "big-remnants",
     dying_explosion = "medium-explosion",
@@ -29,32 +55,19 @@ return {
     selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } },
     drawing_box = { { -1.5, -1.9 }, { 1.5, 1.5 } },
 
-    animation = make_4way_animation_from_spritesheet({
-        layers = {
-            {
-                filename = "__Krastorio2Assets__/entities/fuel-refinery/fuel-refinery.png",
-                width = 122,
-                height = 134,
-                frame_count = 1,
-                shift = util.by_pixel(-5, -4.5),
-                hr_version = {
-                    filename = "__Krastorio2Assets__/entities/fuel-refinery/hr-fuel-refinery.png",
+    graphics_set = {
+        animation = make_4way_animation_from_spritesheet({
+            layers = {
+                {
+                    filename = "__Krastorio2Assets__/buildings/fuel-refinery/fuel-refinery.png",
                     width = 244,
                     height = 268,
                     frame_count = 1,
                     shift = util.by_pixel(-5, -4.5),
                     scale = 0.5,
                 },
-            },
-            {
-                filename = "__Krastorio2Assets__/entities/fuel-refinery/fuel-refinery-shadow.png",
-                width = 156,
-                height = 141,
-                frame_count = 1,
-                shift = util.by_pixel(31.5, 11),
-                draw_as_shadow = true,
-                hr_version = {
-                    filename = "__Krastorio2Assets__/entities/fuel-refinery/hr-fuel-refinery-shadow.png",
+                {
+                    filename = "__Krastorio2Assets__/buildings/fuel-refinery/fuel-refinery-shadow.png",
                     width = 350,
                     height = 219,
                     frame_count = 1,
@@ -63,23 +76,16 @@ return {
                     scale = 0.5,
                 },
             },
-        },
-    }),
-    working_visualisations = {
-        {
-            north_position = util.by_pixel(30, -24),
-            west_position = util.by_pixel(1, -49.5),
-            south_position = util.by_pixel(-30, -48),
-            east_position = util.by_pixel(-11, -1),
-            apply_recipe_tint = "primary",
-            animation = {
-                filename = "__Krastorio2Assets__/entities/fuel-refinery/boiling-green-patch.png",
-                frame_count = 32,
-                width = 15,
-                height = 10,
-                animation_speed = 0.5,
-                hr_version = {
-                    filename = "__Krastorio2Assets__/entities/fuel-refinery/hr-boiling-green-patch.png",
+        }),
+        working_visualisations = {
+            {
+                north_position = util.by_pixel(30, -24),
+                west_position = util.by_pixel(1, -49.5),
+                south_position = util.by_pixel(-30, -48),
+                east_position = util.by_pixel(-11, -1),
+                apply_recipe_tint = "primary",
+                animation = {
+                    filename = "__Krastorio2Assets__/buildings/fuel-refinery/boiling-green-patch.png",
                     frame_count = 32,
                     width = 30,
                     height = 20,
@@ -87,21 +93,14 @@ return {
                     scale = 0.5,
                 },
             },
-        },
-        {
-            north_position = util.by_pixel(30, -24),
-            west_position = util.by_pixel(1, -49.5),
-            south_position = util.by_pixel(-30, -48),
-            east_position = util.by_pixel(-11, -1),
-            apply_recipe_tint = "secondary",
-            animation = {
-                filename = "__Krastorio2Assets__/entities/fuel-refinery/boiling-green-patch-mask.png",
-                frame_count = 32,
-                width = 15,
-                height = 10,
-                animation_speed = 0.5,
-                hr_version = {
-                    filename = "__Krastorio2Assets__/entities/fuel-refinery/hr-boiling-green-patch-mask.png",
+            {
+                north_position = util.by_pixel(30, -24),
+                west_position = util.by_pixel(1, -49.5),
+                south_position = util.by_pixel(-30, -48),
+                east_position = util.by_pixel(-11, -1),
+                apply_recipe_tint = "secondary",
+                animation = {
+                    filename = "__Krastorio2Assets__/buildings/fuel-refinery/boiling-green-patch-mask.png",
                     frame_count = 32,
                     width = 30,
                     height = 20,
@@ -109,21 +108,14 @@ return {
                     scale = 0.5,
                 },
             },
-        },
-        {
-            apply_recipe_tint = "tertiary",
-            north_position = { 0, 0 },
-            west_position = { 0, 0 },
-            south_position = { 0, 0 },
-            east_position = { 0, 0 },
-            north_animation = {
-                filename = "__Krastorio2Assets__/entities/fuel-refinery/boiling-window-green-patch.png",
-                frame_count = 1,
-                width = 87,
-                height = 60,
-                shift = util.by_pixel(0, -5),
-                hr_version = {
-                    filename = "__Krastorio2Assets__/entities/fuel-refinery/hr-boiling-window-green-patch.png",
+            {
+                apply_recipe_tint = "tertiary",
+                north_position = { 0, 0 },
+                west_position = { 0, 0 },
+                south_position = { 0, 0 },
+                east_position = { 0, 0 },
+                north_animation = {
+                    filename = "__Krastorio2Assets__/buildings/fuel-refinery/boiling-window-green-patch.png",
                     x = 0,
                     frame_count = 1,
                     width = 174,
@@ -131,16 +123,8 @@ return {
                     shift = util.by_pixel(0, -5.25),
                     scale = 0.5,
                 },
-            },
-            east_animation = {
-                filename = "__Krastorio2Assets__/entities/fuel-refinery/boiling-window-green-patch.png",
-                x = 87,
-                frame_count = 1,
-                width = 87,
-                height = 60,
-                shift = util.by_pixel(0, -5),
-                hr_version = {
-                    filename = "__Krastorio2Assets__/entities/fuel-refinery/hr-boiling-window-green-patch.png",
+                east_animation = {
+                    filename = "__Krastorio2Assets__/buildings/fuel-refinery/boiling-window-green-patch.png",
                     x = 174,
                     frame_count = 1,
                     width = 174,
@@ -148,16 +132,8 @@ return {
                     shift = util.by_pixel(0, -5.25),
                     scale = 0.5,
                 },
-            },
-            south_animation = {
-                filename = "__Krastorio2Assets__/entities/fuel-refinery/boiling-window-green-patch.png",
-                x = 174,
-                frame_count = 1,
-                width = 87,
-                height = 60,
-                shift = util.by_pixel(0, -5),
-                hr_version = {
-                    filename = "__Krastorio2Assets__/entities/fuel-refinery/hr-boiling-window-green-patch.png",
+                south_animation = {
+                    filename = "__Krastorio2Assets__/buildings/fuel-refinery/boiling-window-green-patch.png",
                     x = 348,
                     frame_count = 1,
                     width = 174,
@@ -167,20 +143,19 @@ return {
                 },
             },
         },
-    },
-
-    water_reflection = {
-        pictures = {
-            filename = "__Krastorio2Assets__/entities/fuel-refinery/fuel-refinery-reflection.png",
-            priority = "extra-high",
-            width = 44,
-            height = 44,
-            shift = util.by_pixel(0, 40),
-            variation_count = 1,
-            scale = 5,
+        water_reflection = {
+            pictures = {
+                filename = "__Krastorio2Assets__/buildings/fuel-refinery/fuel-refinery-reflection.png",
+                priority = "extra-high",
+                width = 44,
+                height = 44,
+                shift = util.by_pixel(0, 40),
+                variation_count = 1,
+                scale = 5,
+            },
+            rotate = false,
+            orientation_to_variation = false,
         },
-        rotate = false,
-        orientation_to_variation = false,
     },
 
     vehicle_impact_sound = sounds.generic_impact,
@@ -194,35 +169,5 @@ return {
             volume = 0.5,
         },
         apparent_volume = 0.5,
-    },
-    fluid_boxes = {
-        -- Inputs
-        {
-            production_type = "input",
-            pipe_covers = pipecoverspictures(),
-            base_area = 10,
-            base_level = -1,
-            pipe_connections = { { type = "input", position = { -1, -2 } } },
-        },
-        {
-            production_type = "input",
-            pipe_covers = pipecoverspictures(),
-            base_area = 10,
-            base_level = -1,
-            pipe_connections = { { type = "input", position = { 1, -2 } } },
-        },
-        -- Outputs
-        {
-            production_type = "output",
-            pipe_covers = pipecoverspictures(),
-            base_level = 1,
-            pipe_connections = { { position = { -1, 2 } } },
-        },
-        {
-            production_type = "output",
-            pipe_covers = pipecoverspictures(),
-            base_level = 1,
-            pipe_connections = { { position = { 1, 2 } } },
-        },
     },
 }

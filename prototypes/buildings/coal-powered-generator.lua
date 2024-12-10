@@ -1,72 +1,6 @@
 local hit_effects = require("__base__/prototypes/entity/hit-effects")
 local sounds = require("__base__/prototypes/entity/sounds")
 
-local function furnacekpipepictures_a()
-    return {
-        north = {
-            filename = "__Krastorio2Assets__/entities/advanced-furnace/advanced-furnace-k-pipe-N.png",
-            priority = "extra-high",
-            width = 35,
-            height = 18,
-            shift = util.by_pixel(2.5, 14),
-            hr_version = {
-                filename = "__Krastorio2Assets__/entities/advanced-furnace/hr-advanced-furnace-k-pipe-N.png",
-                priority = "extra-high",
-                width = 71,
-                height = 38,
-                shift = util.by_pixel(2.25, 13.5),
-                scale = 0.5,
-            },
-        },
-        east = {
-            filename = "__Krastorio2Assets__/entities/advanced-furnace/advanced-furnace-k-pipe-E-top.png",
-            priority = "extra-high",
-            width = 30, --20,
-            height = 38,
-            shift = util.by_pixel(-29, 1),
-            hr_version = {
-                filename = "__Krastorio2Assets__/entities/advanced-furnace/hr-advanced-furnace-k-pipe-E-top.png",
-                priority = "extra-high",
-                width = 59, --42,
-                height = 76,
-                shift = util.by_pixel(-28.75, 1),
-                scale = 0.5,
-            },
-        },
-        south = {
-            filename = "__Krastorio2Assets__/entities/advanced-furnace/advanced-furnace-k-pipe-S-right.png",
-            priority = "extra-high",
-            width = 44,
-            height = 31,
-            shift = util.by_pixel(0, -31.5),
-            hr_version = {
-                filename = "__Krastorio2Assets__/entities/advanced-furnace/hr-advanced-furnace-k-pipe-S-right.png",
-                priority = "extra-high",
-                width = 88,
-                height = 61,
-                shift = util.by_pixel(0, -31.5),
-                scale = 0.5,
-            },
-        },
-        west = {
-            filename = "__Krastorio2Assets__/entities/advanced-furnace/advanced-furnace-k-pipe-W-bottom.png",
-            priority = "extra-high",
-            width = 19,
-            height = 37,
-            shift = util.by_pixel(25.5, 1.5),
-            hr_version = {
-                filename = "__Krastorio2Assets__/entities/advanced-furnace/hr-advanced-furnace-k-pipe-W-bottom.png",
-                priority = "extra-high",
-                width = 39,
-                height = 73,
-                shift = util.by_pixel(25.75, 1.25),
-                scale = 0.5,
-            },
-        },
-    }
-end
-
-
 -- data:extend {
 --     {
 --         type = "fluid",
@@ -121,11 +55,11 @@ data:extend {
         -- type = "furnace",
         type = "burner-generator",
         name = "desc_generatorcoal_c",
-        icons = {{
+        icons = { {
             icon = "__Krastorio2Assets__/icons/entities/advanced-furnace.png",
             icon_size = 128,
             icon_mipmaps = 4,
-        }},
+        } },
         flags = { "placeable-neutral", "placeable-player", "player-creation" },
         minable = { mining_time = 1, result = "desc_generatorcoal_c" },
         max_health = 2000,
@@ -135,9 +69,9 @@ data:extend {
         crafting_speed = 1,
         burner = {
             type = "burner",
-            fuel_category = "sl-coal",
+            fuel_categories = { "sl-coal" },
             effectivity = 1,
-            emissions_per_minute = 30,
+            emissions_per_minute = { pollution = 30 },
             fuel_inventory_size = 1,
             light_flicker = {
                 color = { 0, 0, 0 },
@@ -159,8 +93,8 @@ data:extend {
         },
         max_power_output = "75MW",
         energy_source = {
-          type = "electric",
-          usage_priority = "primary-output"
+            type = "electric",
+            usage_priority = "primary-output"
         },
         -- crafting_categories = { "sl-coal-energy" },
         -- source_inventory_size = 1,
@@ -189,17 +123,38 @@ data:extend {
         --     },
         -- },
 
-        animation = {
-            layers = {
-                {
-                    filename = "__Krastorio2Assets__/entities/advanced-furnace/advanced-furnace.png",
-                    priority = "high",
-                    width = 240,
-                    height = 240,
-                    shift = { 0, -0.1 },
-                    frame_count = 1,
-                    hr_version = {
-                        filename = "__Krastorio2Assets__/entities/advanced-furnace/hr-advanced-furnace.png",
+
+        vehicle_impact_sound = sounds.generic_impact,
+        working_sound = {
+            sound = {
+                filename = "__Krastorio2Assets__/sounds/buildings/advanced-furnace.ogg",
+                volume = 0.50,
+                aggregation = {
+                    max_count = 2,
+                    remove = false,
+                    count_already_playing = true,
+                },
+            },
+            idle_sound = { filename = "__base__/sound/idle1.ogg" },
+        },
+
+        open_sound = sounds.machine_open,
+        close_sound = sounds.machine_close,
+        idle_sound = { filename = "__base__/sound/idle1.ogg" },
+        dying_explosion = "big-explosion",
+        resistances = {
+            { type = "physical", percent = 50 },
+            { type = "fire",     percent = 95 },
+            { type = "impact",   percent = 80 },
+        },
+        damaged_trigger_effect = hit_effects.entity(),
+
+
+        graphics_set = {
+            animation = {
+                layers = {
+                    {
+                        filename = "__Krastorio2Assets__/buildings/advanced-furnace/advanced-furnace.png",
                         priority = "high",
                         width = 480,
                         height = 480,
@@ -207,18 +162,8 @@ data:extend {
                         frame_count = 1,
                         scale = 0.5,
                     },
-                },
-                {
-                    filename = "__Krastorio2Assets__/entities/advanced-furnace/advanced-furnace-sh.png",
-                    priority = "high",
-                    scale = scale,
-                    width = 83,
-                    height = 240,
-                    shift = { 3.1, -0.1 },
-                    frame_count = 1,
-                    draw_as_shadow = true,
-                    hr_version = {
-                        filename = "__Krastorio2Assets__/entities/advanced-furnace/hr-advanced-furnace-sh.png",
+                    {
+                        filename = "__Krastorio2Assets__/buildings/advanced-furnace/advanced-furnace-sh.png",
                         priority = "high",
                         width = 165,
                         height = 480,
@@ -229,22 +174,11 @@ data:extend {
                     },
                 },
             },
-        },
-        working_visualisations = {
-            {
-                constant_speed = true,
-                animation = {
-                    filename = "__Krastorio2Assets__/entities/advanced-furnace/advanced-furnace-anim-light.png",
-                    priority = "high",
-                    width = 240,
-                    height = 240,
-                    shift = { 0, -0.1 },
-                    frame_count = 28,
-                    line_length = 4,
-                    animation_speed = 0.8,
-                    draw_as_light = true,
-                    hr_version = {
-                        filename = "__Krastorio2Assets__/entities/advanced-furnace/hr-advanced-furnace-anim-light.png",
+            working_visualisations = {
+                {
+                    constant_speed = true,
+                    animation = {
+                        filename = "__Krastorio2Assets__/buildings/advanced-furnace/advanced-furnace-anim-light.png",
                         priority = "high",
                         width = 480,
                         height = 480,
@@ -256,23 +190,10 @@ data:extend {
                         scale = 0.5,
                     },
                 },
-            },
-            {
-                constant_speed = true,
-                animation = {
-                    filename = "__Krastorio2Assets__/entities/advanced-furnace/advanced-furnace-anim-glow.png",
-                    priority = "high",
-                    width = 240,
-                    height = 240,
-                    shift = { 0, -0.1 },
-                    frame_count = 28,
-                    line_length = 4,
-                    animation_speed = 0.8,
-                    draw_as_glow = true,
-                    fadeout = true,
-                    blend_mode = "additive",
-                    hr_version = {
-                        filename = "__Krastorio2Assets__/entities/advanced-furnace/hr-advanced-furnace-anim-glow.png",
+                {
+                    constant_speed = true,
+                    animation = {
+                        filename = "__Krastorio2Assets__/buildings/advanced-furnace/advanced-furnace-anim-glow.png",
                         priority = "high",
                         width = 480,
                         height = 480,
@@ -286,20 +207,10 @@ data:extend {
                         scale = 0.5,
                     },
                 },
-            },
-            {
-                constant_speed = true,
-                animation = {
-                    filename = "__Krastorio2Assets__/entities/advanced-furnace/advanced-furnace-anim.png",
-                    priority = "high",
-                    width = 240,
-                    height = 240,
-                    shift = { 0, -0.1 },
-                    frame_count = 28,
-                    line_length = 4,
-                    animation_speed = 0.8,
-                    hr_version = {
-                        filename = "__Krastorio2Assets__/entities/advanced-furnace/hr-advanced-furnace-anim.png",
+                {
+                    constant_speed = true,
+                    animation = {
+                        filename = "__Krastorio2Assets__/buildings/advanced-furnace/advanced-furnace-anim.png",
                         priority = "high",
                         width = 480,
                         height = 480,
@@ -310,52 +221,30 @@ data:extend {
                         scale = 0.5,
                     },
                 },
-            },
-            {
-                constant_speed = true,
-                light = {
-                    intensity = 0.65,
-                    size = 4,
-                    shift = { 1.29, 2 },
-                    color = { r = 1, g = 0.35, b = 0.2 },
+                {
+                    constant_speed = true,
+                    light = {
+                        intensity = 0.65,
+                        size = 4,
+                        shift = { 1.29, 2 },
+                        color = { r = 1, g = 0.35, b = 0.2 },
+                    },
                 },
             },
-        },
-        vehicle_impact_sound = sounds.generic_impact,
-        working_sound = {
-            filename = "__Krastorio2Assets__/sounds/buildings/advanced-furnace.ogg",
-            volume = 0.50,
-            aggregation = {
-                max_count = 2,
-                remove = false,
-                count_already_playing = true,
+            water_reflection = {
+                pictures = {
+                    filename = "__Krastorio2Assets__/buildings/advanced-furnace/advanced-furnace-reflection.png",
+                    priority = "extra-high",
+                    width = 80,
+                    height = 60,
+                    shift = util.by_pixel(0, 40),
+                    variation_count = 1,
+                    scale = 5,
+                },
+                rotate = false,
+                orientation_to_variation = false,
             },
         },
-        idle_sound = { filename = "__base__/sound/idle1.ogg" },
-        dying_explosion = "big-explosion",
-        resistances = {
-            { type = "physical", percent = 50 },
-            { type = "fire",     percent = 95 },
-            { type = "impact",   percent = 80 },
-        },
-        damaged_trigger_effect = hit_effects.entity(),
-
-        water_reflection = {
-            pictures = {
-                filename = "__Krastorio2Assets__/entities/advanced-furnace/advanced-furnace-reflection.png",
-                priority = "extra-high",
-                width = 80,
-                height = 60,
-                shift = util.by_pixel(0, 40),
-                variation_count = 1,
-                scale = 5,
-            },
-            rotate = false,
-            orientation_to_variation = false,
-        },
-
-        open_sound = sounds.machine_open,
-        close_sound = sounds.machine_close,
     },
 }
 

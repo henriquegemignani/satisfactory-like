@@ -84,12 +84,12 @@ sf_item_to_fac_name = {
     "Desc_CircuitBoard_C": "electronic-circuit",
     "Desc_Computer_C": "advanced-circuit",
     "Desc_ComputerSuper_C": "processing-unit",
-    "Desc_FluidCanister_C": "empty-barrel",
+    "Desc_FluidCanister_C": "barrel",
     "Desc_Fuel_C": "solid-fuel",
     "Desc_Plastic_C": "plastic-bar",
     "Desc_PackagedRocketFuel_C": "rocket-fuel",
     "Desc_NuclearFuelRod_C": "uranium-fuel-cell",
-    "Desc_NuclearWaste_C": "used-up-uranium-fuel-cell",
+    "Desc_NuclearWaste_C": "depleted-uranium-fuel-cell",
     "Desc_Motor_C": "engine-unit",
     "Desc_MotorLightweight_C": "electric-engine-unit",
     "Desc_SulfuricAcid_C": "sulfuric-acid",
@@ -341,7 +341,7 @@ PRODUCT_TO_SUBGROUP = {
     "heavy-oil":            ("sl-oil-processing", "c"),
     "desc_polymerresin_c":  ("sl-oil-processing", "d"),
     "desc_petroleumcoke_c": ("sl-oil-processing", "e"),
-    "empty-barrel":         ("sl-oil-processing", "f"),
+    "barrel":         ("sl-oil-processing", "f"),
 
     # Fuel
     "desc_liquidfuel_c": ("sl-fuel", "a"),
@@ -745,7 +745,7 @@ def recipe_processor(data: list[dict[str, str]]) -> None:
                 subgroup = "fill-barrel"
                 order = ingredients[0]["name"]
             else:
-                subgroup = "empty-barrel"
+                subgroup = "barrel"
                 order = main_product
 
         elif main_product in PRODUCT_TO_SUBGROUP or entry_name in RECIPE_TO_SUBGROUP:

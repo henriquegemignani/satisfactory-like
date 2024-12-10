@@ -1,20 +1,12 @@
 return {
   animation_set = {
-    filename = "__Krastorio2Assets__/entities/transport-belts/advanced-transport-belt/transport-belt/advanced-transport-belt.png",
+    filename = "__Krastorio2Assets__/buildings/advanced-transport-belt/advanced-transport-belt.png",
     priority = "extra-high",
-    width = 64,
-    height = 64,
+    width = 128,
+    height = 128,
+    scale = 0.5,
     frame_count = 32,
     direction_count = 20,
-    hr_version = {
-      filename = "__Krastorio2Assets__/entities/transport-belts/advanced-transport-belt/transport-belt/hr-advanced-transport-belt.png",
-      priority = "extra-high",
-      width = 128,
-      height = 128,
-      scale = 0.5,
-      frame_count = 32,
-      direction_count = 20,
-    },
   },
 
   east_index = 1,

@@ -75,15 +75,9 @@ local function slug_resource(params)
         pictures = {
             {
                 filename = asset,
-                width = 128,
-                height = 128,
-                scale = 1/4,
-                hr_version = {
-                    filename = asset,
-                    width = 256,
-                    height = 256,
-                    scale = 1/8,
-                }
+                width = 256,
+                height = 256,
+                scale = 1/8,
             },
         }
     }

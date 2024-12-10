@@ -12,12 +12,12 @@ for name, item in pairs(data.raw["item"]) do
 
         icon = item.icon,
         icon_size = item.icon_size,
-        icon_mipmaps = item.icon_mipmaps,
         icons = item.icons,
         subgroup = "sl-void",
 
         ingredients = {
             {
+                type = "item",
                 name = name,
                 amount = 1,
             }

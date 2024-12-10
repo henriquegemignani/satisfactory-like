@@ -1,4 +1,3 @@
-local noise = require("noise")
 local resource_autoplace = require("__core__/lualib/resource-autoplace")
 
 local fluids = {
@@ -11,17 +10,10 @@ local function makeStages(name, asset_folder)
         sheet = {
             filename = asset_folder .. name .. "/" .. name .. ".png",
             priority = "extra-high",
-            size = 64,
+            size = 128,
             frame_count = 8,
             variation_count = 8,
-            hr_version = {
-                filename = asset_folder .. name .. "/hr-" .. name .. ".png",
-                priority = "extra-high",
-                size = 128,
-                frame_count = 8,
-                variation_count = 8,
-                scale = 0.5
-            }
+            scale = 0.5
         }
     }
 end
@@ -58,35 +50,18 @@ data:extend {
         stage_counts = { 120000, 110000, 80000, 70000, 1300, 400, 150, 80 },
         stages = {
             sheet = {
-              filename = "__Krastorio2Assets__/resources/rare-metals/rare-metals.png",
-              priority = "extra-high",
-              width = 64,
-              height = 64,
-              frame_count = 8,
-              variation_count = 8,
-              hr_version = {
-                filename = "__Krastorio2Assets__/resources/rare-metals/hr-rare-metals.png",
+                filename = "__Krastorio2Assets__/resources/rare-metals/rare-metals.png",
                 priority = "extra-high",
                 width = 128,
                 height = 128,
                 frame_count = 8,
                 variation_count = 8,
                 scale = 0.5,
-              },
             },
-          },
-          stages_effect = {
+        },
+        stages_effect = {
             sheet = {
-              filename = "__Krastorio2Assets__/resources/rare-metals/rare-metals-glow.png",
-              priority = "extra-high",
-              width = 64,
-              height = 64,
-              frame_count = 8,
-              animation_speed = 3,
-              variation_count = 8,
-              draw_as_glow = true,
-              hr_version = {
-                filename = "__Krastorio2Assets__/resources/rare-metals/hr-rare-metals-glow.png",
+                filename = "__Krastorio2Assets__/resources/rare-metals/rare-metals-glow.png",
                 priority = "extra-high",
                 width = 128,
                 height = 128,
@@ -95,16 +70,15 @@ data:extend {
                 variation_count = 8,
                 scale = 0.5,
                 draw_as_glow = true,
-              },
             },
-          },
-          effect_animation_period = 5,
-          effect_animation_period_deviation = 1,
-          effect_darkness_multiplier = 5,
-          min_effect_alpha = 0.2,
-          max_effect_alpha = 0.3,
-          map_color = { r = 0.6, g = 0.3, b = 1 },
-          mining_visualisation_tint = { r = 0.258, g = 0.960, b = 0.529 },
+        },
+        effect_animation_period = 5,
+        effect_animation_period_deviation = 1,
+        effect_darkness_multiplier = 5,
+        min_effect_alpha = 0.2,
+        max_effect_alpha = 0.3,
+        map_color = { r = 0.6, g = 0.3, b = 1 },
+        mining_visualisation_tint = { r = 0.258, g = 0.960, b = 0.529 },
     }),
     make_resource("desc_orebauxite_c", {
         stage_counts = { 120000, 110000, 80000, 70000, 1300, 400, 150, 80 },
@@ -114,14 +88,14 @@ data:extend {
     make_resource("desc_nitrogengas_c", {
         stage_counts = { 0 },
         stages = {
-          sheet = {
-            filename = "__Krastorio2Assets__/resources/mineral-water.png",
-            priority = "extra-high",
-            width = 128,
-            height = 128,
-            frame_count = 8,
-            variation_count = 1,
-          },
+            sheet = {
+                filename = "__Krastorio2Assets__/resources/mineral-water.png",
+                priority = "extra-high",
+                width = 128,
+                height = 128,
+                frame_count = 8,
+                variation_count = 1,
+            },
         },
         category = "sl-resource-well",
 
@@ -148,54 +122,35 @@ data:extend {
         stage_counts = { 0 },
         stages = {
             sheet = {
-              filename = "__Krastorio2Assets__/resources/imersite/imersite-rift.png",
-              priority = "extra-high",
-              width = 250,
-              height = 250,
-              frame_count = 6,
-              variation_count = 1,
-              scale = 0.8,
-              hr_version = {
-                filename = "__Krastorio2Assets__/resources/imersite/hr-imersite-rift.png",
+                filename = "__Krastorio2Assets__/resources/imersite/imersite-rift.png",
                 priority = "extra-high",
                 width = 500,
                 height = 500,
                 frame_count = 6,
                 variation_count = 1,
                 scale = 0.4,
-              },
             },
-          },
-          stages_effect = {
+        },
+        stages_effect = {
             sheets = {
-              {
-                filename = "__Krastorio2Assets__/resources/imersite/imersite-rift-glow.png",
-                priority = "extra-high",
-                width = 250,
-                height = 250,
-                frame_count = 6,
-                variation_count = 1,
-                draw_as_glow = true,
-                scale = 0.8,
-                hr_version = {
-                  filename = "__Krastorio2Assets__/resources/imersite/hr-imersite-rift-glow.png",
-                  priority = "extra-high",
-                  width = 500,
-                  height = 500,
-                  frame_count = 6,
-                  variation_count = 1,
-                  scale = 0.4,
-                  draw_as_glow = true,
+                {
+                    filename = "__Krastorio2Assets__/resources/imersite/imersite-rift-glow.png",
+                    priority = "extra-high",
+                    width = 500,
+                    height = 500,
+                    frame_count = 6,
+                    variation_count = 1,
+                    scale = 0.4,
+                    draw_as_glow = true,
                 },
-              },
             },
-          },
-          effect_animation_period = 5,
-          effect_animation_period_deviation = 1,
-          effect_darkness_multiplier = 3.5,
-          min_effect_alpha = 0.2,
-          max_effect_alpha = 0.3,
-          map_color = { r = 1, g = 0.5, b = 1 },
+        },
+        effect_animation_period = 5,
+        effect_animation_period_deviation = 1,
+        effect_darkness_multiplier = 3.5,
+        min_effect_alpha = 0.2,
+        max_effect_alpha = 0.3,
+        map_color = { r = 1, g = 0.5, b = 1 },
     }),
 }
 
@@ -337,10 +292,7 @@ for name, details in pairs(ore_configurations) do
     resource.collision_box = { { -1.4, -1.4 }, { 1.4, 1.4 } }
     resource.selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } }
     resource.map_grid = false
-    resource.stages.sheet.scale = 2
-    if resource.stages.sheet.hr_version then
-        resource.stages.sheet.hr_version.scale = 1
-    end
+    resource.stages.sheet.scale = 1
     resource.autoplace = nil
 
     for rarity, noise_rarity in pairs { impure = 50000, pure = 200000, normal = 100000 } do
@@ -369,7 +321,7 @@ for name, details in pairs(ore_configurations) do
                 regular_rq_factor_multiplier = 0.05,
                 candidate_spot_count = 22,
             })
-            rarity_resource.autoplace.richness_expression = noise.to_noise_expression(noise_rarity)
+            rarity_resource.autoplace.richness_expression = noise_rarity
         end
     end
 end
@@ -379,6 +331,5 @@ for _, resource in pairs {
     data.raw["resource"]["desc_sam_c-impure"],
     data.raw["resource"]["desc_sam_c-pure"],
 } do
-    resource.stages.sheet.scale = 0.5
-    resource.stages.sheet.hr_version.scale = 0.25
+    resource.stages.sheet.scale = 0.25
 end

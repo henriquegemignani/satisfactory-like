@@ -223,9 +223,8 @@ data:extend {
         type = "item-group",
         name = "sl-recycle",
         icons = {{
-            icon = "__base__/graphics/icons/shortcut-toolbar/mip/undo-x32-white.png",
+            icon = "__satisfactory-like__/graphics/icons/undo-x32.png",
             icon_size = 32,
-            icon_mipmaps = 1,
         }},
         order = "z",
     },

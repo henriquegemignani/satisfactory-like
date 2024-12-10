@@ -99,14 +99,17 @@ local SplitterTiers = {
   data.raw["recipe"]["recipe_alternate_automatedminer_c"].order = data.raw["item"]["burner-mining-drill"].order .. "-automated"
   data.raw["recipe"]["inserter"].ingredients = {
     {
+      type = "item",
       name = "iron-plate",
       amount = 1,
     },
     {
+      type = "item",
       name = "iron-gear-wheel",
       amount = 1,
     },
     {
+      type = "item",
       name = "copper-cable",
       amount = 2,
     }
