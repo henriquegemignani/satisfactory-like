@@ -98,7 +98,7 @@ local converter = {
         animation = {
             layers = {
                 {
-                    filename = "__space-exploration-graphics-3__/graphics/entity/nexus/hr/nexus-base.png",
+                    filename = "__space-exploration-graphics-3__/graphics/entity/nexus/nexus-base.png",
                     width = 467,
                     height = 290,
                     line_length = 1,
@@ -117,22 +117,22 @@ local converter = {
                     scale = 0.5 * structure_size / original_graphic_size,
                     stripes = {
                         {
-                            filename = "__space-exploration-graphics-3__/graphics/entity/nexus/hr/nexus-1.png",
+                            filename = "__space-exploration-graphics-3__/graphics/entity/nexus/nexus-1.png",
                             width_in_frames = 4,
                             height_in_frames = 4,
                         },
                         {
-                            filename = "__space-exploration-graphics-3__/graphics/entity/nexus/hr/nexus-2.png",
+                            filename = "__space-exploration-graphics-3__/graphics/entity/nexus/nexus-2.png",
                             width_in_frames = 4,
                             height_in_frames = 4,
                         },
                         {
-                            filename = "__space-exploration-graphics-3__/graphics/entity/nexus/hr/nexus-3.png",
+                            filename = "__space-exploration-graphics-3__/graphics/entity/nexus/nexus-3.png",
                             width_in_frames = 4,
                             height_in_frames = 4,
                         },
                         {
-                            filename = "__space-exploration-graphics-3__/graphics/entity/nexus/hr/nexus-4.png",
+                            filename = "__space-exploration-graphics-3__/graphics/entity/nexus/nexus-4.png",
                             width_in_frames = 4,
                             height_in_frames = 4,
                         },
@@ -140,7 +140,7 @@ local converter = {
                 },
                 {
                     draw_as_shadow = true,
-                    filename = "__space-exploration-graphics-3__/graphics/entity/nexus/hr/nexus-shadow.png",
+                    filename = "__space-exploration-graphics-3__/graphics/entity/nexus/nexus-shadow.png",
                     width = 599,
                     height = 345,
                     line_length = 1,
@@ -155,7 +155,7 @@ local converter = {
         idle_animation = {
             layers = {
                 {
-                    filename = "__space-exploration-graphics-3__/graphics/entity/nexus/hr/nexus-inactive.png",
+                    filename = "__space-exploration-graphics-3__/graphics/entity/nexus/nexus-inactive.png",
                     frame_count = 1,
                     height = 541,
                     width = 467,
@@ -165,7 +165,7 @@ local converter = {
                 },
                 {
                     draw_as_shadow = true,
-                    filename = "__space-exploration-graphics-3__/graphics/entity/nexus/hr/nexus-shadow.png",
+                    filename = "__space-exploration-graphics-3__/graphics/entity/nexus/nexus-shadow.png",
                     frame_count = 1,
                     width = 599,
                     height = 345,
